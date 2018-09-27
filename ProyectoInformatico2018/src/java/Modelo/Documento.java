@@ -1,4 +1,4 @@
-package Modelos;
+package Modelo;
 
 public class Documento {
     private int id;
