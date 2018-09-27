@@ -1,4 +1,4 @@
-package plataformacolaborativa;
+package Controlador;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
