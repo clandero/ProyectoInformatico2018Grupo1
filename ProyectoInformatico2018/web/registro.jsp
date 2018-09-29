@@ -142,7 +142,7 @@
     <div class="main">
         <h1>REGISTRO</h1>
         <form method="post" action="registrar">
-            <p>Llene los siguientes campos:</p><br />
+            <p>Llene los siguientes campos: </p><br />
             Nombre: <input type="text" name="txtNombre" /><br/><br/>
             Correo udec: <input type="text" name="txtCorreo" /><br /><br/>
             Tipo de usuario: 
