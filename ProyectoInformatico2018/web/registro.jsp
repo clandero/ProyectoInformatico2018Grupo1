@@ -182,7 +182,7 @@
                 <input type="radio" name="radio" value ="Ingeniería Metalúrgica">
                 <span class="checkmark"></span>
             </label>
-            <label class="container">Ingeniería Química
+            <label class="container">Ingeniería Química 
                 <input type="radio" name="radio" value ="Ingeniería Química">
                 <span class="checkmark"></span>
             </label>
