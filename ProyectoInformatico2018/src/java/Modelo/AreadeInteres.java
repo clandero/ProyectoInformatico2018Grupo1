@@ -1,4 +1,4 @@
-package Modelos;
+package Modelo;
 
 public class AreadeInteres {
     private String tema;
