@@ -1,4 +1,4 @@
-package Modelos;
+package Modelo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,24 +7,19 @@ public class Usuario {
     private String correo;
     private String nombre_usuario;
     private String tipo_usuario;
-    private List<AreadeInteres> intereses;
+    private String departamento;
+    private String pass;
 
-    public List<AreadeInteres> getIntereses() {
-        return intereses;
-    }
-
-    public void setIntereses(AreadeInteres intereses) {
-        this.intereses.add(intereses);
-    }
     
     public Usuario(){
     }
     
-    public Usuario(String c, String name, String t){
+    public Usuario(String name, String c, String p, String d, String t){
         this.correo = c;
         this.nombre_usuario = name;
         this.tipo_usuario = t;
-        this.intereses = new ArrayList<AreadeInteres>();
+        this.departamento = d;
+        this.pass = p;
     }
     public String getCorreo(){
         return this.correo;
@@ -43,5 +38,13 @@ public class Usuario {
     }
     public void setTipoUsuario(String t){
         this.tipo_usuario = t;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
     }
 }
