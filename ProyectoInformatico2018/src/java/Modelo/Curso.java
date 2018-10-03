@@ -1,4 +1,4 @@
-package Modelos;
+package Modelo;
 
 public class Curso {
     private int codigo_curso;

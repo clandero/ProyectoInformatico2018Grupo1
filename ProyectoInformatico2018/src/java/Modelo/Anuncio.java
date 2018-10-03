@@ -1,4 +1,4 @@
-package Modelos;
+package Modelo;
 
 public class Anuncio {
     private int n_anun;
