@@ -44,7 +44,7 @@ public class registrar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            response.setContentType("text/html;charset-UTF-8");
+            response.setContentType("text/html;charset-ISO-8859-1");
                 nombre=request.getParameter("txtNombre");
                 correo=request.getParameter("txtCorreo");
                 pass=request.getParameter("txtPassword");
