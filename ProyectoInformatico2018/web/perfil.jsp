@@ -8,7 +8,7 @@
     Usuario u1 = (Usuario)request.getSession().getAttribute("usuario1");
 
 %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%--@page contentType="text/html" pageEncoding="UTF-8"--%>
 <!DOCTYPE html>
 <html>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
