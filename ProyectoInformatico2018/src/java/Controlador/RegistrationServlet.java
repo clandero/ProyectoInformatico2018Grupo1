@@ -27,17 +27,26 @@ public class RegistrationServlet extends HttpServlet{
     
     private static IDao<Usuario> userDao = new UsuarioDao();
     
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
-        response.setContentType("text/html;charset-UTF-8");       
-        
+    /**
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     * @throws Exception
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response){
+        response.setContentType("text/html;charset-UTF-8");    
         
         String mail = request.getParameter("correo");
         String pass = request.getParameter("password");
         String interests = request.getParameter("intereses");
         //out.println(p);
         
+        System.out.println("received a post request");
         userDao.save(new Usuario(mail, pass, interests));
+        
     }
 
     

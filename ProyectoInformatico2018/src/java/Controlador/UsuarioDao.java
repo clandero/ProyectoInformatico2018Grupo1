@@ -18,6 +18,7 @@ public class UsuarioDao implements IDao<Usuario>{
     
     public UsuarioDao(){
         conn = DatabaseConnect.getConn();
+        System.out.println("instanced userdao");
     }
     
     @Override
@@ -45,18 +46,20 @@ public class UsuarioDao implements IDao<Usuario>{
      
     @Override
     public void save(Usuario user) {
+        System.out.println("userdao wants to save");
         try{
             PreparedStatement ps = 
                     conn.prepareStatement(
-                            "insert into usuario((?),(?))"
+                            "insert into usuario(email, password)"
                            +"values ((?),(?))");
-            ps.setString(1, "name");
-            ps.setString(2, "pass");
-            ps.setString(3, user.getCorreo());
-            ps.setString(4, user.getPassword());
+            ps.setString(1, user.getCorreo());
+            ps.setString(2, user.getPassword());
             boolean status = ps.execute();
+            System.out.println("finished save");
+            System.out.println(status);
         } 
-        catch (SQLException s){            
+        catch (SQLException s){  
+            System.out.println(s);
         }
         
     }
