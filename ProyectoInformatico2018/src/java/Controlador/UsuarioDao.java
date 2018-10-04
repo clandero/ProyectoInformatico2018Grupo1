@@ -14,10 +14,12 @@ import java.sql.*;
  */
 public class UsuarioDao implements IDao<Usuario>{
     
-    private Connection conn = null;
+    private static Connection conn = null;
     
     public UsuarioDao(){
-        conn = DatabaseConnect.getConn();
+        if (conn == null){
+            conn = DatabaseConnect.getConn();
+        }
         System.out.println("instanced userdao");
     }
     
@@ -50,7 +52,7 @@ public class UsuarioDao implements IDao<Usuario>{
         try{
             PreparedStatement ps = 
                     conn.prepareStatement(
-                            "insert into usuario(email, password)"
+                            "insert into usuario(correo, password)"
                            +"values ((?),(?))");
             ps.setString(1, user.getCorreo());
             ps.setString(2, user.getPassword());
@@ -62,6 +64,52 @@ public class UsuarioDao implements IDao<Usuario>{
             System.out.println(s);
         }
         
+    }
+    
+    public Hashtable<String, ArrayList<String>> getUser(String p, String q) throws Exception{
+        try{
+            PreparedStatement statement = null;
+            Hashtable<String, ArrayList<String>> personas = new Hashtable<String, ArrayList<String>>();
+            if(q.equals("area")){
+                if(p.equals("ia") || p.equals("ai") || p.equals("inteligencia artificial")){
+                    p = "Inteligencia Artificial";
+                }
+                if(p.equals("robotica")){
+                    p = "Robotica";
+                }
+                statement = conn.prepareStatement("SELECT u.nombre_usuario, u.correo FROM plataforma_colaborativa.usuario as u, plataforma_colaborativa.usuario_area as ua WHERE ua.tema = '"+p+"' AND ua.correo = u.correo");
+                ResultSet result = statement.executeQuery();
+                while(result.next()){
+                    ArrayList<String> datos = new ArrayList<String>();
+                    datos.add(result.getString("correo"));
+                    personas.put(result.getString("nombre_usuario"), datos);
+                }
+            }
+            else if(q.equals("depto")){
+                if(p.equals("informatica") || p.equals("informática") || p.equals("Informática") || p.equals("Informatica")){
+                    p = "Ingeniería Informática";
+                }
+                statement = conn.prepareStatement("SELECT u.nombre_usuario, u.correo, area.tema FROM plataforma_colaborativa.usuario as u, plataforma_colaborativa.usuario_area as area WHERE u.departamento = '"+p+"' AND u.correo = area.correo");
+                ResultSet result = statement.executeQuery();
+                while(result.next()){
+                    ArrayList<String> datos = new ArrayList<String>();
+                    if(personas.containsKey(result.getString("nombre_usuario"))){
+                        datos = personas.get(result.getString("nombre_usuario"));
+                        datos.add(result.getString("tema"));
+                        personas.put(result.getString("nombre_usuario"), datos);
+                    }
+                    else{
+                        datos.add(result.getString("correo"));
+                        datos.add(result.getString("tema"));
+                        personas.put(result.getString("nombre_usuario"), datos);
+                    }
+                }
+            }
+            return personas;
+        }catch(Exception e){
+            System.out.println(e);
+            return null;
+        }
     }
      
     @Override

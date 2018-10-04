@@ -5,12 +5,12 @@
 	 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	 version="3.1">
     <servlet>
-        <servlet-name>RegistrationServlet</servlet-name>
-        <servlet-class>Controlador.RegistrationServlet</servlet-class>
+        <servlet-name>UserRegistrationServlet</servlet-name>
+        <servlet-class>Controlador.UserRegistrationServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
-      <servlet-name>RegistrationServlet</servlet-name>
+      <servlet-name>UserRegistrationServlet</servlet-name>
       <url-pattern>/registrarUsuario</url-pattern>
    </servlet-mapping>
 </web-app>

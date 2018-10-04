@@ -23,9 +23,9 @@ import Modelo.Usuario;
  *
  * @author arken
  */
-public class RegistrationServlet extends HttpServlet{
+public class UserRegistrationServlet extends HttpServlet{
     
-    private static IDao<Usuario> userDao = new UsuarioDao();
+    private static UsuarioDao userDao = new UsuarioDao();
     
     /**
      *

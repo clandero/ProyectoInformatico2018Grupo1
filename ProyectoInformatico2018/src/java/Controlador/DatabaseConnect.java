@@ -27,7 +27,7 @@ public class DatabaseConnect {
         }
         try{
             conn = DriverManager.getConnection(url,user,password);
-            conn.setSchema("prueba1");
+            conn.setSchema("plataforma_colaborativa");
             System.out.println("Connected to PostgreSQL server succesfully");
             //JOptionPane.showMessageDialog(null,"Connected");
         }catch(SQLException ex){
@@ -46,29 +46,6 @@ public class DatabaseConnect {
             }
         }
         return DatabaseConnect.conn;
-    }
-
-    public static ArrayList<String> getUser(String p, String q) throws Exception{
-        DatabaseConnect.connect();
-        try{
-            PreparedStatement statement = null;
-            if(q.equals("area")){
-                statement = conn.prepareStatement("SELECT u.nombre_usuario, u.correo FROM plataforma_colaborativa.usuario as u, plataforma_colaborativa.usuario_area as ua WHERE ua.tema = '"+p+"' AND ua.correo = u.correo");
-            }
-            else if(q.equals("depto")){
-                statement = conn.prepareStatement("SELECT u.nombre_usuario, u.correo FROM plataforma_colaborativa.usuario as u WHERE u.departamento = '"+p+"'");
-            }
-            ResultSet result = statement.executeQuery();
-            ArrayList<String> array = new ArrayList<String>();
-            while(result.next()){
-                array.add(result.getString("nombre_usuario"));
-                array.add(result.getString("correo"));
-            }
-            return array;
-        }catch(Exception e){
-            System.out.println(e);
-            return null;
-        }
     }
 
 }
