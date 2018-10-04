@@ -14,7 +14,10 @@ import java.sql.*;
  */
 public class UsuarioDao implements IDao<Usuario>{
     
+    private Connection conn = null;
+    
     public UsuarioDao(){
+        conn = DatabaseConnect.getConn();
     }
     
     @Override
@@ -42,7 +45,6 @@ public class UsuarioDao implements IDao<Usuario>{
      
     @Override
     public void save(Usuario user) {
-        Connection conn = DatabaseConnect.getConn();
         try{
             PreparedStatement ps = 
                     conn.prepareStatement(

@@ -11,7 +11,7 @@
     </head>
     <body>
         <h1>Registro de usuario!</h1>
-        <form action="registrarUsuario.jsp" method="post">
+        <form action="registrarUsuario" method="post">
             <div>Correo <input type="text" name="correo"></div>
             &nbsp;
             <div>Contraseña <input type="password" name="password"></div>
