@@ -4,7 +4,7 @@
     Author     : vanes
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%--@page contentType="text/html" pageEncoding="UTF-8"--%>
 <!DOCTYPE html>
 <html>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -89,7 +89,7 @@ function supportsHTML5Storage() {
 function testLocalStorageData() {
     if(!supportsHTML5Storage()) { return false; }
     localStorage.setItem("PROFILE_IMG_SRC", "//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" );
-    localStorage.setItem("PROFILE_NAME", "CÃ©sar Izquierdo Tello");
+    localStorage.setItem("PROFILE_NAME", "César Izquierdo Tello");
     localStorage.setItem("PROFILE_REAUTH_EMAIL", "oneaccount@gmail.com");
 }
 </script>
@@ -294,7 +294,7 @@ body, html {
             <form class="form-signin" method="post" action="ingresar">
                 <span id="reauth-email" class="reauth-email"></span>
                 <input type="email" id="inputEmail" name="txtCorreo" class="form-control" placeholder="Correo" required autofocus>
-                <input type="password" id="inputPassword" name="txtPassword" class="form-control" placeholder="ContraseÃ±a" required>
+                <input type="password" id="inputPassword" name="txtPassword" class="form-control" placeholder="Contraseña" required>
                 <div id="remember" class="checkbox">
                     <label>
                         <input type="checkbox" value="recuerdame"> Recuerdame
@@ -303,7 +303,7 @@ body, html {
                 <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Ingresar</button>
             </form><!-- /form -->
             <a href="#" class="forgot-password">
-               Â¿OlvidÃ³ su contraseÃ±a?
+               ¿Olvidó su contraseña?
             </a>
         </div><!-- /card-container -->
     </div><!-- /container -->
