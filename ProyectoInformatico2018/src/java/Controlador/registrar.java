@@ -57,7 +57,9 @@ public class registrar extends HttpServlet {
                 st=con.createStatement();
                 String query="insert into plataforma_colaborativa.usuario values ('"+correo+"','"+nombre+"','"+tipo+"','"+depa+"','"+passencript+"');";
                 st.execute(query);
-                System.out.println("datos insertados");
+              //  System.out.println("datos insertados");
+                System.out.println(query);
+
                 }
                 catch(Exception e){
                     e.printStackTrace();

@@ -5,7 +5,7 @@
 --%>
 
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%--@page contentType="text/html" pageEncoding="UTF-8"--%>
 <!DOCTYPE html>
 <html>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -16,48 +16,48 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
     <head>
-        
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Registro</title>
         <style>
             body {
-    font-family: "Lato", sans-serif;
-}
+                font-family: "Lato", sans-serif;
+            }
 
-.sidenav {
-    height: 100%;
-    width: 160px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    padding-top: 20px;
-}
+            .sidenav {
+                height: 100%;
+                width: 160px;
+                position: fixed;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: #111;
+                overflow-x: hidden;
+                padding-top: 20px;
+            }
 
-.sidenav a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-}
+            .sidenav a {
+                padding: 6px 8px 6px 16px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+            }
 
-.sidenav a:hover {
-    color: #f1f1f1;
-}
+            .sidenav a:hover {
+                color: #f1f1f1;
+            }
 
-.main {
-    margin-left: 160px; /* Same as the width of the sidenav */
-    font-size: 20px; /* Increased text to enable scrolling */
-    padding: 0px 10px;
-}
+            .main {
+                margin-left: 160px; /* Same as the width of the sidenav */
+                font-size: 20px; /* Increased text to enable scrolling */
+                padding: 0px 10px;
+            }
 
-@media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-}
+            @media screen and (max-height: 450px) {
+                .sidenav {padding-top: 15px;}
+                .sidenav a {font-size: 18px;}
+            }
 
             /* Change the link color on hover */
             contenido{ 
@@ -77,9 +77,9 @@
                 -moz-user-select: none;
                 -ms-user-select: none;
                 user-select: none;
-               }       
+            }       
 
-                /* Hide the browser's default radio button */
+            /* Hide the browser's default radio button */
             .container input {
                 position: absolute;
                 opacity: 0;
@@ -121,76 +121,76 @@
 
             /* Style the indicator (dot/circle) */
             .container .checkmark:after {
-             	top: 5px;
-            	left: 5px;
-            	width: 5px;
-            	height: 5px;
-            	border-radius: 50%;
-        	background: white;
+                top: 5px;
+                left: 5px;
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background: white;
             }
-            
+
 
         </style>
 
     </head>
     <body>
-    <div class="sidenav">
-        <a href="ingresar.jsp">Ingresar</a>
-        <a href="registro.jsp">Registrarse</a>
-</div>
-        
-    <div class="main">
-        <h1>REGISTRO</h1>
-        <form method="post" action="registrar">
-            <p>Llene los siguientes campos: </p><br />
-            Nombre: <input type="text" name="txtNombre" /><br/><br/>
-            Correo udec: <input type="text" name="txtCorreo" /><br /><br/>
-            Tipo de usuario: 
-            <div class="select">
-                <select name="search_categories" id="search_categories">
-                    <option value="Docente" selected="selected">Docente</option>
-                    <option value="Estudiante">Estudiante</option>
-                    <option value="Postgrado">Postgrado</option>
-                </select>
-            </div>
-            </br><p>Departamento al que pertenece:</p>
-            <label class="container">Ingenier√≠a Civil
-                <input type="radio" checked="checked" name="radio" value ="Ingenier√≠a Civil">
-                <span class="checkmark"></span>
-            </label>
-            <label class="container">Ingenier√≠a El√©ctrica
-                <input type="radio" name="radio" value ="Ingenier√≠a El√©ctrica">
-                <span class="checkmark"></span>
-            </label>
-            <label class="container">Ingenier√≠a Industrial
-                <input type="radio" name="radio" value ="Ingenier√≠a Industrial">
-                <span class="checkmark"></span>
-            </label>
-            <label class="container">Ingenier√≠a Inform√°tica y Ciencias de la Computaci√≥n
-                <input type="radio" name="radio" value ="Ingenier√≠a Inform√°tica y Ciencias de la Computaci√≥n">
-                <span class="checkmark"></span>
-            </label>
-            <label class="container">Ingenier√≠a de Materiales
-                <input type="radio" name="radio" value ="Ingenier√≠a de Materiales">
-                <span class="checkmark"></span>
-            </label>
-            <label class="container">Ingenier√≠a Mec√°nica
-                <input type="radio" name="radio" value ="Ingenier√≠a Mec√°nica">
-                <span class="checkmark"></span>
-            </label>
-            <label class="container">Ingenier√≠a Metal√∫rgica
-                <input type="radio" name="radio" value ="Ingenier√≠a Metal√∫rgica">
-                <span class="checkmark"></span>
-            </label>
-            <label class="container">Ingenier√≠a Qu√≠mica 
-                <input type="radio" name="radio" value ="Ingenier√≠a Qu√≠mica">
-                <span class="checkmark"></span>
-            </label>
-            Contrase√±a: <input type="password" name="txtPassword" /><br/><br/>
+        <div class="sidenav">
+            <a href="ingresar.jsp">Ingresar</a>
+            <a href="registro.jsp">Registrarse</a>
+        </div>
 
-            <input type="submit" value="Enviar"/><br/><br/>
-        </form>
-    </div>
+        <div class="main">
+            <h1>REGISTRO</h1>
+            <form method="post" action="registrar">
+                <p>Llene los siguientes campos: </p><br />
+                Nombre: <input type="text" name="txtNombre" /><br/><br/>
+                Correo udec: <input type="text" name="txtCorreo" /><br /><br/>
+                Tipo de usuario: 
+                <div class="select">
+                    <select name="search_categories" id="search_categories">
+                        <option value="Docente" selected="selected">Docente</option>
+                        <option value="Estudiante">Estudiante</option>
+                        <option value="Postgrado">Postgrado</option>
+                    </select>
+                </div>
+                </br><p>Departamento al que pertenece:</p>
+                <label class="container">IngenierÌa Civil
+                    <input type="radio" checked="checked" name="radio" value ="IngenierÌa Civil">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">IngenierÌa ElÈctrica
+                    <input type="radio" name="radio" value ="IngenierÌa ElÈctrica">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">IngenierÌa Industrial
+                    <input type="radio" name="radio" value ="IngenierÌa Industrial">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">IngenierÌa Inform·tica y Ciencias de la ComputaciÛn
+                    <input type="radio" name="radio" value ="IngenierÌa Inform·tica y Ciencias de la ComputaciÛn">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">IngenierÌa de Materiales
+                    <input type="radio" name="radio" value ="IngenierÌa de Materiales">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">IngenierÌa Mec·nica
+                    <input type="radio" name="radio" value ="IngenierÌa Mec·nica">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">IngenierÌa Metal˙rgica
+                    <input type="radio" name="radio" value ="IngenierÌa Metal˙rgica">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">IngenierÌa QuÌmica 
+                    <input type="radio" name="radio" value ="IngenierÌa QuÌmica">
+                    <span class="checkmark"></span>
+                </label>
+                ContraseÒa: <input type="password" name="txtPassword" /><br/><br/>
+
+                <input type="submit" value="Enviar"/><br/><br/>
+            </form>
+        </div>
     </body>
 </html>
 

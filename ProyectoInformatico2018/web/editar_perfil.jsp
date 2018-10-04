@@ -1,7 +1,8 @@
 <%-- 
-    Document   : perfil
-    Created on : 26-09-2018, 22:43:42
-    Author     : vanes
+    Editar Perfil
+    Document   : editar
+    Created on : Oct 2, 2018, 1:50:59 PM
+    Author     : alexis
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="java.util.List"%>
@@ -12,18 +13,23 @@
     Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
     Usuario usuario_perfil = (Usuario) request.getSession().getAttribute("usuario_perfil");
     List<AreadeInteres> areas_existentes = (ArrayList<AreadeInteres>) request.getSession().getAttribute("areas_existentes");
-    List<AreadeInteres> areas_usuario = (ArrayList<AreadeInteres>) request.getSession().getAttribute("areas_usuario");
-
 %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%-- Necesitamos: Usuario, areas de interes existentes del usuario y la lista de areas de interes
+    Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+
+--%>
+<%-- Hay que verificar que es el usuario que esta autentificado el que edita su propio perfil!--%>
+
+<%--@page contentType="text/html" pageEncoding="UTF-8"--%>
 <!DOCTYPE html>
 <html>
+
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Perfil</title>
+        <title>Editar Perfil</title>
         <style>
             body {
                 font-family: "Lato", sans-serif;
@@ -86,6 +92,7 @@
 
 
         </style>
+
     </head>
     <body>
         <div class="sidenav">
@@ -113,23 +120,34 @@
                             <hr>
                             <div class="col-md-8">  
                                 <ul class=" details" style="background-color: #ededed ">
-                                    <li><p><span class="" style="width:100px;"></span>Nombre: <%= usuario_perfil.getNombreUsuario()%></p></li>
-                                    <li><p><span class="" style="width:100px;"></span>Tipo: <%= usuario_perfil.getTipoUsuario()%></p></li>
-                                    <li><p><span class="" style="width:100px;"></span>Departamento: <%= usuario_perfil.getDepartamento()%></p></li>
-                                    <li><p><span class="" style="width:100px;"></span>Correo: <%= usuario_perfil.getCorreo()%></p></li>
+
+                                    <li><p><span class="" style="width:100px;"></span>Nombre: Alexis</p></li>
+                                    <li><p><span class="" style="width:100px;"></span>Tipo: Estudiante</p></li>
+                                    <li><p><span class="" style="width:100px;"></span>Departamento: DIICC </p></li>
+                                    <li><p><span class="" style="width:100px;"></span>Correo: alexisanchez@udec.cl</p></li>
                                 </ul>
                             </div>
-                            <!-- Iterate and display actual interests of user -->
                             <div class="col-md-4">  
-                                <div class="col-sm-5 col-xs-6 tital " >Intereses : </div>
-                                <c:forEach items="${areas_usuario}" var="area">
-                                    <div class="col-sm-7 col-xs-6 ">
-                                        <c:out value="${area.getTema()}"> </c:out>                
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="bot-border"></div>
-                                    <div class="col-sm-5 col-xs-6 tital " ></div>                  
-                                </c:forEach>
+                                <div class="col-sm-5 col-xs-6 tital " >Intereses :</div>
+
+                                <!-- 
+                                    Display interests known, allow for modification 
+                                     Add new ones,
+                                     should be a selection of the possible values in the Database
+                                     Value of checkboxes should be the area of interest
+                                     Existing interests should be checked
+                                -->
+                                <form action="EditarPerfil" method="post">
+                                    <c:forEach items="${areas_existentes}" var="area">
+                                        <div class="col-sm-7 col-xs-6 ">
+                                            <input type="checkbox" value="${area.getTema()}"name="interes" size="10"> "${area.getTema()}"                             
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="bot-border"></div>
+                                            <div class="col-sm-5 col-xs-6 tital " ></div>                  
+                                    </c:forEach>
+                                    <input type="submit" value="Guardar cambios">
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -195,21 +213,18 @@
                                     <div class="col-sm-4 col-xs-6 tital " >Color:</div><div class="col-sm-8 col-xs-6 contant_i">Prasad</div>
                                     <div class="clearfix"></div><div class="bot-border"></div>
                                 </div>    
-                                <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
-                                    <button id="editButton" class="float-left submit-button" >Editar Perfil</button>
 
-                                    <script type="text/javascript">
-                                        document.getElementById("editButton").onclick = function () {
-                                            location.href = "editar_perfil.jsp";
-                                        };
-                                    </script>
-                                </c:if>
                             </div>
                         </div>
                     </div>
+
+
+
+
+
+
                 </div>
             </div>
         </div>
-
     </body>
 </html>
