@@ -154,39 +154,39 @@
                     </select>
                 </div>
                 </br><p>Departamento al que pertenece:</p>
-                <label class="container">IngenierÌa Civil
-                    <input type="radio" checked="checked" name="radio" value ="IngenierÌa Civil">
+                <label class="container">Ingenier√≠a Civil
+                    <input type="radio" checked="checked" name="radio" value ="Ingenier√≠a Civil">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container">IngenierÌa ElÈctrica
-                    <input type="radio" name="radio" value ="IngenierÌa ElÈctrica">
+                <label class="container">Ingenier√≠a El√©ctrica
+                    <input type="radio" name="radio" value ="Ingenier√≠a El√©ctrica">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container">IngenierÌa Industrial
-                    <input type="radio" name="radio" value ="IngenierÌa Industrial">
+                <label class="container">Ingenier√≠a Industrial
+                    <input type="radio" name="radio" value ="Ingenier√≠a Industrial">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container">IngenierÌa Inform·tica y Ciencias de la ComputaciÛn
-                    <input type="radio" name="radio" value ="IngenierÌa Inform·tica y Ciencias de la ComputaciÛn">
+                <label class="container">Ingenier√≠a Inform√°tica y Ciencias de la Computaci√≥n
+                    <input type="radio" name="radio" value ="Ingenier√≠a Inform√°tica y Ciencias de la Computaci√≥n">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container">IngenierÌa de Materiales
-                    <input type="radio" name="radio" value ="IngenierÌa de Materiales">
+                <label class="container">Ingenier√≠a de Materiales
+                    <input type="radio" name="radio" value ="Ingenier√≠a de Materiales">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container">IngenierÌa Mec·nica
-                    <input type="radio" name="radio" value ="IngenierÌa Mec·nica">
+                <label class="container">Ingenier√≠a Mec√°nica
+                    <input type="radio" name="radio" value ="Ingenier√≠a Mec√°nica">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container">IngenierÌa Metal˙rgica
-                    <input type="radio" name="radio" value ="IngenierÌa Metal˙rgica">
+                <label class="container">Ingenier√≠a Metal√∫rgica
+                    <input type="radio" name="radio" value ="Ingenier√≠a Metal√∫rgica">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container">IngenierÌa QuÌmica 
-                    <input type="radio" name="radio" value ="IngenierÌa QuÌmica">
+                <label class="container">Ingenier√≠a Qu√≠mica 
+                    <input type="radio" name="radio" value ="Ingenier√≠a Qu√≠mica">
                     <span class="checkmark"></span>
                 </label>
-                ContraseÒa: <input type="password" name="txtPassword" /><br/><br/>
+                Contrase√±a: <input type="password" name="txtPassword" /><br/><br/>
 
                 <input type="submit" value="Enviar"/><br/><br/>
             </form>

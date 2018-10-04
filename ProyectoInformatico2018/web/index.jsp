@@ -4,10 +4,12 @@
     Author     : vanes
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="Controlador.DatabaseConnect"%>
 <!DOCTYPE html>
 <html>
     <head>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home</title>
         <style>
@@ -62,7 +64,6 @@
         </div>
         <div class="main">
         <h1>Bienvenido a la plataforma colaborativa UDEC</h1>
-        </div>
-       
-    </body>
+        </div>  
+  </body>
 </html>
