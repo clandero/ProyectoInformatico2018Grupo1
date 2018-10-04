@@ -14,7 +14,28 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
+    <script language="JavaScript">
+ function formulariodecontacto(){  
+  if (document.registro.txtNombre.value==""){ 
+   alert("Por favor ingresa tu Nombre."); 
+   document.registro.txtNombre.select();
+   return false;
+  } 
+   if (document.registro.txtCorreo.value==""){ 
+   alert("Por favor indique tu correo."); 
+   document.registro.txtCorreo.select();
+   return false;
+  } 
+ 
+   if (document.registro.txtPassword.value==""){ 
+   alert("Por favor ingresa tu contraseña."); 
+   document.registro.txtPassword.select();
+   return false;
+  } 
+  return true;
+ }
+ 
+</script>
     <head>
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -135,13 +156,13 @@
     </head>
     <body>
     <div class="sidenav">
-        <a href="ingresar.jsp">Ingresar</a>
+        <a href="ingreso.jsp">Ingresar</a>
         <a href="registro.jsp">Registrarse</a>
 </div>
         
     <div class="main">
         <h1>REGISTRO</h1>
-        <form method="post" action="registrar">
+        <form method="post" name="registro" action="registrar" onSubmit="return formulariodecontacto()">
             <p>Llene los siguientes campos: </p><br />
             Nombre: <input type="text" name="txtNombre" /><br/><br/>
             Correo udec: <input type="text" name="txtCorreo" /><br /><br/>
