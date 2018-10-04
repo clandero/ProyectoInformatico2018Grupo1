@@ -42,7 +42,7 @@ public class DatabaseConnect {
             try{
                 DatabaseConnect.connect();
             } catch( Exception ex){
-                
+                System.out.println(ex);
             }
         }
         return DatabaseConnect.conn;

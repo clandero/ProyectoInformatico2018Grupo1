@@ -62,8 +62,7 @@ public class UsuarioDao implements IDao<Usuario>{
         } 
         catch (SQLException s){  
             System.out.println(s);
-        }
-        
+        }        
     }
     
     public Hashtable<String, ArrayList<String>> getUser(String p, String q) throws Exception{
@@ -111,6 +110,12 @@ public class UsuarioDao implements IDao<Usuario>{
             return null;
         }
     }
+    
+    public void upFile(String email, String tema){
+                
+    }
+    
+    
      
     @Override
     public void update(Usuario user, String[][] params) {
