@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
-    Created on : 27-09-2018, 16:30:14
-    Author     : cland
+    Created on : 26-09-2018, 21:23:21
+    Author     : vanes
 --%>
 
 <%@page import="java.sql.Connection"%>
@@ -9,34 +9,61 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="css/cssIndex.css" type="text/css">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" type="text/css">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Home</title>
+        <style>
+            body {
+    font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.main {
+    margin-left: 160px; /* Same as the width of the sidenav */
+    font-size: 10px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+        </style>
     </head>
-    <body class="w3-main">
-        <div class="w3-sidebar w3-bar-block w3-grey" style="width:15%">
-            <a href="#" class="w3-bar-item w3-button"><img src="imagenes/escudo.gif" alt="" style="width: 50px" class="center"/></a>
-            <a href="#" class="w3-bar-item w3-button w3-hover-black">Mi Perfil</a>
-            <a href="#" class="w3-bar-item w3-button w3-hover-black">Link 3</a>
-            <a href="#" class="w3-bar-item w3-button w3-hover-black">Link 4</a>
-            <a href="#" class="w3-bar-item w3-button w3-hover-black">Link 5</a>
+        <ul>
+            <li><a class="active" href="registro.jsp">Registro</a></li>
+            <li><a href="perfil.jsp">Ingresar</a></li>
+        </ul>
+    <body>
+        <div class="sidenav">
+            <a href="ingreso.jsp">Ingresar</a>
+            <a href="registro.jsp">Registrarse</a>
         </div>
-        
-        <div class= "w3-container" style="margin-left:15%; height: 100vh; background-image: url('imagenes/edificio_fi.png'); background-size:100%;  background-repeat: no-repeat;">
-            <h1>Plataforma Colaborativa FI UdeC</h1>
-            <form action="busqueda" method="post" >
-                <h3>Busqueda de personas:
-                    <input type="text" placeholder="Search.." name="Buscar">
-                    
-                    <select name="opcion">
-                        <option value="area">Área de Interés</option>
-                        <option value="depto">Departamento</option>
-                    </select>
-                    <input type="submit" name="Enviar"/>
-                </h3>
-            </form>
-        </div>
-       
-    </body>
+        <div class="main">
+        <h1>Bienvenido a la plataforma colaborativa UDEC</h1>
+        </div>  
+  </body>
 </html>
