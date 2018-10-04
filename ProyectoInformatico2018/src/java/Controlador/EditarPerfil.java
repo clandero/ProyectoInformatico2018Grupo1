@@ -24,11 +24,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.annotation.WebServlet;
 
 /**
  *
  * @author alexis
  */
+@WebServlet(
+        name = "Editar Perfil",
+        description = "Example Servlet Using Annotations",
+        urlPatterns = {"/EditarPerfil"}
+)
+
 public class EditarPerfil extends HttpServlet {
 
     /**
@@ -90,7 +97,7 @@ public class EditarPerfil extends HttpServlet {
         //Iterar y añadir a base de datos
         //Si un antiguo interes no se encuentra en los nuevos, remover de la base de datos
 
-        DatabaseConnect db_connect = new DatabaseConnect();
+        // DatabaseConnect db_connect = null;
         Connection connect;
         Statement stmt = null;
         PreparedStatement update_stmt = null;
@@ -99,11 +106,11 @@ public class EditarPerfil extends HttpServlet {
         List<AreadeInteres> areas_usuario = new ArrayList<>();
 
         try {
-            connect = db_connect.connect();
+            connect = DatabaseConnect.getConn();
             stmt = connect.createStatement();
             //add where mail coincides with user provided
-            String query = "SELECT * FROM plataforma_colaborativa.usuario_area WHERE correo='" + usuario.getCorreo() + "'";
-            String query_delete = "DELETE FROM plataforma_colaborativa.usuario_area WHERE correo=? AND tema=?";
+            String query = "SELECT * FROM usuario_area WHERE correo='" + usuario.getCorreo() + "'";
+            String query_delete = "DELETE FROM usuario_area WHERE correo=? AND tema=?";
             System.out.println(query);
             ResultSet rs = stmt.executeQuery(query);
             if (!rs.isBeforeFirst()) {
@@ -147,7 +154,7 @@ public class EditarPerfil extends HttpServlet {
             //should check return value
             update_stmt.executeBatch();
 
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(EditarPerfil.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (stmt != null) {

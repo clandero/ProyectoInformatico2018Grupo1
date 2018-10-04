@@ -95,6 +95,17 @@
             <a href="#contact">Logout</a>
         </div>
         <div class="main">
+            <form action="busqueda" method="post" >
+                <h3>Busqueda de personas:
+                    <input type="text" placeholder="Search.." name="Buscar">
+
+                    <select name="opcion">
+                        <option value="area">Área de Interés</option>
+                        <option value="depto">Departamento</option>
+                    </select>
+                    <input type="submit" name="Enviar"/>
+                </h3>
+            </form>
             <div class="container">    
                 <div class="jumbotron">
 
@@ -150,7 +161,7 @@
                                 <div class="form-group" style="border-bottom:1px solid black">
                                     <h2>EXPERIENCIA</h2>
                                 </div>
-  
+
                                 <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
                                     <button id="editButton" class="float-left submit-button" >Editar Perfil</button>
 

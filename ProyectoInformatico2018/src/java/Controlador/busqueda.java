@@ -34,19 +34,18 @@ public class busqueda extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     private static UsuarioDao userDao = new UsuarioDao();
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         //response.setContentType("text/html;charset-UTF-8");
-        
+
         String p = request.getParameter("Buscar");
         String q = request.getParameter("opcion");
         //out.println(p);
-        
-        Hashtable<String, ArrayList<String>> res = userDao.getUser(p,q);
-        request.getSession().setAttribute("Buscar",p);
+
+        Hashtable<String, ArrayList<String>> res = userDao.getUser(p, q);
+        request.getSession().setAttribute("Buscar", p);
         request.getSession().setAttribute("resultados", res);
         request.getRequestDispatcher("resultadosBusqueda.jsp").forward(request, response);
     }
