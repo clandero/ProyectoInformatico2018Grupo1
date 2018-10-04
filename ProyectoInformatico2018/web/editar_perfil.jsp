@@ -160,59 +160,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row"> 
-                        <div class="col-md-4">
-                            <div class="col-sm-6 col-xs-6 tital " >Height(feet):</div><div class="col-sm-6 col-xs-6 contant_i">Prasad</div>
-                            <div class="clearfix"></div><div class="bot-border"></div>
-                            <div class="col-sm-6 col-xs-6 tital " >Weight(lbs):</div><div class="col-sm-6 col-xs-6 contant_i">Prasad</div>
-                            <div class="clearfix"></div><div class="bot-border"></div>
-                            <div class="col-sm-6 col-xs-6 tital " >Hair Color:</div><div class="col-sm-6 col-xs-6 contant_i">Prasad</div>
-                            <div class="clearfix"></div><div class="bot-border"></div>
-                            <div class="col-sm-6 col-xs-6 tital " >Hair Length:</div><div class="col-sm-6 col-xs-6 contant_i">Prasad</div>
-                            <div class="clearfix"></div><div class="bot-border"></div>
-                            <div class="col-sm-6 col-xs-6 tital " >Suit/Dress:</div><div class="col-sm-6 col-xs-6 contant_i">Prasad</div>
-                            <div class="clearfix"></div><div class="bot-border"></div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="col-sm-6 col-xs-6 tital " >Shirt Size:</div><div class="col-sm-6 col-xs-6 contant_i">Prasad</div>
-                            <div class="clearfix"></div><div class="bot-border"></div>
-                            <div class="col-sm-6 col-xs-6 tital " >Shoe Size:</div><div class="col-sm-6 col-xs-6 contant_i">Prasad</div>
-                            <div class="clearfix"></div><div class="bot-border"></div>
-                            <div class="col-sm-6 col-xs-6 tital " >Bust:</div><div class="col-sm-6 col-xs-6 contant_i">Prasad</div>
-                            <div class="clearfix"></div><div class="bot-border"></div>
-                            <div class="col-sm-6 col-xs-6 tital " >Waist:</div><div class="col-sm-6 col-xs-6 contant_i">Prasad</div>
-                            <div class="clearfix"></div><div class="bot-border"></div>
-                            <div class="col-sm-6 col-xs-6 tital " >Inseam:</div><div class="col-sm-6 col-xs-6 contant_i">Prasad</div>
-                            <div class="clearfix"></div><div class="bot-border"></div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="col-sm-6 col-xs-6 tital " >Hips:</div><div class="col-sm-6 col-xs-6 contant_i">Prasad</div>
-                            <div class="clearfix"></div><div class="bot-border"></div>
-                            <div class="col-sm-6 col-xs-6 tital " >Glove:</div><div class="col-sm-6 col-xs-6 contant_i">Prasad</div>
-                            <div class="clearfix"></div><div class="bot-border"></div>
-                            <div class="col-sm-6 col-xs-6 tital " >Hat:</div><div class="col-sm-6 col-xs-6 contant_i">Prasad</div>
-                            <div class="clearfix"></div><div class="bot-border"></div>
-                        </div>
-                    </div>
 
                     <div class="row">
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <div class="form-group" style="border-bottom:1px solid black">
                                     <h2>EXPERIENCIA</h2>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="col-sm-4 col-xs-6 tital " >Brand:</div><div class="col-sm-8 col-xs-6 contant_i">Prasad</div>
-                                    <div class="clearfix"></div><div class="bot-border"></div>
-                                    <div class="col-sm-4 col-xs-6 tital " >Year:</div><div class="col-sm-8 col-xs-6 contant_i">Prasad</div>
-                                    <div class="clearfix"></div><div class="bot-border"></div>
-                                </div>    
-                                <div class="col-md-6">
-                                    <div class="col-sm-4 col-xs-6 tital " >Model:</div><div class="col-sm-8 col-xs-6 contant_i">Prasad</div>
-                                    <div class="clearfix"></div><div class="bot-border"></div>
-                                    <div class="col-sm-4 col-xs-6 tital " >Color:</div><div class="col-sm-8 col-xs-6 contant_i">Prasad</div>
-                                    <div class="clearfix"></div><div class="bot-border"></div>
-                                </div>    
+                                </div> 
 
                             </div>
                         </div>
