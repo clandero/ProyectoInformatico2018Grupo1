@@ -6,24 +6,23 @@
 package Controlador;
 
 import java.io.IOException;
-import static java.lang.System.out;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-//import java.util.ArrayList;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Hashtable;
+
 /**
  *
- * @author cland
+ * @author berko
  */
-@WebServlet(name = "busqueda", urlPatterns = {"/busqueda"})
-public class busqueda extends HttpServlet {
+@WebServlet(name = "FileSearchServlet", urlPatterns = {"/buscarTrabajo"})
+public class FileSearchServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,20 +33,37 @@ public class busqueda extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static UsuarioDao userDao = new UsuarioDao();
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
-        //response.setContentType("text/html;charset-UTF-8");
+            throws ServletException, IOException {
+        Connection conn = DatabaseConnect.getConn();
+        String keyword = request.getParameter("keyword");
+        String topic = request.getParameter("topic");
+        try{
+            String query = 
+                "SELECT a.tema, d.titulo " +
+                "FROM area_de_interes as a, documento_area as d_a, documento as d " +
+                "WHERE a.tema = d_a.tema " +
+                "AND d.n_doc = d_a.n_doc ";
+            
+              //+ "AND a.tema = (?)"
+              //+ "AND d.title LIKE %(?)%"
+            PreparedStatement ps = conn.prepareStatement(query);
+            //ps.setString(1, topic);
+            //ps.setString(2, keyword);
+            ResultSet result = ps.executeQuery();
+            Hashtable<String, ArrayList<String>> files = new Hashtable<String, ArrayList<String>>();
 
-        String p = request.getParameter("Buscar");
-        String q = request.getParameter("opcion");
-        //out.println(p);
-
-        Hashtable<String, ArrayList<String>> res = userDao.getUser(p, q);
-        request.getSession().setAttribute("Buscar", p);
-        request.getSession().setAttribute("resultados", res);
-        request.getRequestDispatcher("/resultadosBusqueda.jsp").forward(request, response);
+            while(result.next()){
+                ArrayList<String> datos = new ArrayList<String>();
+                datos.add(result.getString("titulo"));
+                files.put(result.getString("tema"), datos);                    
+            }
+            request.getSession().setAttribute("resultados", files);
+            request.getRequestDispatcher("resultadosBusqueda.jsp").forward(request, response);
+        
+        } catch(SQLException | NullPointerException ex){
+            System.out.println(ex);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -62,11 +78,7 @@ public class busqueda extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(busqueda.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -80,11 +92,7 @@ public class busqueda extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(busqueda.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

@@ -66,6 +66,5 @@ public class AreaDao implements IDao<AreadeInteres>{
     @Override
     public void delete(AreadeInteres t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+    }    
 }

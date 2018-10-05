@@ -34,9 +34,9 @@ public class DatabaseConnect {
         if (conn == null) {
             try {
                 DatabaseConnect.connect();
-            } catch (Exception ex) {
-
-            }
+            } catch( Exception ex){
+                System.out.println(ex);
+            } 
         }
         return DatabaseConnect.conn;
     }
