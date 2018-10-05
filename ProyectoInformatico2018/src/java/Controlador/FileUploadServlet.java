@@ -73,6 +73,7 @@ public class FileUploadServlet extends HttpServlet {
         writer.println("New file " + fileName + " created at " + path);
         LOGGER.log(Level.INFO, "File{0}being uploaded to {1}", 
                 new Object[]{fileName, path});
+        userDao.upFile(mail, tema, fileName, "/docs/"+fileName);
     } catch (FileNotFoundException fne) {
         writer.println("You either did not specify a file to upload or are "
                 + "trying to upload a file to a protected or nonexistent "
@@ -92,7 +93,7 @@ public class FileUploadServlet extends HttpServlet {
             writer.close();
         }
     }
-    userDao.upFile(mail, tema, fileName, path+fileName);
+    
 }
 
 private String getFileName(final Part part) {
