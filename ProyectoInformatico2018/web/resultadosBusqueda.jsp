@@ -18,10 +18,7 @@
     <body class="w3-main">
         <div class="w3-sidebar w3-bar-block w3-grey" style="width:15%">
             <a href="#" class="w3-bar-item w3-button"><img src="imagenes/escudo.gif" alt="" style="width: 50px" class="center"/></a>
-            <a href="#" class="w3-bar-item w3-button w3-hover-black">Mi Perfil</a>
-            <a href="#" class="w3-bar-item w3-button w3-hover-black">Link 3</a>
-            <a href="#" class="w3-bar-item w3-button w3-hover-black">Link 4</a>
-            <a href="#" class="w3-bar-item w3-button w3-hover-black">Link 5</a>
+            <a href="perfil.jsp" class="w3-bar-item w3-button w3-hover-black">Mi Perfil</a>
         </div>
         <div class= "w3-container" style="margin-left:15%; height: 100vh; background-image: url('imagenes/edificio_fi.png'); background-size:100%;  background-repeat: no-repeat;">
         <%String x = (String)request.getSession().getAttribute("Buscar");
