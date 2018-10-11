@@ -84,7 +84,7 @@ public class ingresar extends HttpServlet {
                 String tipo = res.getString("tipo_usuario");
                 String depa = res.getString("departamento");
                 Usuario u1 = new Usuario(nombre, correo, pass, depa, tipo);
-                request.getSession().setAttribute("usuario", u1);
+                request.getSession().setAttribute("usuario_existente", u1);
                 request.getSession().setAttribute("usuario_perfil", u1);
 
             }
