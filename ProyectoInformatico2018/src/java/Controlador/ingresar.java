@@ -43,6 +43,8 @@ public class ingresar extends HttpServlet {
     String urlbd = "jdbc:postgresql://bdd.inf.udec.cl/pigrupo1";
     String userbd = "pigrupo1";
     String passwordbd = "pigrupo1";
+    
+    private static UsuarioDao userDao = new UsuarioDao();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -58,18 +60,7 @@ public class ingresar extends HttpServlet {
         correo = request.getParameter("txtCorreo");
         pass = request.getParameter("txtPassword");
         String passencript = DigestUtils.md5Hex(pass);
-        try {
-            Class.forName("org.postgresql.Driver");
-            con = DriverManager.getConnection(urlbd, userbd, passwordbd);
-            st = con.createStatement();
-            String query = "SELECT * FROM plataforma_colaborativa.usuario WHERE correo='" + correo + "' AND password='" + passencript + "';";
-            st.executeQuery(query);
-            //System.out.println("usuario valido valido");
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println("datos no insertados");
-        }
-        String datos = "SELECT * FROM plataforma_colaborativa.usuario WHERE correo='" + correo + "';";
+        Usuario u1 = userDao.get(correo, pass).get();
         String consulta_areas = "SELECT * FROM plataforma_colaborativa.area_de_interes";
         String consulta_areas_usuario = "SELECT * FROM plataforma_colaborativa.usuario_area WHERE correo='" + correo + "'";
         List<AreadeInteres> areas_existentes = new ArrayList<>();
@@ -77,17 +68,8 @@ public class ingresar extends HttpServlet {
         Statement s = null;
         ResultSet res_areas;
         try {
-            s = con.createStatement();
-            ResultSet res = s.executeQuery(datos);
-            while (res.next()) {
-                String nombre = res.getString("nombre_usuario");
-                String tipo = res.getString("tipo_usuario");
-                String depa = res.getString("departamento");
-                Usuario u1 = new Usuario(nombre, correo, pass, depa, tipo);
-                request.getSession().setAttribute("usuario", u1);
-                request.getSession().setAttribute("usuario_perfil", u1);
-
-            }
+            request.getSession().setAttribute("usuario", u1);
+            request.getSession().setAttribute("usuario_perfil", u1);            
             res_areas = s.executeQuery(consulta_areas);
             while (res_areas.next()) {
                 areas_existentes.add(new AreadeInteres(res_areas.getString("tema")));

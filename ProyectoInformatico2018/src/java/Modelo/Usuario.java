@@ -18,11 +18,12 @@ public class Usuario {
     }
 
     public Usuario(String name, String c, String p, String d, String t) {
-        this.correo = c;
         this.nombre_usuario = name;
-        this.tipo_usuario = t;
-        this.departamento = d;
+        this.correo = c;       
         this.password = p;
+        this.departamento = d;
+        this.tipo_usuario = t;
+        
     }
 
     public Usuario(String c, String name, String intereses) {
