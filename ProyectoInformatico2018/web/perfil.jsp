@@ -9,7 +9,7 @@
 <%@page import="Modelo.AreadeInteres"%>
 <%@page import="Modelo.Usuario"%>
 <%
-
+    Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
     Usuario usuario_perfil = (Usuario) request.getSession().getAttribute("usuario_perfil");
     List<AreadeInteres> areas_existentes = (ArrayList<AreadeInteres>) request.getSession().getAttribute("areas_existentes");
     List<AreadeInteres> areas_usuario = (ArrayList<AreadeInteres>) request.getSession().getAttribute("areas_usuario");
@@ -162,7 +162,7 @@
                                     <h2>EXPERIENCIA</h2>
                                 </div>
 
-                                <c:if test="${usuario_perfil.getCorreo().equals(usuario_perfil.getCorreo())}">
+                                <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
                                     <button id="editButton" class="float-left submit-button" >Editar Perfil</button>
 
                                     <script type="text/javascript">
