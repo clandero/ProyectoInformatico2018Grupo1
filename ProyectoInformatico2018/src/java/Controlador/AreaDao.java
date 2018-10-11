@@ -34,7 +34,40 @@ public class AreaDao implements IDao<AreadeInteres>{
 
     @Override
     public List getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "SELECT * FROM area_de_interes";
+        try{
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            List ls = new ArrayList<AreadeInteres>();
+            while (rs.next()){
+                ls.add(new AreadeInteres(rs.getString("tema")));
+            }
+            return ls;
+        } catch(SQLException ex){
+            System.out.println(ex);
+            return null;
+        }
+    }
+    
+    public List getAll(Usuario u) {
+        String query = "SELECT UNIQUE tema "
+                     + "FROM usuario_area"
+                     + "WHERE correo=(?)";
+        try{
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, u.getCorreo());
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            List ls = new ArrayList<AreadeInteres>();
+            while (rs.next()){
+                ls.add(new AreadeInteres(rs.getString("tema")));
+            }
+            return ls;
+        } catch(SQLException ex){
+            System.out.println(ex);
+            return null;
+        }
     }
     
     @Override

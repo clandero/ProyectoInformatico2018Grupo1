@@ -28,24 +28,30 @@ public class UsuarioDao implements IDao<Usuario>{
         return null;
     }
 
-    public Optional<Usuario> get(String correo, String pass){
+    public Usuario get(String correo, String pass){
         try{
             String query = "SELECT * "
-                         + "FROM plataforma_colaborativa.usuario"
+                         + "FROM usuario "
                          + "WHERE correo=(?) AND "
-                         + "password=(?);";
-
+                         + "password=(?) ";
             PreparedStatement st = conn.prepareStatement(query);
             st.setString(1, correo);
             st.setString(2, pass);
             st.execute();
             ResultSet rs = st.getResultSet();
-            Usuario user = new Usuario(rs.getString("nombre_usuario"),rs.getString("correo"), 
+            if(rs.next()){  
+                Usuario user = new Usuario(rs.getString("nombre_usuario"),rs.getString("correo"), 
                                        rs.getString("password"), rs.getString("departamento"),
                                        rs.getString("tipo_usuario"));
-            return Optional.ofNullable(user);
+                return user;
+            } else{
+                System.out.println("no more rs");
+                return null;
+            }
+
         } catch (SQLException ex){
-            return Optional.ofNullable(null);
+            System.out.println(ex);
+            return null;
         }
     }
        
@@ -62,7 +68,7 @@ public class UsuarioDao implements IDao<Usuario>{
         try{
             PreparedStatement ps = 
                     conn.prepareStatement(
-                            "insert into usuario(nombre_usuario, correo, password, departamento, tipo_usuario)"
+                            "insert into usuario(nombre_usuario, correo, password, departamento, tipo_usuario) "
                            +"values ((?), (?), (?), (?), (?))");
             ps.setString(1, user.getNombreUsuario());
             ps.setString(2, user.getCorreo());

@@ -22,8 +22,7 @@ public class Usuario {
         this.correo = c;       
         this.password = p;
         this.departamento = d;
-        this.tipo_usuario = t;
-        
+        this.tipo_usuario = t;        
     }
 
     public Usuario(String c, String name, String intereses) {
