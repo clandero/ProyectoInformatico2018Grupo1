@@ -56,6 +56,7 @@ public class ingresar extends HttpServlet {
         response.setContentType("text/html;charset-UTF-8");
         System.err.println("aaaaaaaaaaaaaaaaaaaa");
         correo = request.getParameter("txtCorreo");
+        System.out.println(correo);
         pass = request.getParameter("txtPassword");
         String passencript = DigestUtils.md5Hex(pass);
         try {
@@ -65,8 +66,7 @@ public class ingresar extends HttpServlet {
             String query = "SELECT * FROM plataforma_colaborativa.usuario WHERE correo='" + correo + "' AND password='" + passencript + "';";
             st.executeQuery(query);
             //System.out.println("usuario valido valido");
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | SQLException e) {
             System.err.println("datos no insertados");
         }
         String datos = "SELECT * FROM plataforma_colaborativa.usuario WHERE correo='" + correo + "';";
