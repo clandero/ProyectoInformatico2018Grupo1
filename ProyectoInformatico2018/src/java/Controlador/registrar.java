@@ -71,7 +71,9 @@ public class registrar extends HttpServlet {
             System.out.println("datos no insertados");
         }
         Usuario u1 = new Usuario(nombre, correo, pass, depa, tipo);
-        request.getSession().setAttribute("usuario1", u1);
+        request.getSession().setAttribute("usuario_perfil", u1);
+        request.getSession().setAttribute("usuario_existente", u1);
+
         request.getRequestDispatcher("perfil.jsp").forward(request, response);
     }
 
