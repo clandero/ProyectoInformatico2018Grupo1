@@ -135,11 +135,12 @@
     </head>
     <body>
         <div class="sidenav">
-            <a href="ingresar.jsp">Ingresar</a>
+            <a href="ingreso.jsp">Ingresar</a>
             <a href="registro.jsp">Registrarse</a>
         </div>
 
         <div class="main">
+            <div class="card card-container">
             <h1>REGISTRO</h1>
             <form method="post" action="registrar">
                 <p>Llene los siguientes campos: </p><br />
@@ -158,31 +159,31 @@
                     <input type="radio" checked="checked" name="radio" value ="IngenierÌa Civil">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container">Ingenier√≠a El√©ctrica
+                <label class="container">IngenierÌa ElÈctrica
                     <input type="radio" name="radio" value ="IngenierÌaa ElÈctrica">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container">Ingenier√≠a Industrial
+                <label class="container">IngenierÌa Industrial
                     <input type="radio" name="radio" value ="IngenierÌa Industrial">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container">Ingenier√≠a Inform√°tica y Ciencias de la Computaci√≥n
+                <label class="container">IngenierÌa Inform·tica y Ciencias de la ComputaciÛn
                     <input type="radio" name="radio" value ="IngenierÌa Inform·tica y Ciencias de la ComputaciÛn">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container">Ingenier√≠a de Materiales
+                <label class="container">IngenierÌa de Materiales
                     <input type="radio" name="radio" value ="IngenierÌa de Materiales">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container">Ingenier√≠a Mec√°nica
+                <label class="container">IngenierÌa Mec·nica
                     <input type="radio" name="radio" value ="IngenierÌa Mec·nica">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container">Ingenier√≠a Metal√∫rgica
+                <label class="container">IngenierÌa Metal˙rgica
                     <input type="radio" name="radio" value ="IngenierÌa Metal˙rgica">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container">Ingenier√≠a Qu√≠mica 
+                <label class="container">IngenierÌa QuÌmica 
                     <input type="radio" name="radio" value ="IngenierÌa QuÌmica">
                     <span class="checkmark"></span>
                 </label>
@@ -190,6 +191,7 @@
 
                 <input type="submit" value="Enviar"/><br/><br/>
             </form>
+        </div>
         </div>
     </body>
 </html>

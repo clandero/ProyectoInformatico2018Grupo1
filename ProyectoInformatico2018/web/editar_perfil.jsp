@@ -95,12 +95,7 @@
 
     </head>
     <body>
-        <div class="sidenav">
-            <a href="perfil.jsp">Perfil</a>
-            <a href="#services">Anuncios</a>
-            <a href="#clients">Contactos</a>
-            <a href="#contact">Logout</a>
-        </div>
+        <%@include file="sidebar.jsp" %>
         <div class="main">
             <div class="container">    
                 <div class="jumbotron">
