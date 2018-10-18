@@ -12,7 +12,7 @@ import java.sql.*;
  *
  * @author arken
  */
-public class UsuarioDao implements IDao<Usuario>{
+public class UsuarioDao{
     
     private static Connection conn = null;
     
@@ -22,40 +22,54 @@ public class UsuarioDao implements IDao<Usuario>{
         }
         System.out.println("instanced userdao");
     }
-    
-    @Override
+   
     public Optional<Usuario> get(long id){
-        Connection conn = DatabaseConnect.getConn();
-        try{
-            PreparedStatement ps = 
-                    conn.prepareStatement("select * "
-                                        + "from Usuario"
-                                        + "where id=(?)");           
-            ps.setInt(1, (int) id);
-            boolean status = ps.execute();
-            ResultSet result = ps.getResultSet();
-        } 
-        catch (SQLException s){            
-        }        
-        return Optional.ofNullable(new Usuario());
+        return null;
     }
-    
-     
-    @Override
+
+    public Usuario get(String correo, String pass){
+        try{
+            String query = "SELECT * "
+                         + "FROM usuario "
+                         + "WHERE correo=(?) AND "
+                         + "password=(?) ";
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setString(1, correo);
+            st.setString(2, pass);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            if(rs.next()){  
+                Usuario user = new Usuario(rs.getString("nombre_usuario"),rs.getString("correo"), 
+                                       rs.getString("password"), rs.getString("departamento"),
+                                       rs.getString("tipo_usuario"));
+                return user;
+            } else{
+                System.out.println("no more rs");
+                return null;
+            }
+
+        } catch (SQLException ex){
+            System.out.println(ex);
+            return null;
+        }
+    }
+           
     public List<Usuario> getAll() {
         return new ArrayList<Usuario>();
     }
-     
-    @Override
+    
     public void save(Usuario user) {
         System.out.println("userdao wants to save");
         try{
             PreparedStatement ps = 
                     conn.prepareStatement(
-                            "insert into usuario(correo, password)"
-                           +"values ((?),(?))");
-            ps.setString(1, user.getCorreo());
-            ps.setString(2, user.getPassword());
+                            "insert into usuario(nombre_usuario, correo, password, departamento, tipo_usuario) "
+                           +"values ((?), (?), (?), (?), (?))");
+            ps.setString(1, user.getNombreUsuario());
+            ps.setString(2, user.getCorreo());
+            ps.setString(3, user.getPassword());
+            ps.setString(4, user.getDepartamento());
+            ps.setString(5, user.getTipoUsuario());            
             boolean status = ps.execute();
             System.out.println("finished save");
             System.out.println(status);
@@ -147,14 +161,12 @@ public class UsuarioDao implements IDao<Usuario>{
             System.out.println(ex);
         }
     }
-     
-    @Override
+    
     public void update(Usuario user, String[][] params) {
         
         
     }
-     
-    @Override
+    
     public void delete(Usuario user) {
         
     }

@@ -16,7 +16,7 @@ import java.sql.*;
  *
  * @author berko
  */
-public class AreaDao implements IDao<AreadeInteres>{
+public class AreaDao{
     
     private static Connection conn = null;
     
@@ -27,17 +27,47 @@ public class AreaDao implements IDao<AreadeInteres>{
         System.out.println("instanced areadao");
     }
 
-    @Override
     public Optional get(long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public List getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "SELECT * FROM area_de_interes";
+        try{
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            List ls = new ArrayList<AreadeInteres>();
+            while (rs.next()){
+                ls.add(new AreadeInteres(rs.getString("tema")));
+            }
+            return ls;
+        } catch(SQLException ex){
+            System.out.println(ex);
+            return null;
+        }
     }
     
-    @Override
+    public List getAll(Usuario u) {
+        String query = "SELECT UNIQUE tema "
+                     + "FROM usuario_area"
+                     + "WHERE correo=(?)";
+        try{
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, u.getCorreo());
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            List ls = new ArrayList<AreadeInteres>();
+            while (rs.next()){
+                ls.add(new AreadeInteres(rs.getString("tema")));
+            }
+            return ls;
+        } catch(SQLException ex){
+            System.out.println(ex);
+            return null;
+        }
+    }
+    
     public void save(AreadeInteres t) {
         throw new UnsupportedOperationException("Need user_email! Use method save(Area, email) instead."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -58,12 +88,10 @@ public class AreaDao implements IDao<AreadeInteres>{
         }
     }
 
-    @Override
     public void update(AreadeInteres t, String[][] params) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public void delete(AreadeInteres t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }    

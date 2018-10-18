@@ -30,19 +30,16 @@ import org.apache.commons.codec.digest.DigestUtils;
  * @author vanes
  */
 @WebServlet(
-        name = "Ingresasr",
+        name = "Ingresar",
         description = "Example Servlet Using Annotations",
         urlPatterns = {"/ingresar"}
 )
 
 public class ingresar extends HttpServlet {
 
-    Connection con;
-    Statement st;
-    String correo, pass;
-    String urlbd = "jdbc:postgresql://bdd.inf.udec.cl/pigrupo1";
-    String userbd = "pigrupo1";
-    String passwordbd = "pigrupo1";
+    
+    private static UsuarioDao userDao = new UsuarioDao();
+    private static AreaDao areaDao = new AreaDao();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -55,56 +52,23 @@ public class ingresar extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset-UTF-8");
         System.err.println("aaaaaaaaaaaaaaaaaaaa");
-        correo = request.getParameter("txtCorreo");
-        System.out.println(correo);
-        pass = request.getParameter("txtPassword");
+
+        String correo = request.getParameter("txtCorreo");
+        String pass = request.getParameter("txtPassword");
         String passencript = DigestUtils.md5Hex(pass);
-        try {
-            Class.forName("org.postgresql.Driver");
-            con = DriverManager.getConnection(urlbd, userbd, passwordbd);
-            st = con.createStatement();
-            String query = "SELECT * FROM plataforma_colaborativa.usuario WHERE correo='" + correo + "' AND password='" + passencript + "';";
-            st.executeQuery(query);
-            //System.out.println("usuario valido valido");
-        } catch (ClassNotFoundException | SQLException e) {
-            System.err.println("datos no insertados");
+        System.out.println("want to get "+ correo + ", "+pass+ "->"+passencript);
+        Usuario u1 = userDao.get(correo, passencript);
+        if (u1 == null){
+            return;
+        } else{
+            System.out.println("listo lito");
+
         }
-        String datos = "SELECT * FROM plataforma_colaborativa.usuario WHERE correo='" + correo + "';";
-        String consulta_areas = "SELECT * FROM plataforma_colaborativa.area_de_interes";
-        String consulta_areas_usuario = "SELECT * FROM plataforma_colaborativa.usuario_area WHERE correo='" + correo + "'";
-        List<AreadeInteres> areas_existentes = new ArrayList<>();
-        List<AreadeInteres> areas_usuario = new ArrayList<>();
-        Statement s = null;
-        ResultSet res_areas;
-        try {
-            s = con.createStatement();
-            ResultSet res = s.executeQuery(datos);
-            while (res.next()) {
-                String nombre = res.getString("nombre_usuario");
-                String tipo = res.getString("tipo_usuario");
-                String depa = res.getString("departamento");
-                Usuario u1 = new Usuario(nombre, correo, pass, depa, tipo);
-                request.getSession().setAttribute("usuario", u1);
-                request.getSession().setAttribute("usuario_perfil", u1);
-
-            }
-            res_areas = s.executeQuery(consulta_areas);
-            while (res_areas.next()) {
-                areas_existentes.add(new AreadeInteres(res_areas.getString("tema")));
-            }
-            request.getSession().setAttribute("areas_existentes", areas_existentes);
-
-            res_areas = s.executeQuery(consulta_areas_usuario);
-            while (res_areas.next()) {
-                areas_usuario.add(new AreadeInteres(res_areas.getString("tema")));
-            }
-
-            request.getSession().setAttribute("areas_usuario", areas_usuario);
-            request.getRequestDispatcher("perfil.jsp").forward(request, response);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ingresar.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        request.getSession().setAttribute("usuario", u1);
+        request.getSession().setAttribute("usuario_perfil", u1);            
+        request.getSession().setAttribute("areas_existentes", areaDao.getAll());
+        request.getSession().setAttribute("areas_usuario", areaDao.getAll(u1));
+        request.getRequestDispatcher("perfil.jsp").forward(request, response);     
 
     }
 
