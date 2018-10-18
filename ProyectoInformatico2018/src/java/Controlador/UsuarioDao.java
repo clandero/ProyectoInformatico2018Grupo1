@@ -63,7 +63,7 @@ public class UsuarioDao{
         try{
             PreparedStatement ps = 
                     conn.prepareStatement(
-                            "insert into usuario(nombre_usuario, correo, password, departamento, tipo_usuario) "
+                            "insert into usuario(nombre_usuario, correo, password, n_departamento, tipo_usuario) "
                            +"values ((?), (?), (?), (?), (?))");
             ps.setString(1, user.getNombreUsuario());
             ps.setString(2, user.getCorreo());
