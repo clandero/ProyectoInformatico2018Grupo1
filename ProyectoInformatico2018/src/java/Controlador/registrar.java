@@ -10,9 +10,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import Modelo.Usuario;
 import javax.servlet.annotation.WebServlet;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -51,7 +48,9 @@ public class registrar extends HttpServlet {
         String passencript = DigestUtils.md5Hex(pass);
         String depa = request.getParameter("radio");
         String tipo = request.getParameter("search_categories");
-        Usuario u1 = new Usuario(nombre, correo, passencript, depa, tipo);
+        //Buscar en BD departamento por nombre departamento para obtener numero
+        Usuario u1 = new Usuario(nombre, correo, passencript, depa,
+                new DepartamentoDao().get(depa), tipo);
         try {
             userDao.save(u1);
         } catch (Exception e) {
