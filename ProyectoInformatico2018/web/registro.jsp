@@ -140,7 +140,7 @@
         </div>
 
         <div class="main">
-            <div class="card card-container">
+            <div class="card card-container"> <!-- Algo así funcionó en algun momento, no se que paso-->
             <h1>REGISTRO</h1>
             <form method="post" action="registrar">
                 <p>Llene los siguientes campos: </p><br />
