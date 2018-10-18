@@ -110,6 +110,7 @@ public class EditarPerfil extends HttpServlet {
             stmt = connect.createStatement();
             //add where mail coincides with user provided
             String query = "SELECT * FROM usuario_area WHERE correo='" + usuario.getCorreo() + "'";
+            System.out.println(usuario.getCorreo());
             String query_delete = "DELETE FROM usuario_area WHERE correo=? AND tema=?";
             System.out.println(query);
             ResultSet rs = stmt.executeQuery(query);
@@ -170,7 +171,9 @@ public class EditarPerfil extends HttpServlet {
             request.getSession().setAttribute("areas_usuario", areas_usuario);
 
         }
-        response.sendRedirect("perfil.jsp");
+        request.getRequestDispatcher("perfil.jsp").forward(request, response);
+
+      //  response.sendRedirect("perfil.jsp");
         // processRequest(request, response);
     }
 

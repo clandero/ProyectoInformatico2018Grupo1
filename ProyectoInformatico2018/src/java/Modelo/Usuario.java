@@ -29,7 +29,7 @@ public class Usuario {
         this.correo = c;
         this.nombre_usuario = name;
         this.tipo_usuario = "user";
-        this.intereses = new ArrayList<AreadeInteres>();
+        this.intereses = new ArrayList<>();
         String[] intereses_list = intereses.split(" ");
         for (String inter : intereses_list) {
             this.intereses.add(new AreadeInteres(inter));

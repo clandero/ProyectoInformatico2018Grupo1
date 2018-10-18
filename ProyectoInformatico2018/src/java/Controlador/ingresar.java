@@ -52,6 +52,7 @@ public class ingresar extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset-UTF-8");
         System.err.println("aaaaaaaaaaaaaaaaaaaa");
+
         String correo = request.getParameter("txtCorreo");
         String pass = request.getParameter("txtPassword");
         String passencript = DigestUtils.md5Hex(pass);
@@ -61,8 +62,8 @@ public class ingresar extends HttpServlet {
             return;
         } else{
             System.out.println("listo lito");
+
         }
-        
         request.getSession().setAttribute("usuario", u1);
         request.getSession().setAttribute("usuario_perfil", u1);            
         request.getSession().setAttribute("areas_existentes", areaDao.getAll());

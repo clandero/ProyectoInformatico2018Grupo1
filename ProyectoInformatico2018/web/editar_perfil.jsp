@@ -95,12 +95,7 @@
 
     </head>
     <body>
-        <div class="sidenav">
-            <a href="perfil.jsp">Perfil</a>
-            <a href="#services">Anuncios</a>
-            <a href="#clients">Contactos</a>
-            <a href="#contact">Logout</a>
-        </div>
+        <%@include file="sidebar.jsp" %>
         <div class="main">
             <div class="container">    
                 <div class="jumbotron">
@@ -120,11 +115,10 @@
                             <hr>
                             <div class="col-md-8">  
                                 <ul class=" details" style="background-color: #ededed ">
-
-                                    <li><p><span class="" style="width:100px;"></span>Nombre: Alexis</p></li>
-                                    <li><p><span class="" style="width:100px;"></span>Tipo: Estudiante</p></li>
-                                    <li><p><span class="" style="width:100px;"></span>Departamento: DIICC </p></li>
-                                    <li><p><span class="" style="width:100px;"></span>Correo: alexisanchez@udec.cl</p></li>
+                                    <li><p><span class="" style="width:100px;"></span>Nombre: <%= usuario.getNombreUsuario()%></p></li>
+                                    <li><p><span class="" style="width:100px;"></span>Tipo: <%= usuario.getTipoUsuario()%></p></li>
+                                    <li><p><span class="" style="width:100px;"></span>Departamento: <%= usuario.getDepartamento()%></p></li>
+                                    <li><p><span class="" style="width:100px;"></span>Correo: <%= usuario.getCorreo()%></p></li>
                                 </ul>
                             </div>
                             <div class="col-md-4">  
@@ -141,10 +135,10 @@
                                     <c:forEach items="${areas_existentes}" var="area">
                                         <div class="col-sm-7 col-xs-6 ">
                                             <input type="checkbox" value="${area.getTema()}"name="interes" size="10"> "${area.getTema()}"                             
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div class="bot-border"></div>
-                                            <div class="col-sm-5 col-xs-6 tital " ></div>                  
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="bot-border"></div>
+                                        <div class="col-sm-5 col-xs-6 tital " ></div>                  
                                     </c:forEach>
                                     <input type="submit" value="Guardar cambios">
                                 </form>
