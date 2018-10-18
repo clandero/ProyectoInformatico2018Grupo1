@@ -40,7 +40,7 @@ public class UsuarioDao{
             ResultSet rs = st.getResultSet();
             if(rs.next()){  
                 Usuario user = new Usuario(rs.getString("nombre_usuario"),rs.getString("correo"), 
-                                       rs.getString("password"), rs.getString("departamento"),
+                                       rs.getString("password"), rs.getInt("n_departamento"),
                                        rs.getString("tipo_usuario"));
                 return user;
             } else{
@@ -68,7 +68,7 @@ public class UsuarioDao{
             ps.setString(1, user.getNombreUsuario());
             ps.setString(2, user.getCorreo());
             ps.setString(3, user.getPassword());
-            ps.setString(4, user.getDepartamento());
+            ps.setInt(4, user.getDepartamento());
             ps.setString(5, user.getTipoUsuario());            
             boolean status = ps.execute();
             System.out.println("finished save");

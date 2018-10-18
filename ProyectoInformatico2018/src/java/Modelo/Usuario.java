@@ -8,8 +8,8 @@ public class Usuario {
     private String correo;
     private String nombre_usuario;
     private String tipo_usuario;
-
     private String departamento;
+    private int n_departamento;
 
     private String password;
     private List<AreadeInteres> intereses;
@@ -17,12 +17,21 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String name, String c, String p, String d, String t) {
+    public Usuario(String name, String c, String p, String departamento, int d, String t) {
         this.nombre_usuario = name;
-        this.correo = c;       
+        this.correo = c;
         this.password = p;
-        this.departamento = d;
-        this.tipo_usuario = t;        
+        this.departamento = departamento;
+        this.n_departamento = d;
+        this.tipo_usuario = t;
+    }
+
+    public Usuario(String name, String c, String p, int d, String t) {
+        this.nombre_usuario = name;
+        this.correo = c;
+        this.password = p;
+        this.n_departamento = d;
+        this.tipo_usuario = t;
     }
 
     public Usuario(String c, String name, String intereses) {
@@ -64,12 +73,12 @@ public class Usuario {
         this.tipo_usuario = t;
     }
 
-    public String getDepartamento() {
-        return departamento;
+    public int getDepartamento() {
+        return n_departamento;
     }
 
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;
+    public void setDepartamento(int departamento) {
+        this.n_departamento = departamento;
     }
 
     public void setPassword(String p) {
