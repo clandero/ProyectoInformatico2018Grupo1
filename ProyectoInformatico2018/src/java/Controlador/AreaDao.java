@@ -16,7 +16,7 @@ import java.sql.*;
  *
  * @author berko
  */
-public class AreaDao implements IDao<AreadeInteres>{
+public class AreaDao{
     
     private static Connection conn = null;
     
@@ -27,12 +27,10 @@ public class AreaDao implements IDao<AreadeInteres>{
         System.out.println("instanced areadao");
     }
 
-    @Override
     public Optional get(long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public List getAll() {
         String query = "SELECT * FROM area_de_interes";
         try{
@@ -70,7 +68,6 @@ public class AreaDao implements IDao<AreadeInteres>{
         }
     }
     
-    @Override
     public void save(AreadeInteres t) {
         throw new UnsupportedOperationException("Need user_email! Use method save(Area, email) instead."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -91,12 +88,10 @@ public class AreaDao implements IDao<AreadeInteres>{
         }
     }
 
-    @Override
     public void update(AreadeInteres t, String[][] params) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public void delete(AreadeInteres t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }    

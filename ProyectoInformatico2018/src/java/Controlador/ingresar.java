@@ -55,7 +55,7 @@ public class ingresar extends HttpServlet {
         String correo = request.getParameter("txtCorreo");
         String pass = request.getParameter("txtPassword");
         String passencript = DigestUtils.md5Hex(pass);
-        System.out.println("want to get"+ correo + ", "+pass+ "->"+passencript);
+        System.out.println("want to get "+ correo + ", "+pass+ "->"+passencript);
         Usuario u1 = userDao.get(correo, passencript);
         if (u1 == null){
             return;

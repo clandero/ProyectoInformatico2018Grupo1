@@ -12,7 +12,7 @@ import java.sql.*;
  *
  * @author arken
  */
-public class UsuarioDao implements IDao<Usuario>{
+public class UsuarioDao{
     
     private static Connection conn = null;
     
@@ -22,8 +22,7 @@ public class UsuarioDao implements IDao<Usuario>{
         }
         System.out.println("instanced userdao");
     }
-    
-    @Override
+   
     public Optional<Usuario> get(long id){
         return null;
     }
@@ -54,15 +53,11 @@ public class UsuarioDao implements IDao<Usuario>{
             return null;
         }
     }
-       
-        
-            
-    @Override
+           
     public List<Usuario> getAll() {
         return new ArrayList<Usuario>();
     }
-     
-    @Override
+    
     public void save(Usuario user) {
         System.out.println("userdao wants to save");
         try{
@@ -166,14 +161,12 @@ public class UsuarioDao implements IDao<Usuario>{
             System.out.println(ex);
         }
     }
-     
-    @Override
+    
     public void update(Usuario user, String[][] params) {
         
         
     }
-     
-    @Override
+    
     public void delete(Usuario user) {
         
     }
