@@ -40,7 +40,6 @@ public class registrar extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -52,7 +51,7 @@ public class registrar extends HttpServlet {
         String passencript = DigestUtils.md5Hex(pass);
         String depa = request.getParameter("radio");
         String tipo = request.getParameter("search_categories");
-        Usuario u1 = new Usuario(nombre, correo, pass, depa, tipo);
+        Usuario u1 = new Usuario(nombre, correo, passencript, depa, tipo);
         try {
             userDao.save(u1);
         } catch (Exception e) {
@@ -60,10 +59,9 @@ public class registrar extends HttpServlet {
             System.out.println("datos no insertados");
         }
 
-        Usuario u1 = new Usuario(nombre, correo, pass, depa, tipo);
         request.getSession().setAttribute("usuario_perfil", u1);
         request.getSession().setAttribute("usuario", u1);
-      
+
         request.getRequestDispatcher("perfil.jsp").forward(request, response);
     }
 
