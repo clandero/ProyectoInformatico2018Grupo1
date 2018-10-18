@@ -286,7 +286,7 @@
     </head>
     <body>
         <div class="sidenav">
-            <a href="ingresar.jsp">Ingresar</a>
+            <a href="ingreso.jsp">Ingresar</a>
             <a href="registro.jsp">Registrarse</a>
         </div>
         <div class="main">
