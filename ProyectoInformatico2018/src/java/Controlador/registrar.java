@@ -52,15 +52,27 @@ public class registrar extends HttpServlet {
         Usuario u1 = new Usuario(nombre, correo, passencript, depa,
                 new DepartamentoDao().get(depa), tipo);
         try {
-            userDao.save(u1);
+            boolean chequeo=userDao.save(u1);
+            if(correo.indexOf('@')<0){
+                String message = "Correo en formato incorrecto. Por favor, intente nuevamente.";
+                request.setAttribute("message", message);
+                request.getRequestDispatcher("registro.jsp").forward(request, response);
+            }
+            else if(chequeo==false){
+                String message = "El correo ya se encuentra registrado.";
+                request.setAttribute("message", message);
+                request.getRequestDispatcher("registro.jsp").forward(request, response);
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("datos no insertados");
         }
-
+        request.getSession().setAttribute("depa_usuario", new DepartamentoDao().get_nombre(depa));
         request.getSession().setAttribute("usuario_perfil", u1);
         request.getSession().setAttribute("usuario", u1);
-
+        request.getSession().setAttribute("usuario_nombre", u1.getNombreUsuario());
+        request.getSession().setAttribute("usuario_tipo", u1.getTipoUsuario());
+        request.getSession().setAttribute("usuario_correo", u1.getCorreo());
+        
         request.getRequestDispatcher("perfil.jsp").forward(request, response);
     }
 
