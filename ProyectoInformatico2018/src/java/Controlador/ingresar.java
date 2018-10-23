@@ -29,6 +29,7 @@ public class ingresar extends HttpServlet {
     
     private static UsuarioDao userDao = new UsuarioDao();
     private static AreaDao areaDao = new AreaDao();
+    private static DepartamentoDao depaDao = new DepartamentoDao();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -48,13 +49,22 @@ public class ingresar extends HttpServlet {
         System.out.println("want to get "+ correo + ", "+pass+ "->"+passencript);
         Usuario u1 = userDao.get(correo, passencript);
         if (u1 == null){
+            String message = "Correo o contraseña incorrectos, por favor intente nuevamente.";
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("ingreso.jsp").forward(request, response); 
             return;
         } else{
             System.out.println("listo lito");
 
         }
+        String depa = Integer.toString(u1.getDepartamento());
+        System.out.println(depa+"AQUIII EL DEPARTAMENTO");
+        request.getSession().setAttribute("depa_usuario", depaDao.get_nombre(depa));
         request.getSession().setAttribute("usuario", u1);
-        request.getSession().setAttribute("usuario_perfil", u1);            
+        request.getSession().setAttribute("usuario_perfil", u1);     
+        request.getSession().setAttribute("usuario_nombre", u1.getNombreUsuario());
+        request.getSession().setAttribute("usuario_tipo", u1.getTipoUsuario());
+        request.getSession().setAttribute("usuario_correo", u1.getCorreo());
         request.getSession().setAttribute("areas_existentes", areaDao.getAll());
         request.getSession().setAttribute("areas_usuario", areaDao.getAll(u1));
         request.getRequestDispatcher("perfil.jsp").forward(request, response);     
