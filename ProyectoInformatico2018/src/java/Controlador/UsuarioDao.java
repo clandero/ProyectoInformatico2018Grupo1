@@ -79,9 +79,10 @@ public class UsuarioDao{
         }        
     }
     
-    public Hashtable<String, ArrayList<String>> getUser(String p, String q) throws Exception{
+    public ArrayList<Usuario> getUser(String p, String q) throws Exception{
         try{
             PreparedStatement statement = null;
+            ArrayList<Usuario> resultados = new ArrayList<Usuario>();
             Hashtable<String, ArrayList<String>> personas = new Hashtable<String, ArrayList<String>>();
             if(q.equals("area")){
                 if(p.equals("ia") || p.equals("ai") || p.equals("inteligencia artificial")){
@@ -93,16 +94,18 @@ public class UsuarioDao{
                 statement = conn.prepareStatement("SELECT u.nombre_usuario, u.correo FROM plataforma_colaborativa.usuario as u, plataforma_colaborativa.usuario_area as ua WHERE ua.tema = '"+p+"' AND ua.correo = u.correo");
                 ResultSet result = statement.executeQuery();
                 while(result.next()){
-                    ArrayList<String> datos = new ArrayList<String>();
-                    datos.add(result.getString("correo"));
-                    personas.put(result.getString("nombre_usuario"), datos);
+                    //ArrayList<String> datos = new ArrayList<String>();
+                    Usuario u = new Usuario();
+                    u.setNombreUsuario(result.getString("nombre_usuario"));
+                    u.setCorreo(result.getString("correo"));
+                    resultados.add(u);
                 }
             }
             else if(q.equals("depto")){
                 if(p.equals("informatica") || p.equals("informática") || p.equals("Informática") || p.equals("Informatica")){
                     p = "Ingeniería Informática";
                 }
-                statement = conn.prepareStatement("SELECT u.nombre_usuario, u.correo, area.tema FROM plataforma_colaborativa.usuario as u, plataforma_colaborativa.usuario_area as area WHERE u.departamento = '"+p+"' AND u.correo = area.correo");
+                statement = conn.prepareStatement("SELECT u.nombre_usuario, u.correo, a.tema FROM plataforma_colaborativa.usuario as u, plataforma_colaborativa.usuario_area as a WHERE u.n_departamento = (SELECT d.n_departamento FROM plataforma_colaborativa.departamento as d WHERE d.nombre_departamento = '"+p+"') AND u.correo = a.correo");
                 ResultSet result = statement.executeQuery();
                 while(result.next()){
                     ArrayList<String> datos = new ArrayList<String>();
@@ -117,8 +120,21 @@ public class UsuarioDao{
                         personas.put(result.getString("nombre_usuario"), datos);
                     }
                 }
+                Set<String> keys = personas.keySet();
+                for(String key: keys){
+                    Usuario u = new Usuario();
+                    u.setNombreUsuario(key);
+                    ArrayList<String> aux = personas.get(key);
+                    u.setCorreo(aux.get(0));
+                    for(int i=1;i<aux.size();i++){
+                        u.addInteres(aux.get(i));
+                    }
+                    resultados.add(u);
+                    //System.out.println("Value of "+key+" is: "+hm.get(key));
+                }
+                
             }
-            return personas;
+            return resultados;
         }catch(Exception e){
             System.out.println(e);
             return null;

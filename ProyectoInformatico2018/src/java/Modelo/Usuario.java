@@ -15,6 +15,7 @@ public class Usuario {
     private List<AreadeInteres> intereses;
 
     public Usuario() {
+        this.intereses = new ArrayList<AreadeInteres>();
     }
 
     public Usuario(String name, String c, String p, String departamento, int d, String t) {
@@ -24,6 +25,7 @@ public class Usuario {
         this.departamento = departamento;
         this.n_departamento = d;
         this.tipo_usuario = t;
+        this.intereses = new ArrayList<AreadeInteres>();
     }
 
     public Usuario(String name, String c, String p, int d, String t) {
@@ -32,6 +34,7 @@ public class Usuario {
         this.password = p;
         this.n_departamento = d;
         this.tipo_usuario = t;
+        this.intereses = new ArrayList<AreadeInteres>();
     }
 
     public Usuario(String c, String name, String intereses) {
@@ -45,6 +48,14 @@ public class Usuario {
         }
     }
 
+    public List<AreadeInteres> getIntereses() {
+        return this.intereses;
+    }
+    
+    public void addInteres(String x){
+        this.intereses.add(new AreadeInteres(x));
+    }
+    
     public String getCorreo() {
         return this.correo;
     }

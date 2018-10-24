@@ -3,10 +3,7 @@
     Created on : 28-09-2018, 15:22:09
     Author     : cland
 --%>
-<%@page import="java.util.Map.Entry"%>
-<%@page import="java.util.Hashtable"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="Controlador.DatabaseConnect"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,56 +18,47 @@
             <a href="perfil.jsp" class="w3-bar-item w3-button w3-hover-black">Mi Perfil</a>
         </div>
         <div class= "w3-container" style="margin-left:15%; height: 100vh; background-image: url('imagenes/edificio_fi.png'); background-size:100%;  background-repeat: no-repeat;">
-        <%String x = (String)request.getSession().getAttribute("Buscar");
-        String q = request.getParameter("opcion");%>
-        <h1>Resultados de búsqueda: <%= x%></h1>
-        <%if(q.equals("area")){%>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                </tr>
-            </thead>
-            <tbody>
-                <%Hashtable<String, ArrayList<String>> res = (Hashtable<String, ArrayList<String>>)request.getSession().getAttribute("resultados");
-                for (Entry<String, ArrayList<String>> entry : res.entrySet()) {
-                    ArrayList<String> aux = entry.getValue();
-                    String correo = aux.get(0);%>
+        <h1>Resultados de búsqueda: ${Buscar}</h1>
+        <c:if test="${opcion=='area'}">
+            <table>
+                <thead>
                     <tr>
-                        <td><%= entry.getKey() %></td>
-                        <td><%= correo %></td>
+                        <th>Nombre</th>
+                        <th>Correo</th>
                     </tr>
-                <%}%>
-            </tbody>
-        </table>
-        <%}%>
-        <%if(q.equals("depto")){%>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Área de interés</th>
-                </tr>
-            </thead>
-            <tbody>
-                <%Hashtable<String, ArrayList<String>> res = (Hashtable<String, ArrayList<String>>)request.getSession().getAttribute("resultados"); 
-                for (Entry<String, ArrayList<String>> entry : res.entrySet()) {
-                    ArrayList<String> aux = entry.getValue();
-                    String correo = aux.get(0);
-                    String tema = aux.get(1);%>
+                </thead>
+                <tbody>
+                    <c:forEach var="i" items="${resultados}">
+                        <tr>
+                            <td>${i.getNombreUsuario()}</td>
+                            <td>${i.getCorreo()}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </c:if>
+        <c:if test="${opcion=='depto'}">
+            <table>
+                <thead>
                     <tr>
-                        <td><%= entry.getKey() %></td>
-                        <td><%= correo %></td>
-                        <%if(aux.size() > 2){
-                            for(int i=2;i<aux.size();i++){ tema = tema + " / " + aux.get(i);}}%>
-                        <td><%= tema %></td>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Área de interés</th>
                     </tr>
-                <%}%>
-            </tbody>
-        </table>
-        <%}%>
+                </thead>
+                <tbody>
+                    <c:forEach var="i" items="${resultados}">
+                        <tr>
+                            <td>${i.getNombreUsuario()}</td>
+                            <td>${i.getCorreo()}</td>
+                            <c:forEach var="j" items="${i.getIntereses()}">
+                                <td>${j.getTema()}</td>
+                            </c:forEach>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </c:if>
         </div>
     </body>
 </html>

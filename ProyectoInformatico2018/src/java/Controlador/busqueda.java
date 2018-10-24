@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Modelo.Usuario;
 import java.io.IOException;
 import static java.lang.System.out;
 import java.util.ArrayList;
@@ -44,8 +45,9 @@ public class busqueda extends HttpServlet {
         String q = request.getParameter("opcion");
         //out.println(p);
 
-        Hashtable<String, ArrayList<String>> res = userDao.getUser(p, q);
+        ArrayList<Usuario> res = userDao.getUser(p, q);
         request.getSession().setAttribute("Buscar", p);
+        request.getSession().setAttribute("opcion", q);
         request.getSession().setAttribute("resultados", res);
         request.getRequestDispatcher("/resultadosBusqueda.jsp").forward(request, response);
     }
