@@ -23,8 +23,8 @@ import java.util.Hashtable;
  *
  * @author berko
  */
-@WebServlet(name = "FileSearchServlet", urlPatterns = {"/buscarTrabajo"})
-public class FileSearchServlet extends HttpServlet {
+@WebServlet(name = "ProfileFileSearchServlet", urlPatterns = {"/perfilTrabajos"})
+public class ProfileFileSearchServlet extends HttpServlet {
     
     private DocumentoDao docDao = new DocumentoDao();
 
@@ -39,16 +39,15 @@ public class FileSearchServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Connection conn = DatabaseConnect.getConn();
-        
-        String keyword = request.getParameter("keyword");
-        String topic = request.getParameter("topic");
+            Connection conn = DatabaseConnect.getConn();
 
-        Hashtable<String, ArrayList<String>> files = docDao.search(keyword, topic);
-        request.getSession().setAttribute("resultados", files);
-        request.getRequestDispatcher("resultadosBusqueda.jsp").forward(request, response);
-        
-    }
+            String correo = ((Usuario)request.getSession().
+                    getAttribute("usuario_perfil")).getCorreo();
+
+            ArrayList<String> files = docDao.search(correo);
+            request.getSession().setAttribute("resultados", files);
+            request.getRequestDispatcher("perfil.jsp").forward(request, response);            
+        }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

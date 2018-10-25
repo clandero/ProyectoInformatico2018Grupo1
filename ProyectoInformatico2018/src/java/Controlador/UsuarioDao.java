@@ -125,42 +125,7 @@ public class UsuarioDao{
         }
     }
     
-    public void upFile(String correo, String tema, String titulo, String sv_path){
-        try{
-            String query = 
-                "INSERT INTO documento(sv_path,correo,titulo) "
-              + "VALUES ((?),(?),(?)) "
-              + "RETURNING n_doc";
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, sv_path);
-            ps.setString(2, correo);
-            ps.setString(3, titulo);
-            ps.execute();            
-            ResultSet rs = ps.getResultSet();
-            int n_doc = 10000;
-            if (rs.next()){
-                n_doc = rs.getInt("n_doc");
-            }
-            query = 
-                    "INSERT "
-                  + "INTO documento_area(n_doc, tema) "
-                  + "VALUES ((?),(?))";
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, n_doc);
-            ps.setString(2, tema);
-            ps.execute();
-            query = 
-                    "INSERT "
-                  + "INTO usuario_area(correo, tema) "
-                  + "VALUES ((?),(?))";
-            ps = conn.prepareStatement(query);
-            ps.setString(1, correo);
-            ps.setString(2, tema);
-            ps.execute();
-        } catch (SQLException ex){
-            System.out.println(ex);
-        }
-    }
+    
     
     public void update(Usuario user, String[][] params) {
         
