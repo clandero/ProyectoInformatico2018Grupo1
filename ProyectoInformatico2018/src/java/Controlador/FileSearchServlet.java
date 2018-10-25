@@ -5,6 +5,8 @@
  */
 package Controlador;
 
+import Modelo.*;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -23,6 +25,8 @@ import java.util.Hashtable;
  */
 @WebServlet(name = "FileSearchServlet", urlPatterns = {"/buscarTrabajo"})
 public class FileSearchServlet extends HttpServlet {
+    
+    private DocumentoDao docDao = new DocumentoDao();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,33 +40,21 @@ public class FileSearchServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Connection conn = DatabaseConnect.getConn();
-        String keyword = request.getParameter("keyword");
-        String topic = request.getParameter("topic");
-        try{
-            String query = 
-                "SELECT a.tema, d.titulo " +
-                "FROM area_de_interes as a, documento_area as d_a, documento as d " +
-                "WHERE a.tema = d_a.tema " +
-                "AND d.n_doc = d_a.n_doc ";
-            
-              //+ "AND a.tema = (?)"
-              //+ "AND d.title LIKE %(?)%"
-            PreparedStatement ps = conn.prepareStatement(query);
-            //ps.setString(1, topic);
-            //ps.setString(2, keyword);
-            ResultSet result = ps.executeQuery();
-            Hashtable<String, ArrayList<String>> files = new Hashtable<String, ArrayList<String>>();
+        
+        if (request.getParameter("mode").equals("general")){
+            String keyword = request.getParameter("keyword");
+            String topic = request.getParameter("topic");
 
-            while(result.next()){
-                ArrayList<String> datos = new ArrayList<String>();
-                datos.add(result.getString("titulo"));
-                files.put(result.getString("tema"), datos);                    
-            }
+            Hashtable<String, ArrayList<String>> files = docDao.search(keyword, topic);
             request.getSession().setAttribute("resultados", files);
             request.getRequestDispatcher("resultadosBusqueda.jsp").forward(request, response);
-        
-        } catch(SQLException | NullPointerException ex){
-            System.out.println(ex);
+        } else if(request.getParameter("mode").equals("user")){
+            String correo = ((Usuario)request.getSession().
+                    getAttribute("usuario_perfil")).getCorreo();
+            
+            ArrayList<String> files = docDao.search(correo);
+            request.getSession().setAttribute("resultados", files);
+            request.getRequestDispatcher("resultadosBusqueda.jsp").forward(request, response);            
         }
     }
 
