@@ -15,14 +15,14 @@
     List<AreadeInteres> areas_usuario = (ArrayList<AreadeInteres>) request.getSession().getAttribute("areas_usuario");
 
 %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-9"%>
 <!DOCTYPE html>
 <html>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
         <title>Perfil</title>
         <style>
             body {
@@ -88,24 +88,11 @@
         </style>
     </head>
     <body>
-        <%@include file="sidebar.jsp" %>
-        <div class="main">
-            <form action="busqueda" method="post" >
-                <h3>Busqueda de personas:
-                    <input type="text" placeholder="Search.." name="Buscar">
-
-                    <select name="opcion">
-                        <option value="area">Área de Interés</option>
-                        <option value="depto">Departamento</option>
-                    </select>
-                    <input type="submit" name="Enviar"/>
-                </h3>
-            </form>
+        <jsp:include page="sidebar.jsp"/>
+        <div class="main">    
+            <jsp:include page="searchbar.jsp"/>
             <div class="container">    
                 <div class="jumbotron">
-
-
-
                     <div class="row">
                         <div class="col-md-3 col-xs-12 col-sm-6 col-lg-3">
                             <div class="thumbnail text-center photo_view_postion_b" >
@@ -114,11 +101,11 @@
                         </div>
                         <div class="col-md-9 col-xs-12 col-sm-6 col-lg-9">
                             <div class="" style="border-bottom:1px solid black">
-                                <h2>PERFIL</h2>
+                                <h2>Mi Perfil</h2>
                             </div>
                             <hr>
-                            <div class="col-md-8">  
-                                <ul class=" details" style="background-color: #ededed ">
+                            <div class="col-md-6" style="padding:0;">  
+                                <ul class="details" style="padding:0;background-color: #ededed; margin-left: none; ">
                                     <li><p><span class="" style="width:100px;"></span>Nombre: <%= usuario_perfil.getNombreUsuario()%></p></li>
                                     <li><p><span class="" style="width:100px;"></span>Tipo: <%= usuario_perfil.getTipoUsuario()%></p></li>
                                     <li><p><span class="" style="width:100px;"></span>Departamento: <%= usuario_perfil.getDepartamento()%></p></li>
@@ -126,7 +113,7 @@
                                 </ul>
                             </div>
                             <!-- Iterate and display actual interests of user -->
-                            <div class="col-md-4">  
+                            <div class="col-md-6" style="margin-left:none;">  
                                 <div class="col-sm-5 col-xs-6 tital " >Intereses : </div>
                                 <c:forEach items="${areas_usuario}" var="area">
                                     <div class="col-sm-7 col-xs-6 ">

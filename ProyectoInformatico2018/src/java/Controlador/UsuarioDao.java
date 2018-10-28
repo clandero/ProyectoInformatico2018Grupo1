@@ -102,7 +102,7 @@ public class UsuarioDao{
                 }
             }
             else if(q.equals("depto")){
-                if(p.equals("informatica") || p.equals("informática") || p.equals("Informática") || p.equals("Informatica")){
+                if(p.equals("informatica") || p.equals("informática") || p.equals("Informática") || p.equals("Informatica") || p.equals("InformÃ¡tica")){
                     p = "Ingeniería Informática";
                 }
                 statement = conn.prepareStatement("SELECT u.nombre_usuario, u.correo, a.tema FROM plataforma_colaborativa.usuario as u, plataforma_colaborativa.usuario_area as a WHERE u.n_departamento = (SELECT d.n_departamento FROM plataforma_colaborativa.departamento as d WHERE d.nombre_departamento = '"+p+"') AND u.correo = a.correo");

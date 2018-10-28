@@ -7,6 +7,7 @@ package Controlador;
 
 import Modelo.Usuario;
 import java.io.IOException;
+import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -39,11 +40,12 @@ public class busqueda extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
-        //response.setContentType("text/html;charset-UTF-8");
+        PrintWriter out = response.getWriter();
+        response.setContentType("ISO-8859-9");
 
         String p = request.getParameter("Buscar");
         String q = request.getParameter("opcion");
-        //out.println(p);
+        out.println(p);
 
         ArrayList<Usuario> res = userDao.getUser(p, q);
         request.getSession().setAttribute("Buscar", p);

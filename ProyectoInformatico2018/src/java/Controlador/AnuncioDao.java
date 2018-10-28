@@ -43,9 +43,7 @@ public class AnuncioDao {
             ps.execute();
             
             //
-        } catch (SQLException ex){
-            
-        }
-        
+        } catch (SQLException ex){   
+        }   
     }
 }
