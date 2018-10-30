@@ -29,6 +29,7 @@ public class ingresar extends HttpServlet {
     
     private static UsuarioDao userDao = new UsuarioDao();
     private static AreaDao areaDao = new AreaDao();
+    private static DocumentoDao documentoDao = new DocumentoDao();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -57,6 +58,7 @@ public class ingresar extends HttpServlet {
         request.getSession().setAttribute("usuario_perfil", u1);            
         request.getSession().setAttribute("areas_existentes", areaDao.getAll());
         request.getSession().setAttribute("areas_usuario", areaDao.getAll(u1));
+        request.getSession().setAttribute("documentos_usuario", documentoDao.search(u1.getCorreo()));
         request.getRequestDispatcher("perfil.jsp").forward(request, response);     
 
     }
