@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import Modelo.Usuario;
 import javax.servlet.annotation.WebServlet;
 import org.apache.commons.codec.digest.DigestUtils;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -51,22 +53,35 @@ public class registrar extends HttpServlet {
         //Buscar en BD departamento por nombre departamento para obtener numero
         Usuario u1 = new Usuario(nombre, correo, passencript, depa,
                 new DepartamentoDao().get(depa), tipo);
+        boolean correo_valido=true;
         try {
-            boolean chequeo=userDao.save(u1);
-            if(correo.indexOf('@')<0){
-                String message = "Correo en formato incorrecto. Por favor, intente nuevamente.";
-                request.setAttribute("message", message);
-                request.getRequestDispatcher("registro.jsp").forward(request, response);
+            String emailPattern = "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@" +
+                "[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$";
+            Pattern pattern = Pattern.compile(emailPattern);
+            if (correo != null) {
+                Matcher matcher = pattern.matcher(correo);
+                if (matcher.matches()) {
+                    System.out.println("válido");
+                }
+                else {
+                    correo_valido=false;
+                    String message = "Correo en formato incorrecto. Por favor, intente nuevamente.";
+                    request.setAttribute("message", message);
+                    request.getRequestDispatcher("registro.jsp").forward(request, response);
+                }
             }
-            else if(chequeo==false){
+            if(correo_valido==true){
+            boolean chequeo=userDao.save(u1);
+            if(chequeo==false){
                 String message = "El correo ya se encuentra registrado.";
                 request.setAttribute("message", message);
                 request.getRequestDispatcher("registro.jsp").forward(request, response);
             }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        request.getSession().setAttribute("depa_usuario", new DepartamentoDao().get_nombre(depa));
+        request.getSession().setAttribute("depa_usuario", depa);
         request.getSession().setAttribute("usuario_perfil", u1);
         request.getSession().setAttribute("usuario", u1);
         request.getSession().setAttribute("usuario_nombre", u1.getNombreUsuario());
