@@ -11,6 +11,10 @@ public class AreadeInteres {
         this.tema = x;
     }
 
+    public AreadeInteres(AreadeInteres area) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public void setTema(String x) {
         this.tema = x;
     }
