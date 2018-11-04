@@ -37,9 +37,10 @@ public class AreaDao{
             PreparedStatement ps = conn.prepareStatement(query);
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            List ls = new ArrayList<AreadeInteres>();
-            while (rs.next()){
-                ls.add(new AreadeInteres(rs.getString("tema")));
+            List<String> ls = new ArrayList<String>();
+            while (rs.next()) {
+                String tema=rs.getString("tema");
+                ls.add(tema);
             }
             return ls;
         } catch(SQLException ex){
