@@ -4,7 +4,8 @@ public class Anuncio {
     private int n_anun;
     private String contenido;
     private String titulo;
-    private String fecha_anuncio;
+    private java.sql.Date fecha_anuncio;
+    private String correo;
     
     public Anuncio(){
     }
@@ -31,11 +32,11 @@ public class Anuncio {
         return titulo;
     }
 
-    public String getFecha_anuncio() {
+    public java.sql.Date getFecha_anuncio() {
         return fecha_anuncio;
     }
 
-    public void setFecha_anuncio(String fecha_anuncio) {
+    public void setFecha_anuncio(java.sql.Date fecha_anuncio) {
         this.fecha_anuncio = fecha_anuncio;
     }
     
@@ -51,4 +52,13 @@ public class Anuncio {
     public void setN_anun(int n_anun) {
         this.n_anun = n_anun;
     }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+    
 }
