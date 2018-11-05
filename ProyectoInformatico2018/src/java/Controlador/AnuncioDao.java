@@ -66,6 +66,10 @@ public class AnuncioDao {
             System.out.println("AQUIIIIIIIIIIIIIIIII EN ANUNCIODAOdeRS"+rs);
             if(rs.next()){
             int n_anun = rs.getInt("n_anun");
+            java.sql.Date fecha = rs.getDate("fecha_anuncio");
+            a.setN_anun(n_anun);
+            a.setFecha_anuncio(fecha);
+            a.setCorreo(u.getCorreo());
             System.out.println("AQUIIIIIIIIIIIIIIIII EN ANUNCIODAO"+area.getTema());
             query = "INSERT INTO anuncio_area(n_anun, tema)"
                   + "VALUES ((?),(?))";
