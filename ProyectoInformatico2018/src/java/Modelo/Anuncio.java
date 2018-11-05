@@ -1,6 +1,6 @@
 package Modelo;
 
-public class Anuncio {
+public class Anuncio implements Comparable<Anuncio>{
     private String titulo;
     private int n_anun;
     private String usuario;
@@ -56,5 +56,9 @@ public class Anuncio {
     }
     public String getTitulo(){
         return this.titulo;
+    }
+    @Override
+    public int compareTo(Anuncio t){
+        return Integer.compare(this.getNumero(),t.getNumero());
     }
 }

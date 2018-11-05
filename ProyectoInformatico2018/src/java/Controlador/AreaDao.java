@@ -6,9 +6,7 @@
 package Controlador;
 
 import Modelo.*;
-import static java.lang.System.out;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.*;
 import java.sql.*;
@@ -32,13 +30,17 @@ public class AreaDao{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List getAll() {
+    public Set getAll() {
         String query = "SELECT * FROM area_de_interes";
         try{
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.execute();
-            ResultSet rs = ps.getResultSet();
-            List ls = new ArrayList<AreadeInteres>();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            //PreparedStatement ps = conn.prepareStatement(query);
+            //ps.execute();
+            //ResultSet rs = ps.getResultSet();
+           // List ls = new ArrayList<AreadeInteres>();
+            Set<AreadeInteres> ls = new TreeSet();
             while (rs.next()){
                 ls.add(new AreadeInteres(rs.getString("tema")));
             }
@@ -49,20 +51,18 @@ public class AreaDao{
         }
     }
     
-    public ArrayList<AreadeInteres> getAll(Usuario u) {
-        String query = "SELECT DISTINCT u.tema FROM plataforma_colaborativa.usuario_area as u WHERE correo='"+u.getCorreo()+"'";
-        out.println("Consulta: "+query);
+    public Set getAll(Usuario u) {
+        String query = "SELECT tema "
+                     + "FROM usuario_area "
+                     + "WHERE correo=(?)";
         try{
-            PreparedStatement ps = conn.prepareStatement(query,ResultSet.TYPE_SCROLL_SENSITIVE, 
-                        ResultSet.CONCUR_UPDATABLE);
-            //ps.setString(1, u.getCorreo());
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, u.getCorreo());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            out.println(rs.first());
-            ArrayList<AreadeInteres> ls = new ArrayList<AreadeInteres>();
+            Set<AreadeInteres> ls = new TreeSet();
             while (rs.next()){
                 ls.add(new AreadeInteres(rs.getString("tema")));
-                out.println(rs.getString("tema"));
             }
             return ls;
         } catch(SQLException ex){

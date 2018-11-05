@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.TreeSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,8 +50,7 @@ public class anuncios extends HttpServlet {
         //for(AreadeInteres i : ul.getIntereses()){
         //    out.println(i.getTema());
         //}
-        ArrayList<AreadeInteres> x = new ArrayList<AreadeInteres>();
-        x = areaDao.getAll(ul);
+        TreeSet<AreadeInteres> x = (TreeSet<AreadeInteres>) areaDao.getAll(ul);
         out.println(x.isEmpty());
         for(AreadeInteres i : x){
             out.println(i.getTema());

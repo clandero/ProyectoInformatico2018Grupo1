@@ -4,6 +4,7 @@
     Created on : Oct 2, 2018, 1:50:59 PM
     Author     : alexis
 --%>
+<%@page import="java.util.TreeSet"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -12,7 +13,7 @@
 <%
     Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
     Usuario usuario_perfil = (Usuario) request.getSession().getAttribute("usuario_perfil");
-    List<AreadeInteres> areas_existentes = (ArrayList<AreadeInteres>) request.getSession().getAttribute("areas_existentes");
+    TreeSet<AreadeInteres> areas_existentes = (TreeSet<AreadeInteres>) request.getSession().getAttribute("areas_existentes");
 %>
 <%-- Necesitamos: Usuario, areas de interes existentes del usuario y la lista de areas de interes
     Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");

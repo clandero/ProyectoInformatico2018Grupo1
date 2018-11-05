@@ -3,6 +3,7 @@
     Created on : 26-09-2018, 22:43:42
     Author     : vanes
 --%>
+<%@page import="java.util.TreeSet"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -11,8 +12,8 @@
 <%
     Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
     Usuario usuario_perfil = (Usuario) request.getSession().getAttribute("usuario_perfil");
-    List<AreadeInteres> areas_existentes = (ArrayList<AreadeInteres>) request.getSession().getAttribute("areas_existentes");
-    List<AreadeInteres> areas_usuario = (ArrayList<AreadeInteres>) request.getSession().getAttribute("areas_usuario");
+    TreeSet<AreadeInteres> areas_existentes = (TreeSet<AreadeInteres>) request.getSession().getAttribute("areas_existentes");
+    TreeSet<AreadeInteres> areas_usuario = (TreeSet<AreadeInteres>) request.getSession().getAttribute("areas_usuario");
 
 %>
 <%@page contentType="text/html" pageEncoding="ISO-8859-9"%>
