@@ -10,6 +10,8 @@ import Modelo.AreadeInteres;
 import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -67,10 +69,11 @@ public class crear_Anuncio extends HttpServlet {
         System.out.println("AQUIIIIIIIIIIIIIIIII EN DOPOST"+area);
         System.out.println("AQUIIIIIIIIIIIIIIIII EN DOPOST"+contenido);
         Anuncio an = new Anuncio(titulo, contenido);
+        an.setTitulo(titulo);
+        an.setContent(contenido);
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         AreadeInteres areadeinteres = new AreadeInteres(area);
         anuncioDao.save(an, usuario, areadeinteres);
-        
         
     }
 
