@@ -56,20 +56,6 @@ public class anuncios extends HttpServlet {
             out.println(i.getTema());
         }
         request.getSession().setAttribute("lista_anuncios", newDao.getAnuncios(x));
-        /*Enumeration e = (Enumeration) (request.getSession().getAttributeNames());
-        out.println("AAAA");
-        while ( e.hasMoreElements())
-        {
-            Object tring;
-            if((tring = e.nextElement())!=null)
-            {
-                out.println(request.getSession().getValue((String) tring));
-                out.println("<br/>");
-            }
-
-        }*/
-        //List x = request.getSession(false).getAttribute("areas_usuario");
-        
         request.getRequestDispatcher("anuncios.jsp").forward(request, response);     
 
     }

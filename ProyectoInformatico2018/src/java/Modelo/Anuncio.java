@@ -1,6 +1,7 @@
 package Modelo;
 
 public class Anuncio {
+    private String titulo;
     private int n_anun;
     private String usuario;
     private String contenido;
@@ -9,8 +10,9 @@ public class Anuncio {
     public Anuncio(){
     }
     
-    public Anuncio(int n, String usuario, String cont, String fecha, String tema){
+    public Anuncio(int n, String titulo, String usuario, String cont, String fecha, String tema){
         this.n_anun = n;
+        this.titulo = titulo;
         this.usuario = usuario;
         this.contenido = cont;
         this.fecha_subida = fecha;
@@ -30,7 +32,6 @@ public class Anuncio {
     public void setUsuario(String cont){
         this.usuario = cont; 
     }
-    
     public String getUsuario(){
         return this.usuario;
     }
@@ -50,5 +51,10 @@ public class Anuncio {
     public String getTema(){
         return this.tema;
     }
-    
+    public void setTitulo(String cont){
+        this.titulo = cont; 
+    }
+    public String getTitulo(){
+        return this.titulo;
+    }
 }

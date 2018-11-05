@@ -48,14 +48,16 @@ public class AnuncioDao {
     }
     public ArrayList<Anuncio> getAnuncios(ArrayList<AreadeInteres> x){
         ArrayList<Anuncio> res = new ArrayList<Anuncio>();
+        /*ArrayList<AreadeInteres> y = new ArrayList<AreadeInteres>();
+        y.add(new AreadeInteres("Estructuras"));*/
         try{
-            for(AreadeInteres i : x){
-                String query = "SELECT a.n_anun, a.contenido, us.nombre_usuario, a.fecha_anuncio FROM plataforma_colaborativa.anuncio as a, plataforma_colaborativa.anuncio_area as x, plataforma_colaborativa.usuario as us WHERE a.n_anun = x.n_anun AND x.tema = '"+i.getTema()+"' AND a.correo = us.correo";
+            for(AreadeInteres i : /*y*/x){
+                String query = "SELECT a.titulo, a.n_anun, a.contenido, us.nombre_usuario, a.fecha_anuncio FROM plataforma_colaborativa.anuncio as a, plataforma_colaborativa.anuncio_area as x, plataforma_colaborativa.usuario as us WHERE a.n_anun = x.n_anun AND x.tema = '"+i.getTema()+"' AND a.correo = us.correo";
                 PreparedStatement ps = conn.prepareStatement(query);
                 ps.execute();
                 ResultSet rs = ps.getResultSet();
                 while (rs.next()){
-                    res.add(new Anuncio(rs.getInt("n_anun"),rs.getString("nombre_usuario"),rs.getString("contenido"),rs.getString("fecha_anuncio"),i.getTema()));
+                    res.add(new Anuncio(rs.getInt("n_anun"),rs.getString("titulo"),rs.getString("nombre_usuario"),rs.getString("contenido"),rs.getString("fecha_anuncio"),i.getTema()));
                 }
             }
             return res;

@@ -26,10 +26,11 @@
             
             <c:forEach var="i" items="${lista_anuncios}">
                 <div class="jumbotron">
+                    <h2>Título: ${i.getTitulo()}</h2>
                     <p>${i.getContent()}</p>
                     <p>Escrito por: ${i.getUsuario()}</p>
-                    <p>Fecha: ${i.getFecha()}</p>
-                    <p>Tema: ${i.getTema()}</p>
+                    <h5>Fecha: ${i.getFecha()}</h5>
+                    <h5>Tema: ${i.getTema()}</h5>
                 </div>
             </c:forEach>
             

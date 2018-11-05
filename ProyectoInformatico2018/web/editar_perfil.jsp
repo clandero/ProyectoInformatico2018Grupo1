@@ -134,7 +134,7 @@
                                 <form action="EditarPerfil" method="post">
                                     <c:forEach items="${areas_existentes}" var="area">
                                         <div class="col-sm-7 col-xs-6 ">
-                                            <input type="checkbox" value="${area.getTema()}"name="interes" size="10"> "${area.getTema()}"                             
+                                            <input type="checkbox" value="${area.getTema()}" name="interes" size="10"> "${area.getTema()}"                             
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="bot-border"></div>

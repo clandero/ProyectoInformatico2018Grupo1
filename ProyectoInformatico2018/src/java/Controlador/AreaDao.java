@@ -50,7 +50,8 @@ public class AreaDao{
     }
     
     public ArrayList<AreadeInteres> getAll(Usuario u) {
-        String query = "SELECT DISTINCT u.tema FROM usuario_area as u WHERE correo='"+u.getCorreo()+"'";
+        String query = "SELECT DISTINCT u.tema FROM plataforma_colaborativa.usuario_area as u WHERE correo='"+u.getCorreo()+"'";
+        out.println("Consulta: "+query);
         try{
             PreparedStatement ps = conn.prepareStatement(query,ResultSet.TYPE_SCROLL_SENSITIVE, 
                         ResultSet.CONCUR_UPDATABLE);
@@ -61,7 +62,7 @@ public class AreaDao{
             ArrayList<AreadeInteres> ls = new ArrayList<AreadeInteres>();
             while (rs.next()){
                 ls.add(new AreadeInteres(rs.getString("tema")));
-                //out.println();
+                out.println(rs.getString("tema"));
             }
             return ls;
         } catch(SQLException ex){
