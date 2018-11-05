@@ -106,6 +106,13 @@ public class EditarPerfil extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(EditarPerfil.class.getName()).log(Level.SEVERE, null, ex);
         }
+        /*
+        System.out.println("Areas usuario despues de editar: ");
+        areas_usuario.forEach((area) -> {
+            System.out.println(area.getTema());
+        });
+        */
+        request.getSession().setAttribute("areas_usuario", areas_usuario);
         request.getRequestDispatcher("perfil.jsp").forward(request, response);
 
     }
