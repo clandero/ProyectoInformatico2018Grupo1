@@ -4,7 +4,8 @@
     Author     : cland
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-9"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,7 +13,7 @@
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>PÃ¡gina principal</title>
+        <title>Página principal</title>
         <link href="css/newcss.css" rel="stylesheet" type="text/css"/>
 
     </head>
@@ -22,6 +23,16 @@
             <jsp:include page="searchbar.jsp"/>
             <div class="container">
             <h1>Hello World!</h1>
+            
+            <c:forEach var="i" items="${lista_anuncios}">
+                <div class="jumbotron">
+                    <p>${i.getContent()}</p>
+                    <p>Escrito por: ${i.getUsuario()}</p>
+                    <p>Fecha: ${i.getFecha()}</p>
+                    <p>Tema: ${i.getTema()}</p>
+                </div>
+            </c:forEach>
+            
                 <div class="jumbotron">
                 </div>
             </div>

@@ -6,6 +6,7 @@
 package Controlador;
 
 import Modelo.*;
+import static java.lang.System.out;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,18 +49,19 @@ public class AreaDao{
         }
     }
     
-    public List getAll(Usuario u) {
-        String query = "SELECT UNIQUE tema "
-                     + "FROM usuario_area"
-                     + "WHERE correo=(?)";
+    public ArrayList<AreadeInteres> getAll(Usuario u) {
+        String query = "SELECT DISTINCT u.tema FROM usuario_area as u WHERE correo='"+u.getCorreo()+"'";
         try{
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, u.getCorreo());
+            PreparedStatement ps = conn.prepareStatement(query,ResultSet.TYPE_SCROLL_SENSITIVE, 
+                        ResultSet.CONCUR_UPDATABLE);
+            //ps.setString(1, u.getCorreo());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            List ls = new ArrayList<AreadeInteres>();
+            out.println(rs.first());
+            ArrayList<AreadeInteres> ls = new ArrayList<AreadeInteres>();
             while (rs.next()){
                 ls.add(new AreadeInteres(rs.getString("tema")));
+                //out.println();
             }
             return ls;
         } catch(SQLException ex){

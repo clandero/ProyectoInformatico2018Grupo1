@@ -5,10 +5,14 @@
  */
 package Controlador;
 
+import Modelo.Anuncio;
+import Modelo.AreadeInteres;
 import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,19 +35,43 @@ public class anuncios extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     private static AnuncioDao newDao = new AnuncioDao();
+    private static AreaDao areaDao = new AreaDao();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String p = request.getParameter("Buscar");
-        String q = request.getParameter("opcion");
-        //out.println(p);
+        response.setContentType("text/html;charset=ISO-8859-9");
+        PrintWriter out = response.getWriter();
+        Usuario ul = (Usuario) request.getSession(false).getAttribute("usuario");
+        out.println(ul.getNombreUsuario());
+        out.println(ul.getCorreo());
+        //out.println(ul.getIntereses().size());
+        //for(AreadeInteres i : ul.getIntereses()){
+        //    out.println(i.getTema());
+        //}
+        ArrayList<AreadeInteres> x = new ArrayList<AreadeInteres>();
+        x = areaDao.getAll(ul);
+        out.println(x.isEmpty());
+        for(AreadeInteres i : x){
+            out.println(i.getTema());
+        }
+        request.getSession().setAttribute("lista_anuncios", newDao.getAnuncios(x));
+        /*Enumeration e = (Enumeration) (request.getSession().getAttributeNames());
+        out.println("AAAA");
+        while ( e.hasMoreElements())
+        {
+            Object tring;
+            if((tring = e.nextElement())!=null)
+            {
+                out.println(request.getSession().getValue((String) tring));
+                out.println("<br/>");
+            }
 
-        //ArrayList<Usuario> res = newDao.getUser(p, q);
-        request.getSession().setAttribute("Buscar", p);
-        request.getSession().setAttribute("opcion", q);
-        //request.getSession().setAttribute("resultados", res);
-        request.getRequestDispatcher("/resultadosBusqueda.jsp").forward(request, response);
+        }*/
+        //List x = request.getSession(false).getAttribute("areas_usuario");
+        
+        request.getRequestDispatcher("anuncios.jsp").forward(request, response);     
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
