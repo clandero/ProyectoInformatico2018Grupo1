@@ -84,4 +84,13 @@ public class Usuario {
     public void setPassword(String p) {
         this.password = p;
     }
+
+    public List<AreadeInteres> getIntereses() {
+        return intereses;
+    }
+
+    public void setIntereses(List<AreadeInteres> intereses) {
+        this.intereses = intereses;
+    }
+    
 }
