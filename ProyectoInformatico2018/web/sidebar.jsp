@@ -11,9 +11,8 @@
     <a href="perfil.jsp">Perfil</a>
     <a href="upload.jsp">Subir Doc.</a>
     <a href="#">Anuncios</a>
-    <form name="forma" method="post" action="areas">
-        <a onclick="forma.submit()" href="#">Crear Anuncio</a>
-    </form>
+    <a href="crearAnuncio.jsp">Crear Anuncio</a>
+    <a href="personas.jsp">Personas</a>
     <a href="#clients">Contactos</a>
     <a href="#contact">Logout</a>
 </div>
