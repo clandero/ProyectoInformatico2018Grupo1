@@ -24,5 +24,4 @@ public class AreadeInteres implements Comparable<AreadeInteres>{
         return this.getTema().compareTo(t.getTema());
     }
 
-    
 }

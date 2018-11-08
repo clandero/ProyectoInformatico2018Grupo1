@@ -8,6 +8,7 @@ package Controlador;
 import Modelo.Anuncio;
 import Modelo.Usuario;
 import Modelo.AreadeInteres;
+import static java.lang.System.out;
 
 import java.util.List;
 import java.util.Optional;
@@ -66,9 +67,32 @@ public class AnuncioDao {
             ps.setString(2, area.getTema());
             ps.execute();
             //
-        } catch (SQLException ex){
-            System.out.println(ex);
-        }
+
+        } catch (SQLException ex){   
+        }   
+    }
+    public TreeSet<Anuncio> getAnuncios(TreeSet<AreadeInteres> x){
+        TreeSet<Anuncio> res = new TreeSet<Anuncio>();
+        /*ArrayList<AreadeInteres> y = new ArrayList<AreadeInteres>();
+        y.add(new AreadeInteres("Estructuras"));*/
+
         
+        try{
+            out.println("AAAAA");
+            for(AreadeInteres i : /*y*/x){
+                String query = "SELECT a.titulo, a.n_anun, a.contenido, us.nombre_usuario, a.fecha_anuncio FROM plataforma_colaborativa.anuncio as a, plataforma_colaborativa.anuncio_area as x, plataforma_colaborativa.usuario as us WHERE a.n_anun = x.n_anun AND x.tema = '"+i.getTema()+"' AND a.correo = us.correo";
+                out.println(query);
+                PreparedStatement ps = conn.prepareStatement(query);
+                ps.execute();
+                ResultSet rs = ps.getResultSet();
+                while (rs.next()){
+                    out.println(rs.getInt("n_anun"));
+                    res.add(new Anuncio(rs.getInt("n_anun"),rs.getString("titulo"),rs.getString("nombre_usuario"),rs.getString("contenido"),rs.getString("fecha_anuncio"),i.getTema()));
+                }
+            }
+            return res;
+        } catch (SQLException ex){   
+        }
+        return null;
     }
 }
