@@ -4,6 +4,7 @@
     Author     : vanes
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -134,6 +135,29 @@
                                 <div class="form-group" style="border-bottom:1px solid black">
                                     <h2>TRABAJOS/PROYECTOS</h2>
                                 </div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="i" items="${documentos_usuario}">
+                                            <tr>
+                                                <td><c:out value="${i}"></c:out></td>
+                                            <tr>
+                                        </c:forEach>        
+                                     </tbody>
+                                </table> 
+                                <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
+                                    <button id="delButton" class="float-left submit-button" >Eliminar Documentos</button>
+
+                                    <script type="text/javascript">
+                                        document.getElementById("delButton").onclick = function () {
+                                            location.href = "eliminar_documentos.jsp";
+                                        };
+                                    </script>
+                                </c:if>
                             </div>
                         </div>
                     </div>
