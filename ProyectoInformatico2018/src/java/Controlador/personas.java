@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.TreeSet;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,9 +21,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author vanes
  */
+@WebServlet(name = "personas", urlPatterns = {"/personas"})
 public class personas extends HttpServlet {
+    
 
-    private AreaDao areaDao = new AreaDao();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,7 +34,11 @@ public class personas extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=ISO-8859-9");
+        request.getRequestDispatcher("index.jsp").forward(request, response);     
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -59,7 +65,11 @@ public class personas extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //Usuario usuario = request.getParameter("user");
+         processRequest(request, response);
+            System.out.println("ESTOY EN PERSONAS.JAVA.............................................s");
+            response.setContentType("text/html");  
+            PrintWriter out=response.getWriter();  
+            out.print("Welcome, ");  
         request.getRequestDispatcher("perfil.jsp").forward(request, response);
     }
 
