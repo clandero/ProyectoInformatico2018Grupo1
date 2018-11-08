@@ -120,30 +120,35 @@ public class DocumentoDao {
         contextPath = cPath;
     }
     
-    public void delete(int n_doc){
-        String query = "DELETE FROM documento_area"
-                     + "WHERE n_doc = (?)";
+    public void delete(int n_doc, String correo){
+        String query = "SELECT * "
+                     + "FROM documento "
+                     + "WHERE n_doc = (?) AND "
+                     + "correo = (?) ";
         try{
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, n_doc);
-            ps.execute();
-            query = "SELECT FROM DOCUMENTO"
-                  + "WHERE n_doc = (?)";
-            ps.setInt(1, n_doc);
+            ps.setString(2, correo);
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            if(rs.next()){
-                
+            if (!(rs.next())){
+                System.out.println("File does not exist, "
+                        + "or is not owned by "+ correo);
+                return;
             }
-            query = "DELETE FROM documento"
-                    + "WHERE n_doc = (?)";
+            query = "DELETE FROM documento_area "
+                     + "WHERE n_doc = (?) ";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, n_doc);
+            ps.execute();
+            query = "DELETE FROM documento "
+                    + "WHERE n_doc = (?) ";
             ps = conn.prepareStatement(query);
             ps.setInt(1, n_doc);
             ps.execute();
         } catch(SQLException ex){
             System.out.println(ex);
-        }
-        
+        }      
         
     }
     

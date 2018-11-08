@@ -50,8 +50,8 @@ public class AreaDao{
     
     public List getAll(Usuario u) {
         String query = "SELECT UNIQUE tema "
-                     + "FROM usuario_area"
-                     + "WHERE correo=(?)";
+                     + "FROM usuario_area "
+                     + "WHERE correo=(?) ";
         try{
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, u.getCorreo());

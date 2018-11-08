@@ -96,6 +96,7 @@ public class AnuncioDao {
             ps = conn.prepareStatement(query);
             ps.setInt(1, n_anun);
             ps.execute();
+            // BORRAR ARCHIVO DEL SERVIDOR
             
         } catch (SQLException ex){
             
