@@ -1,6 +1,6 @@
 package Modelo;
 
-public class AreadeInteres {
+public class AreadeInteres implements Comparable<AreadeInteres>{
 
     private String tema;
 
@@ -11,15 +11,16 @@ public class AreadeInteres {
         this.tema = x;
     }
 
-    public AreadeInteres(AreadeInteres area) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public void setTema(String x) {
         this.tema = x;
     }
 
     public String getTema() {
         return this.tema;
+    }
+    
+    @Override
+    public int compareTo(AreadeInteres t){
+        return this.getTema().compareTo(t.getTema());
     }
 }
