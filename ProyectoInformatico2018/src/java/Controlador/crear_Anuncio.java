@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class crear_Anuncio extends HttpServlet {
 
-    AnuncioDao anuncioDao = new AnuncioDao();
+    private AnuncioDao anuncioDao = new AnuncioDao();
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
