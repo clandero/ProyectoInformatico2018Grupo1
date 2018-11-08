@@ -18,6 +18,8 @@ import Modelo.*;
 public class DocumentoDao {
     
     private static Connection conn;
+    // FALTA SABER EL PATH DEL SERVIDOR, PARA BORRAR LOS ARCHIVOS EN /DOCS/
+    private static String contextPath = "";
     
     public DocumentoDao(){
         if (conn == null){
@@ -112,6 +114,37 @@ public class DocumentoDao {
             System.out.println(ex);
         }
         return null;
+    }
+    
+    public static void setContext(String cPath){
+        contextPath = cPath;
+    }
+    
+    public void delete(int n_doc){
+        String query = "DELETE FROM documento_area"
+                     + "WHERE n_doc = (?)";
+        try{
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, n_doc);
+            ps.execute();
+            query = "SELECT FROM DOCUMENTO"
+                  + "WHERE n_doc = (?)";
+            ps.setInt(1, n_doc);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            if(rs.next()){
+                
+            }
+            query = "DELETE FROM documento"
+                    + "WHERE n_doc = (?)";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, n_doc);
+            ps.execute();
+        } catch(SQLException ex){
+            System.out.println(ex);
+        }
+        
+        
     }
     
 }

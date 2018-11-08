@@ -69,6 +69,37 @@ public class AnuncioDao {
         } catch (SQLException ex){
             System.out.println(ex);
         }
+    }
+    
+    public void delete(int n_anun){
+        try{
+            String query = "SELECT tema"
+                         + "FROM anuncio_area as a"
+                         + "WHERE a.n_anun = (?)";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, n_anun);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            if (!(rs.next())){
+                System.out.println("no result");
+                return;
+            }
+            String tema = rs.getString("tema");
+            query = "DELETE FROM anuncio_area"
+                  + "WHERE tema=(?) AND n_anun=(?)";            
+            ps = conn.prepareStatement(query);
+            ps.setString(1, tema);
+            ps.setInt(2, n_anun);
+            ps.execute();
+            query = "DELETE FROM anuncio"
+                  + "WHERE n_anun=(?)";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, n_anun);
+            ps.execute();
+            
+        } catch (SQLException ex){
+            
+        }
         
     }
 }
