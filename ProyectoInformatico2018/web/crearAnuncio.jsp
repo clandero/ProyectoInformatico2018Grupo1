@@ -97,8 +97,8 @@
                         <td>Área de interes:</td>
                         <td>
                             <select name="txtArea">
-                                <c:forEach items="${areas}" var="area">
-                                    <option value="${area}" selected><c:out value="${area}"></c:out></option>
+                                <c:forEach items="${areas_existentes}" var="area">
+                                    <option value="${area.getTema()}" selected><c:out value="${area.getTema()}"></c:out></option>
                                 </c:forEach>
                             </select>
                         </td>
