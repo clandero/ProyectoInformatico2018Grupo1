@@ -8,8 +8,10 @@ package Controlador;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.io.File;
 
 import Modelo.*;
+import java.nio.file.NoSuchFileException;
 
 /**
  *
@@ -19,7 +21,7 @@ public class DocumentoDao {
     
     private static Connection conn;
     // FALTA SABER EL PATH DEL SERVIDOR, PARA BORRAR LOS ARCHIVOS EN /DOCS/
-    private static String contextPath = "";
+    private static String contextPath = null;
     
     public DocumentoDao(){
         if (conn == null){
@@ -117,7 +119,10 @@ public class DocumentoDao {
     }
     
     public static void setContext(String cPath){
-        contextPath = cPath;
+        if (contextPath == null){
+            contextPath = cPath;
+        }
+        
     }
     
     public void delete(int n_doc, String correo){
@@ -146,6 +151,10 @@ public class DocumentoDao {
             ps = conn.prepareStatement(query);
             ps.setInt(1, n_doc);
             ps.execute();
+            File to_delete = new File(contextPath + File.separator +
+                                     rs.getString("sv_path"));
+            to_delete.delete();
+            
         } catch(SQLException ex){
             System.out.println(ex);
         }      
