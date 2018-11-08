@@ -145,7 +145,7 @@ public class UsuarioDao{
                 //System.out.println("INTERESES ESTA VACIO EN AREADAO--------------");
                 while (rs.next()){
                     //System.out.println(rs.getString("correo")+"INTERESES ESTA VACIO--------------"+i.getTema()+" "+ rs.getString("nombre_usuario")+" "+rs.getString("nombre_departamento")+" "+rs.getString("tipo_usuario")+" "+ rs.getInt("n_departamento")+" "+ rs.getString("tema"));
-                    if(correos.isEmpty()&&(u.getCorreo()!=rs.getString("correo"))){
+                    if(correos.isEmpty()&&(!u.getCorreo().equals(rs.getString("correo")))){
                         //System.out.println(rs.getString("correo").getClass().getName()+"INTERESES ESTA VACIO2--------------"+i.getTema()+" "+ rs.getString("nombre_usuario")+" "+rs.getString("nombre_departamento")+" "+rs.getString("tipo_usuario")+" "+ rs.getInt("n_departamento")+" "+ rs.getString("tema"));
                         correos.add(rs.getString("correo"));
                         //susuario.add(new Usuario());
