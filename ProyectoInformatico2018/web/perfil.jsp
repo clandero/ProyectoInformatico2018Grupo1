@@ -4,19 +4,7 @@
     Author     : vanes
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="Modelo.AreadeInteres"%>
-<%@page import="Modelo.Usuario"%>
-<%@page import="Modelo.Documento"%>
-<%
-    Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-    Usuario usuario_perfil = (Usuario) request.getSession().getAttribute("usuario_perfil");
-    List<AreadeInteres> areas_existentes = (ArrayList<AreadeInteres>) request.getSession().getAttribute("areas_existentes");
-    List<AreadeInteres> areas_usuario = (ArrayList<AreadeInteres>) request.getSession().getAttribute("areas_usuario");
-    List<Documento> documentos_usuario = (ArrayList<Documento>) request.getSession().getAttribute("documentos_usuario");
 
-%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -121,10 +109,10 @@
                             <hr>
                             <div class="col-md-8">  
                                 <ul class=" details" style="background-color: #ededed ">
-                                    <li><p><span class="" style="width:100px;"></span>Nombre: <%= usuario_perfil.getNombreUsuario()%></p></li>
-                                    <li><p><span class="" style="width:100px;"></span>Tipo: <%= usuario_perfil.getTipoUsuario()%></p></li>
-                                    <li><p><span class="" style="width:100px;"></span>Departamento: <%= usuario_perfil.getDepartamento()%></p></li>
-                                    <li><p><span class="" style="width:100px;"></span>Correo: <%= usuario_perfil.getCorreo()%></p></li>
+                                    <li><p><span class="" style="width:100px;"></span>Nombre: <c:out value="${usuario_nombre}"> </c:out> </p></li>
+                                    <li><p><span class="" style="width:100px;"></span>Tipo: <c:out value="${usuario_tipo}"> </c:out></p></li>
+                                    <li><p><span class="" style="width:100px;"></span>Departamento: <c:out value="${depa_usuario}"> </c:out></p></li>
+                                    <li><p><span class="" style="width:100px;"></span>Correo: <c:out value="${usuario_correo}"> </c:out></p></li>
                                 </ul>
                             </div>
                             <!-- Iterate and display actual interests of user -->

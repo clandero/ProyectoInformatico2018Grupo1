@@ -4,8 +4,7 @@
     Author     : vanes
 --%>
 
-<%@page import="java.sql.Connection"%>
-<%@page import="Controlador.DatabaseConnect"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -59,8 +58,10 @@
     </ul>
     <body>
         <div class="sidenav">
-            <a href="ingreso.jsp">Ingresar</a>
-            <a href="registro.jsp">Registrarse</a>
+            <form name="forma" method="post" action="index">
+                <a href="ingreso.jsp">Ingresar</a>
+                <a onclick="forma.submit()" href="#">Registrarse</a>
+            </form>
         </div>
         <div class="main">
             <h1>Bienvenido a la plataforma colaborativa UDEC</h1>

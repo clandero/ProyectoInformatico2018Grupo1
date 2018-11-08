@@ -4,7 +4,9 @@
     Author     : vanes
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+    
 <%--@page contentType="text/html" pageEncoding="UTF-8"--%>
 <!DOCTYPE html>
 <html>
@@ -135,17 +137,20 @@
     </head>
     <body>
         <div class="sidenav">
-            <a href="ingreso.jsp">Ingresar</a>
-            <a href="registro.jsp">Registrarse</a>
+            <form name="forma" method="post" action="index">
+                <a href="ingreso.jsp">Ingresar</a>
+                <a href="#" onclick="forma.submit()">Registrarse</a>
+            </form>
         </div>
 
         <div class="main">
+            <p>${message}</p>
             <div class="card card-container"> <!-- Algo así funcionó en algun momento, no se que paso-->
             <h1>REGISTRO</h1>
             <form method="post" action="registrar">
                 <p>Llene los siguientes campos: </p><br />
-                Nombre: <input type="text" name="txtNombre" /><br/><br/>
-                Correo udec: <input type="text" name="txtCorreo" /><br /><br/>
+                Nombre: <input type="text" name="txtNombre" required /><br/><br/>
+                Correo udec: <input type="text" name="txtCorreo" required /><br /><br/>
                 Tipo de usuario: 
                 <div class="select">
                     <select name="search_categories" id="search_categories">
@@ -154,40 +159,15 @@
                         <option value="Postgrado">Postgrado</option>
                     </select>
                 </div>
-                </br><p>Departamento al que pertenece:</p>
-                <label class="container">Ingeniería Civil
-                    <input type="radio" checked="checked" name="radio" value ="Ingeniería Civil">
+                </br><p>Departamento al que pertenece:</p><p></p>
+                <c:forEach items="${depar}" var="nom_depa">
+                <label class="container"><c:out value="${nom_depa}"> </c:out> 
+                    <input type="radio" checked="checked" name="radio" value ="${nom_depa}">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container">Ingeniería Eléctrica
-                    <input type="radio" name="radio" value ="Ingenieríaa Eléctrica">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container">Ingeniería Industrial
-                    <input type="radio" name="radio" value ="Ingeniería Industrial">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container">Ingeniería Informática y Ciencias de la Computación
-                    <input type="radio" name="radio" value ="Ingeniería Informática y Ciencias de la Computación">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container">Ingeniería de Materiales
-                    <input type="radio" name="radio" value ="Ingeniería de Materiales">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container">Ingeniería Mecánica
-                    <input type="radio" name="radio" value ="Ingeniería Mecánica">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container">Ingeniería Metalúrgica
-                    <input type="radio" name="radio" value ="Ingeniería Metalúrgica">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container">Ingeniería Química 
-                    <input type="radio" name="radio" value ="Ingeniería Química">
-                    <span class="checkmark"></span>
-                </label>
-                Contraseña: <input type="password" name="txtPassword" /><br/><br/>
+                </c:forEach>
+                
+                Contraseña: <input type="password" name="txtPassword" required /><br/><br/>
 
                 <input type="submit" value="Enviar"/><br/><br/>
             </form>
