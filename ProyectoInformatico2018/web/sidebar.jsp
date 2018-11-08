@@ -13,7 +13,7 @@
     <a href="#">Anuncios</a>
     <a href="crearAnuncio.jsp">Crear Anuncio</a>
     <a href="personas.jsp">Personas</a>
-    <a href="#clients">Contactos</a>
-    <a href="#contact">Logout</a>
+    <a href="#">Contactos</a>
+    <a href="logOut">Logout</a>
 </div>
 
