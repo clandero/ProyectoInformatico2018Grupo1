@@ -44,6 +44,12 @@ public class Usuario {
             this.intereses.add(new AreadeInteres(inter));
         }
     }
+    public Usuario(String c, String name, String tipo_usuario,int depa) {
+        this.correo = c;
+        this.nombre_usuario = name;
+        this.tipo_usuario = tipo_usuario;
+        this.n_departamento = depa;
+    }
 
     public String getCorreo() {
         return this.correo;
