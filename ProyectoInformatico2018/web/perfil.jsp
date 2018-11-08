@@ -3,20 +3,9 @@
     Created on : 26-09-2018, 22:43:42
     Author     : vanes
 --%>
-<%@page import="java.util.TreeSet"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="Modelo.AreadeInteres"%>
-<%@page import="Modelo.Usuario"%>
-<%
-    Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-    Usuario usuario_perfil = (Usuario) request.getSession().getAttribute("usuario_perfil");
-    TreeSet<AreadeInteres> areas_existentes = (TreeSet<AreadeInteres>) request.getSession().getAttribute("areas_existentes");
-    TreeSet<AreadeInteres> areas_usuario = (TreeSet<AreadeInteres>) request.getSession().getAttribute("areas_usuario");
 
-%>
-<%@page contentType="text/html" pageEncoding="ISO-8859-9"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -105,12 +94,14 @@
                                 <h2>Mi Perfil</h2>
                             </div>
                             <hr>
-                            <div class="col-md-6" style="padding:0;">  
-                                <ul class="details" style="padding:0;background-color: #ededed; margin-left: none; ">
-                                    <li><p><span class="" style="width:100px;"></span>Nombre: <%= usuario_perfil.getNombreUsuario()%></p></li>
-                                    <li><p><span class="" style="width:100px;"></span>Tipo: <%= usuario_perfil.getTipoUsuario()%></p></li>
-                                    <li><p><span class="" style="width:100px;"></span>Departamento: <%= usuario_perfil.getDepartamento()%></p></li>
-                                    <li><p><span class="" style="width:100px;"></span>Correo: <%= usuario_perfil.getCorreo()%></p></li>
+
+                            <div class="col-md-8">  
+                                <ul class=" details" style="background-color: #ededed ">
+                                    <li><p><span class="" style="width:100px;"></span>Nombre: <c:out value="${usuario_nombre}"> </c:out> </p></li>
+                                    <li><p><span class="" style="width:100px;"></span>Tipo: <c:out value="${usuario_tipo}"> </c:out></p></li>
+                                    <li><p><span class="" style="width:100px;"></span>Departamento: <c:out value="${depa_usuario}"> </c:out></p></li>
+                                    <li><p><span class="" style="width:100px;"></span>Correo: <c:out value="${usuario_correo}"> </c:out></p></li>
+
                                 </ul>
                             </div>
                             <!-- Iterate and display actual interests of user -->
@@ -133,6 +124,29 @@
                                 <div class="form-group" style="border-bottom:1px solid black">
                                     <h2>TRABAJOS/PROYECTOS</h2>
                                 </div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="i" items="${documentos_usuario}">
+                                            <tr>
+                                                <td><c:out value="${i}"></c:out></td>
+                                            <tr>
+                                        </c:forEach>        
+                                     </tbody>
+                                </table> 
+                                <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
+                                    <button id="delButton" class="float-left submit-button" >Eliminar Documentos</button>
+
+                                    <script type="text/javascript">
+                                        document.getElementById("delButton").onclick = function () {
+                                            location.href = "eliminar_documentos.jsp";
+                                        };
+                                    </script>
+                                </c:if>
                             </div>
                         </div>
                     </div>

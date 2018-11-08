@@ -4,21 +4,9 @@
     Created on : Oct 2, 2018, 1:50:59 PM
     Author     : alexis
 --%>
-<%@page import="java.util.TreeSet"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="Modelo.AreadeInteres"%>
-<%@page import="Modelo.Usuario"%>
-<%
-    Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-    Usuario usuario_perfil = (Usuario) request.getSession().getAttribute("usuario_perfil");
-    TreeSet<AreadeInteres> areas_existentes = (TreeSet<AreadeInteres>) request.getSession().getAttribute("areas_existentes");
-%>
-<%-- Necesitamos: Usuario, areas de interes existentes del usuario y la lista de areas de interes
-    Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
 
---%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%-- Hay que verificar que es el usuario que esta autentificado el que edita su propio perfil!--%>
 
 <%--@page contentType="text/html" pageEncoding="UTF-8"--%>
@@ -116,22 +104,16 @@
                             <hr>
                             <div class="col-md-8">  
                                 <ul class=" details" style="background-color: #ededed ">
-                                    <li><p><span class="" style="width:100px;"></span>Nombre: <%= usuario.getNombreUsuario()%></p></li>
-                                    <li><p><span class="" style="width:100px;"></span>Tipo: <%= usuario.getTipoUsuario()%></p></li>
-                                    <li><p><span class="" style="width:100px;"></span>Departamento: <%= usuario.getDepartamento()%></p></li>
-                                    <li><p><span class="" style="width:100px;"></span>Correo: <%= usuario.getCorreo()%></p></li>
+                                    <li><p><span class="" style="width:100px;"></span>Nombre: ${usuario.getNombreUsuario()}</p></li>
+                                    <li><p><span class="" style="width:100px;"></span>Tipo: ${usuario.getTipoUsuario()}</p></li>
+                                    <li><p><span class="" style="width:100px;"></span>Departamento: ${usuario.getDepartamento()}</p></li>
+                                    <li><p><span class="" style="width:100px;"></span>Correo: ${usuario.getCorreo()}</p></li>
                                 </ul>
                             </div>
                             <div class="col-md-4">  
                                 <div class="col-sm-5 col-xs-6 tital " >Intereses :</div>
 
-                                <!-- 
-                                    Display interests known, allow for modification 
-                                     Add new ones,
-                                     should be a selection of the possible values in the Database
-                                     Value of checkboxes should be the area of interest
-                                     Existing interests should be checked
-                                -->
+
                                 <form action="EditarPerfil" method="post">
                                     <c:forEach items="${areas_existentes}" var="area">
                                         <div class="col-sm-7 col-xs-6 ">
@@ -166,12 +148,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
                 </div>
             </div>
         </div>

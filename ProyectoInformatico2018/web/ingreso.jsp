@@ -99,7 +99,7 @@
     </script>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Ingreso</title>
         <style>
             body {
                 font-family: "Lato", sans-serif;
@@ -286,16 +286,18 @@
     </head>
     <body>
         <div class="sidenav">
-            <a href="ingreso.jsp">Ingresar</a>
-            <a href="registro.jsp">Registrarse</a>
+            <form name="forma" method="post" action="index">
+                <a href="ingreso.jsp">Ingresar</a>
+                <a href="#" onclick="forma.submit()">Registrarse</a>
+            </form>
         </div>
         <div class="main">
             <div class="container">
                 <div class="card card-container">
-                    <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
                     <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
                     <p id="profile-name" class="profile-name-card"></p>
                     <form class="form-signin" method="post" action="ingresar">
+                        <p>${message}</p>
                         <span id="reauth-email" class="reauth-email"></span>
                         <input type="email" id="inputEmail" name="txtCorreo" class="form-control" placeholder="Correo" required autofocus>
                         <input type="password" id="inputPassword" name="txtPassword" class="form-control" placeholder="Contraseña" required>

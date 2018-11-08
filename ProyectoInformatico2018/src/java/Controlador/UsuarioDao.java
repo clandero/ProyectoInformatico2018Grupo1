@@ -58,7 +58,7 @@ public class UsuarioDao{
         return new ArrayList<Usuario>();
     }
     
-    public void save(Usuario user) {
+    public boolean save(Usuario user) {
         System.out.println("userdao wants to save");
         try{
             PreparedStatement ps = 
@@ -73,9 +73,11 @@ public class UsuarioDao{
             boolean status = ps.execute();
             System.out.println("finished save");
             System.out.println(status);
+            return true;
         } 
         catch (SQLException s){  
             System.out.println(s);
+            return false;
         }        
     }
     
