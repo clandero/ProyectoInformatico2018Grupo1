@@ -169,6 +169,25 @@ public class UsuarioDao{
         }
         return susuario;
     }
+    public Usuario getUser(String correo){
+        System.out.println("GETUSER EN USERDAO--------------");
+        try{
+            String query = "SELECT * FROM usuario as us WHERE us.correo = (?)";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, correo);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            if(rs.next()){  
+                Usuario user = new Usuario(rs.getString("correo"), rs.getString("nombre_usuario"),rs.getString("tipo_usuario"), rs.getInt("n_departamento"));                         
+                return user;
+            }  
+        } catch (SQLException ex){   
+            System.out.println(ex);
+            System.out.println(ex.getStackTrace()[0].getLineNumber());
+            System.out.println(ex.getCause());
+        }
+        return null;
+    }
     
     public void upFile(String correo, String tema, String titulo, String sv_path){
         try{
