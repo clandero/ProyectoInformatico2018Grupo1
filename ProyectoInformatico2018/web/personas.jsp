@@ -92,17 +92,23 @@
                 <c:if test="${personasInteresComun.isEmpty()}">
                     Ingrese intereses para buscar personas.
                 </c:if>
+            
             <c:forEach items="${personasInteresComun}" var="pic">
+                <form method="post" action="personas">
                 <div class="jumbotron">
-                    <a href="#" ><h2>${pic.getNombreUsuario()}</h2></a>
+                    <h2>${pic.getNombreUsuario()}</h2>
+                    <input type="hidden" name="person" value="${pic.getCorreo()}">
                     <p>${pic.getTipoUsuario()} ${depad.get_nombre(Integer.toString(pic.getDepartamento()))}</p>
                     <p>${pic.getCorreo()}</p>
                     <c:forEach items="${pic.getIntereses()}" var="in">
                         <p>${in.getTema()}</p>
                     </c:forEach>
+                    <input type="submit" value="Ver Perfil"/><br/><br/>
                 </div>
+                </form>
             </c:forEach>
             
+
           
             </div>         
         </div>
