@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -23,7 +24,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "personas", urlPatterns = {"/personas"})
 public class personas extends HttpServlet {
-    
+    private static UsuarioDao userDao = new UsuarioDao();
+    private static AreaDao areaDao = new AreaDao();
+    private static DepartamentoDao depaDao = new DepartamentoDao();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,8 +39,7 @@ public class personas extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=ISO-8859-9");
-        request.getRequestDispatcher("index.jsp").forward(request, response);     
+        response.setContentType("text/html;charset=ISO-8859-9");    
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -65,12 +67,24 @@ public class personas extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         processRequest(request, response);
-            System.out.println("ESTOY EN PERSONAS.JAVA.............................................s");
-            response.setContentType("text/html");  
-            PrintWriter out=response.getWriter();  
-            out.print("Welcome, ");  
-        request.getRequestDispatcher("perfil.jsp").forward(request, response);
+
+         response.setContentType("text/html;charset-UTF-8");  
+         String userCorreo = request.getParameter("person"); 
+         Usuario u1 = userDao.getUser(userCorreo);
+         System.out.println("AQUIII EN PERSONAS"+userCorreo);
+         if(request.getAttribute("person2")!=null){
+             System.out.println("EL PERSON2 NO ESTA VACIO -------------------"+((Usuario)request.getAttribute("person2")).getNombreUsuario());
+         }
+        String depa = Integer.toString(u1.getDepartamento());
+        System.out.println("AQUIII EL DEPARTAMENTO");
+        request.getSession().setAttribute("depa_usuario2",depaDao.get_nombre(depa));
+        request.getSession().setAttribute("usuario2", u1);   
+        request.getSession().setAttribute("usuario_nombre2", u1.getNombreUsuario());
+        request.getSession().setAttribute("usuario_tipo2", u1.getTipoUsuario());
+        request.getSession().setAttribute("usuario_correo2", u1.getCorreo());
+        request.getSession().setAttribute("areas_existentes2", areaDao.getAll());
+        request.getSession().setAttribute("areas_usuario2", areaDao.getAll(u1));
+        request.getRequestDispatcher("perfilSimple.jsp").forward(request, response);
     }
 
     /**
