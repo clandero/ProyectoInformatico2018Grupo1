@@ -23,10 +23,10 @@
             </div>
             
             
-            <div class="card" style="width: 800px;"> <!-- Algo así funcionó en algun momento, no se que paso-->
-            <h1>Registro</h1>
+            <div class="card" style="width: 600px;"> <!-- Algo así funcionó en algun momento, no se que paso-->
+                <h1>Registro</h1><br>
             <form method="post" action="registrar">
-                <h4>Por favor, llene los siguientes campos: </h4><br />
+                <h4>Por favor, llene los siguientes campos: </h4>
                 <h5>Nombre: <input type="text" name="txtNombre" required /></h5>
                 <h5>Correo UdeC: <input type="text" name="txtCorreo" required /></h5>
                 <h5>Tipo de usuario: 
@@ -35,18 +35,18 @@
                         <option value="Estudiante">Estudiante</option>
                         <option value="Postgrado">Postgrado</option>
                     </select>
-                </h5>
-                </br><p>Departamento al que pertenece:</p><p></p>
+                </h5><br>
+                <h4>Departamento al que pertenece:</h4>
                 <c:forEach items="${depar}" var="nom_depa">
                 <label class="container"><c:out value="${nom_depa}"> </c:out> 
                     <input type="radio" checked="checked" name="radio" value ="${nom_depa}">
                     <span class="checkmark"></span>
                 </label>
                 </c:forEach>
-                
-                Contraseña: <input type="password" name="txtPassword" required /><br/><br/>
+                <br><br>
+                <h5>Contraseña: <input type="password" name="txtPassword" required /></h5><br/>
 
-                <input type="submit" value="Enviar"/><br/><br/>
+                <input type="submit" value="Enviar" style="width: 70px; height: 30px;"/><br/><br/>
             </form>
         </div>
         </div>
