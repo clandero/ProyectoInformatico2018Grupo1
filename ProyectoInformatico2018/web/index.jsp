@@ -52,16 +52,10 @@
             }
         </style>
     </head>
-    <ul>
-        <li><a class="active" href="registro.jsp">Registro</a></li>
-        <li><a href="perfil.jsp">Ingresar</a></li>
-    </ul>
     <body>
         <div class="sidenav">
-            <form name="forma" method="post" action="index">
                 <a href="ingreso.jsp">Ingresar</a>
-                <a onclick="forma.submit()" href="#">Registrarse</a>
-            </form>
+                <a href="index">Registrarse</a>
         </div>
         <div class="main">
             <h1>Bienvenido a la plataforma colaborativa UDEC</h1>
