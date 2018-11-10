@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Usuario {
@@ -46,6 +47,7 @@ public class Usuario {
         for (String inter : intereses_list) {
             this.intereses.add(new AreadeInteres(inter));
         }
+        Collections.sort(this.intereses);
     }
 
     public List<AreadeInteres> getIntereses() {
@@ -54,6 +56,7 @@ public class Usuario {
     
     public void addInteres(String x){
         this.intereses.add(new AreadeInteres(x));
+        Collections.sort(this.intereses);
     }
     
     public String getCorreo() {
