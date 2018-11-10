@@ -13,6 +13,8 @@ import static java.lang.System.out;
 
 import java.util.*;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -124,8 +126,41 @@ public class AnuncioDao {
         
     }
 
+    /**
+     *
+     * @param u Usuario del cual retirar los anuncios que ha creado
+     * @return Set con los anuncios
+     */
+    public Set<Anuncio> getAll(Usuario u) {
+        Set<Anuncio> anuncios_usuario = new TreeSet<>();
+        
+        String query_anuncio = "SELECT * "
+                + "FROM anuncio, anuncio_area "
+                + "WHERE anuncio.n_anun = anuncio_area.n_anun "
+                + "AND anuncio.correo = '" + u.getCorreo() + "'";
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query_anuncio);
+            while (rs.next()) {
+                int num_anuncio = rs.getInt("n_anun");
+                String titulo = rs.getString("titulo");
+                String contenido = rs.getString("contenido");
+                String fecha_anuncio = rs.getString("fecha_anuncio");
+                String tema = rs.getString("tema");
+                System.out.println("Fecha retirada: "+ fecha_anuncio);
+                System.out.println("Tema retirado: "+ tema);
+                anuncios_usuario.add(new Anuncio(num_anuncio, titulo,
+                        u.getCorreo(), contenido, fecha_anuncio, tema));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AnuncioDao.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return anuncios_usuario;
+    }
+
     public TreeSet<Anuncio> getAnuncios(TreeSet<AreadeInteres> x) {
-        TreeSet<Anuncio> res = new TreeSet<>();
+        TreeSet<Anuncio> res = new TreeSet<Anuncio>();
         /*ArrayList<AreadeInteres> y = new ArrayList<AreadeInteres>();
         y.add(new AreadeInteres("Estructuras"));*/
 
