@@ -81,7 +81,13 @@
                                 <div class="form-group" style="border-bottom:1px solid black">
                                     <h2>Mis anuncios</h2>
                                 </div>
-
+                                <c:forEach var="anuncio" items="${anuncios_usuario}">
+                                    <div class="jumbotron">
+                                        <h2>Título: ${anuncio.getTitulo()}</h2>
+                                        <h5>Fecha: ${anuncio.getFecha()}</h5>
+                                        <h5>Tema: ${anuncio.getTema()}</h5>
+                                    </div>
+                                </c:forEach>
                                 <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
                                     <button id="editButton" class="float-left submit-button" >Editar Perfil</button>
 

@@ -10,47 +10,46 @@ import Modelo.Usuario;
 import Modelo.AreadeInteres;
 import static java.lang.System.out;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.*;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author berko
  */
 public class AnuncioDao {
-    
+
     private static Connection conn = null;
-    
-    public AnuncioDao(){
-         if (conn == null){
+
+    public AnuncioDao() {
+        if (conn == null) {
             conn = DatabaseConnect.getConn();
         }
         System.out.println("instanced anunciodao");
     }
-    
-    public void addTema(int n_anun, AreadeInteres area){
-        try{
+
+    public void addTema(int n_anun, AreadeInteres area) {
+        try {
             String query = "INSERT INTO anuncio_area(n_anun, tema)"
-                      + "VALUES ((?),(?))";
+                    + "VALUES ((?),(?))";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, n_anun);
             ps.setString(2, area.getTema());
             ps.execute();
-        }
-        catch (SQLException ex){
+        } catch (SQLException ex) {
             System.out.println(ex);
         }
     }
-    
-    public void save(Anuncio a, Usuario u, AreadeInteres area){
-        try{
+
+    public void save(Anuncio a, Usuario u, AreadeInteres area) {
+        try {
             // crear anuncio en bd
             String query = "INSERT INTO anuncio "
-                         + "(contenido, correo, fecha_anuncio)"
-                         + "VALUES ((?),(?),(?))"
-                         + "RETURNING n_anun";
+                    + "(contenido, correo, fecha_anuncio)"
+                    + "VALUES ((?),(?),(?))"
+                    + "RETURNING n_anun";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, a.getNumero());
             ps.setString(2, a.getContent());
@@ -61,37 +60,70 @@ public class AnuncioDao {
             rs.next();
             int n_anun = rs.getInt("n_anun");
             query = "INSERT INTO anuncio_area(n_anun, tema)"
-                  + "VALUES ((?),(?))";
+                    + "VALUES ((?),(?))";
             ps = conn.prepareStatement(query);
             ps.setInt(1, n_anun);
             ps.setString(2, area.getTema());
             ps.execute();
             //
 
-        } catch (SQLException ex){   
-        }   
+        } catch (SQLException ex) {
+        }
     }
-    public TreeSet<Anuncio> getAnuncios(TreeSet<AreadeInteres> x){
+
+    /**
+     *
+     * @param u Usuario del cual retirar los anuncios que ha creado
+     * @return Set con los anuncios
+     */
+    public Set<Anuncio> getAll(Usuario u) {
+        Set<Anuncio> anuncios_usuario = new TreeSet<>();
+        
+        String query_anuncio = "SELECT * "
+                + "FROM anuncio, anuncio_area "
+                + "WHERE anuncio.n_anun = anuncio_area.n_anun "
+                + "AND anuncio.correo = '" + u.getCorreo() + "'";
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query_anuncio);
+            while (rs.next()) {
+                int num_anuncio = rs.getInt("n_anun");
+                String titulo = rs.getString("titulo");
+                String contenido = rs.getString("contenido");
+                String fecha_anuncio = rs.getString("fecha_anuncio");
+                String tema = rs.getString("tema");
+                System.out.println("Fecha retirada: "+ fecha_anuncio);
+                System.out.println("Tema retirado: "+ tema);
+                anuncios_usuario.add(new Anuncio(num_anuncio, titulo,
+                        u.getCorreo(), contenido, fecha_anuncio, tema));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AnuncioDao.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return anuncios_usuario;
+    }
+
+    public TreeSet<Anuncio> getAnuncios(TreeSet<AreadeInteres> x) {
         TreeSet<Anuncio> res = new TreeSet<Anuncio>();
         /*ArrayList<AreadeInteres> y = new ArrayList<AreadeInteres>();
         y.add(new AreadeInteres("Estructuras"));*/
 
-        
-        try{
+        try {
             out.println("AAAAA");
-            for(AreadeInteres i : /*y*/x){
-                String query = "SELECT a.titulo, a.n_anun, a.contenido, us.nombre_usuario, a.fecha_anuncio FROM plataforma_colaborativa.anuncio as a, plataforma_colaborativa.anuncio_area as x, plataforma_colaborativa.usuario as us WHERE a.n_anun = x.n_anun AND x.tema = '"+i.getTema()+"' AND a.correo = us.correo";
+            for (AreadeInteres i : /*y*/ x) {
+                String query = "SELECT a.titulo, a.n_anun, a.contenido, us.nombre_usuario, a.fecha_anuncio FROM plataforma_colaborativa.anuncio as a, plataforma_colaborativa.anuncio_area as x, plataforma_colaborativa.usuario as us WHERE a.n_anun = x.n_anun AND x.tema = '" + i.getTema() + "' AND a.correo = us.correo";
                 out.println(query);
                 PreparedStatement ps = conn.prepareStatement(query);
                 ps.execute();
                 ResultSet rs = ps.getResultSet();
-                while (rs.next()){
+                while (rs.next()) {
                     out.println(rs.getInt("n_anun"));
-                    res.add(new Anuncio(rs.getInt("n_anun"),rs.getString("titulo"),rs.getString("nombre_usuario"),rs.getString("contenido"),rs.getString("fecha_anuncio"),i.getTema()));
+                    res.add(new Anuncio(rs.getInt("n_anun"), rs.getString("titulo"), rs.getString("nombre_usuario"), rs.getString("contenido"), rs.getString("fecha_anuncio"), i.getTema()));
                 }
             }
             return res;
-        } catch (SQLException ex){   
+        } catch (SQLException ex) {
         }
         return null;
     }

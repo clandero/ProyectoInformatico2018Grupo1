@@ -7,6 +7,7 @@ public class Anuncio implements Comparable<Anuncio>{
     private String contenido;
     private String fecha_subida;
     private String tema;
+    
     public Anuncio(){
     }
     
