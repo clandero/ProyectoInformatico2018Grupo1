@@ -70,7 +70,7 @@ and open the template in the editor.
     max-width: 350px;
     padding: 40px 40px;
 }
-html,.container,.main{
+html,body,.container,.main{
     background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
 }
 

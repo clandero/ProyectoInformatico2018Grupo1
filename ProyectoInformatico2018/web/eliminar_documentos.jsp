@@ -4,6 +4,7 @@
     Author     : Martin
 --%>
 
+<%@page import="java.util.TreeSet"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -13,86 +14,23 @@
 <%
     Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
     Usuario usuario_perfil = (Usuario) request.getSession().getAttribute("usuario_perfil");
-    List<AreadeInteres> areas_existentes = (ArrayList<AreadeInteres>) request.getSession().getAttribute("areas_existentes");
+    TreeSet<AreadeInteres> areas_existentes = (TreeSet<AreadeInteres>) request.getSession().getAttribute("areas_existentes");
     List<Documento> documentos_usuario = (ArrayList<Documento>) request.getSession().getAttribute("documentos_usuario");
 %>
 
 <!DOCTYPE html>
 <html>
-
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <title>Eliminar Documentos</title>
-        <style>
-            body {
-                font-family: "Lato", sans-serif;
-            }
-
-            .sidenav {
-                height: 100%;
-                width: 160px;
-                position: fixed;
-                z-index: 1;
-                top: 0;
-                left: 0;
-                background-color: #111;
-                overflow-x: hidden;
-                padding-top: 20px;
-            }
-
-            .sidenav a {
-                padding: 6px 8px 6px 16px;
-                text-decoration: none;
-                font-size: 25px;
-                color: #818181;
-                display: block;
-            }
-
-            .sidenav a:hover {
-                color: #f1f1f1;
-            }
-
-            .main {
-                margin-left: 160px; /* Same as the width of the sidenav */
-                font-size: 10px; /* Increased text to enable scrolling */
-                padding: 0px 10px;
-            }
-
-            @media screen and (max-height: 450px) {
-                .sidenav {padding-top: 15px;}
-                .sidenav a {font-size: 18px;}
-            }
-
-            /* Change the link color on hover */
-            li a:hover {
-                background-color: #111;
-                color: white;
-            }
-            .details li {
-                list-style: none;
-                background-color: #ededed;
-            }
-            li {
-                margin-bottom:10px;
-            }
-            .tital{
-                text-align:right;
-            }
-            .contant_i{
-                color: #631e1e;
-                border-bottom: 1px solid #cea7a7;
-            }
-
-
-        </style>
-
     </head>
     <body>
         <%@include file="sidebar.jsp" %>
         <div class="main">
+            <jsp:include page="searchbar.jsp"/>
             <div class="container">    
                 <div class="jumbotron">
                     <div class="row">

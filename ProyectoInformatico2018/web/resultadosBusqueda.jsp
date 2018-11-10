@@ -7,58 +7,75 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="css/cssIndex.css" type="text/css">
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" type="text/css">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+        <link href="css/perfil.css" rel="stylesheet" type="text/css"/>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <title>Resultados de la búsqueda</title>
     </head>
-    <body class="w3-main">
-        <div class="w3-sidebar w3-bar-block w3-grey" style="width:15%">
-            <a href="#" class="w3-bar-item w3-button"><img src="imagenes/escudo.gif" alt="" style="width: 50px" class="center"/></a>
-            <a href="perfil.jsp" class="w3-bar-item w3-button w3-hover-black">Mi Perfil</a>
-        </div>
-        <div class= "w3-container" style="margin-left:15%; height: 100vh; background-image: url('imagenes/edificio_fi.png'); background-size:100%;  background-repeat: no-repeat;">
-        <h1>Resultados de búsqueda: ${Buscar}</h1>
-        <c:if test="${opcion=='area'}">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Correo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="i" items="${resultados}">
-                        <tr>
-                            <td>${i.getNombreUsuario()}</td>
-                            <td>${i.getCorreo()}</td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </c:if>
-        <c:if test="${opcion=='depto'}">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Correo</th>
-                        <th>Área de interés</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="i" items="${resultados}">
-                        <tr>
-                            <td>${i.getNombreUsuario()}</td>
-                            <td>${i.getCorreo()}</td>
-                            <c:forEach var="j" items="${i.getIntereses()}">
-                                <td>${j.getTema()}</td>
-                            </c:forEach>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </c:if>
+    <body>
+        <jsp:include page="sidebar.jsp"/>
+        <div class="main">
+            <jsp:include page="searchbar.jsp"/>
+            <div class="container">
+                <div class="jumbotron">
+                    <div class="row">
+                        <div class="col-6" style="margin-left:none;">
+                            <div class="form-group" style="border-bottom:1px solid black">
+                                    <h2>Resultados de búsqueda: ${Buscar}</h2>
+                            </div>
+                           
+                            <c:if test="${opcion=='area'}">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th></th>
+                                            <th>Correo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="i" items="${resultados}">
+                                            <tr>
+                                                <td>${i.getNombreUsuario()}</td>
+                                                <td></td>
+                                                <td>${i.getCorreo()}</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </c:if>
+                            <c:if test="${opcion=='depto'}">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            
+                                            <th>Correo</th>
+                                            
+                                            <th>Área de interés</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="i" items="${resultados}">
+                                            <tr>
+                                                <td>${i.getNombreUsuario()}</td>
+                                                
+                                                <td>${i.getCorreo()}</td>
+                                                
+                                                <td><c:forEach var="j" items="${i.getIntereses()}" varStatus="loop">
+                                                    ${j.getTema()}<c:if test="${!loop.last}">,</c:if>
+                                                </c:forEach></td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

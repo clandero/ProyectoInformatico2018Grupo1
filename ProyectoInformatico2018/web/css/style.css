@@ -8,9 +8,8 @@ and open the template in the editor.
     Author     : Vicente Varas <vvaras@udec.cl>
 */
 body {
-            font-family: "Lato", sans-serif;
+    font-family: "Lato", sans-serif;
 }
-
 .sidenav {
     height: 100%;
     width: 160px;
@@ -22,6 +21,12 @@ body {
     overflow-x: hidden;
     padding-top: 20px;
 }
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
 
 .sidenav a {
     padding: 6px 8px 6px 16px;
@@ -52,9 +57,10 @@ body {
 /*
  * General styles
  */
+
 body, html {
     height: 100%;
-    background-repeat: no-repeat;
+    /*background-repeat: no-repeat;*/
     background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
 }
 
@@ -187,3 +193,28 @@ body, html {
 .forgot-password:focus{
     color: #333;
 }
+li a:hover {
+                background-color: #111;
+                color: white;
+            }
+            .details li {
+                list-style: none;
+                background-color: #ededed;
+            }
+            li {
+                margin-bottom:10px;
+            }
+            .tital{
+                text-align:right;
+            }
+            .contant_i{
+                color: #631e1e;
+                border-bottom: 1px solid #cea7a7;
+            }
+            
+            
+            table{
+                font-size: medium;
+            }
+            
+            

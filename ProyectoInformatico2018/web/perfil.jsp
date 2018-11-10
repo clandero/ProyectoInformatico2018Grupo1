@@ -58,30 +58,17 @@
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <div class="form-group" style="border-bottom:1px solid black">
-                                    <h2>TRABAJOS/PROYECTOS</h2>
+                                    <h2>Mis trabajos y publicaciones</h2>
                                 </div>
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach var="i" items="${documentos_usuario}">
-                                            <tr>
-                                                <td><c:out value="${i}"></c:out></td>
-                                            <tr>
-                                        </c:forEach>        
-                                     </tbody>
-                                </table> 
+                                <p>Nombre:</p>
+                                <c:forEach var="i" items="${documentos_usuario}">
+                                    <ul>
+                                        <li><c:out value="${i}"></c:out></li>
+                                    </ul>
+                                </c:forEach>        
                                 <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
                                     <button id="delButton" class="float-left submit-button" >Eliminar Documentos</button>
-
-                                    <script type="text/javascript">
-                                        document.getElementById("delButton").onclick = function () {
-                                            location.href = "eliminar_documentos.jsp";
-                                        };
-                                    </script>
+                                    <script src="scripts/eliminar_documentos.js" type="text/javascript"></script>
                                 </c:if>
                             </div>
                         </div>
@@ -92,7 +79,7 @@
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <div class="form-group" style="border-bottom:1px solid black">
-                                    <h2>EXPERIENCIA</h2>
+                                    <h2>Mis anuncios</h2>
                                 </div>
 
                                 <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">

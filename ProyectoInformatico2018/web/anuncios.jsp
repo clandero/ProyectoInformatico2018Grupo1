@@ -14,6 +14,7 @@
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Página principal</title>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <link href="css/newcss.css" rel="stylesheet" type="text/css"/>
 
     </head>
@@ -22,8 +23,6 @@
         <div class="main">
             <jsp:include page="searchbar.jsp"/>
             <div class="container">
-            <h1>Hello World!</h1>
-            
             <c:forEach var="i" items="${lista_anuncios}">
                 <div class="jumbotron">
                     <h2>Título: ${i.getTitulo()}</h2>
@@ -33,9 +32,6 @@
                     <h5>Tema: ${i.getTema()}</h5>
                 </div>
             </c:forEach>
-            
-                <div class="jumbotron">
-                </div>
             </div>
         </div>
     </body>

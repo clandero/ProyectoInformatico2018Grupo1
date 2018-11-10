@@ -11,8 +11,7 @@
     <a href="perfil.jsp">Perfil</a>
     <a href="upload.jsp">Subir Doc.</a>
     <a href="anuncios">Anuncios</a>
-    <a href="#clients">Contactos</a>
-    <a href="#contact">Logout</a>
+    <a href="logOut">Logout</a>
 </div>
 
 
