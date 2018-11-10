@@ -29,9 +29,7 @@ public class ingresar extends HttpServlet {
     
     private static UsuarioDao userDao = new UsuarioDao();
     private static AreaDao areaDao = new AreaDao();
-
     private static DepartamentoDao depaDao = new DepartamentoDao();
-
     private static DocumentoDao documentoDao = new DocumentoDao();
 
 

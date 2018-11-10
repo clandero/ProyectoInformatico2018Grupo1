@@ -23,20 +23,19 @@
             </div>
             
             
-            <div class="card card-container"> <!-- Algo así funcionó en algun momento, no se que paso-->
+            <div class="card" style="width: 800px;"> <!-- Algo así funcionó en algun momento, no se que paso-->
             <h1>Registro</h1>
             <form method="post" action="registrar">
-                <p>Por favor, llene los siguientes campos: </p><br />
-                <p>Nombre: <input type="text" name="txtNombre" required /></p>
-                <p>Correo UdeC: <input type="text" name="txtCorreo" required /></p>
-                Tipo de usuario: 
-                <div class="select">
+                <h4>Por favor, llene los siguientes campos: </h4><br />
+                <h5>Nombre: <input type="text" name="txtNombre" required /></h5>
+                <h5>Correo UdeC: <input type="text" name="txtCorreo" required /></h5>
+                <h5>Tipo de usuario: 
                     <select name="search_categories" id="search_categories">
                         <option value="Docente" selected="selected">Docente</option>
                         <option value="Estudiante">Estudiante</option>
                         <option value="Postgrado">Postgrado</option>
                     </select>
-                </div>
+                </h5>
                 </br><p>Departamento al que pertenece:</p><p></p>
                 <c:forEach items="${depar}" var="nom_depa">
                 <label class="container"><c:out value="${nom_depa}"> </c:out> 
