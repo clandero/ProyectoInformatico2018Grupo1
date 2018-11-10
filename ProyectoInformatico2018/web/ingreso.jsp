@@ -17,10 +17,8 @@
     </head>
     <body>
         <div class="sidenav">
-            <form name="forma" method="post" action="index">
-                <a href="ingreso.jsp">Ingresar</a>
-                <a href="#" onclick="forma.submit()">Registrarse</a>
-            </form>
+            <a href="ingreso.jsp">Ingresar</a>
+            <a href="index">Registrarse</a>          
         </div>
         <div class="main">
             <div class="container">
