@@ -19,6 +19,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import java.util.List;
+
+
 /**
  *
  * @author berko
@@ -45,6 +48,7 @@ public class ProfileFileSearchServlet extends HttpServlet {
                     getAttribute("usuario_perfil")).getCorreo();
 
             ArrayList<String> files = docDao.search(correo);
+
             request.getSession().setAttribute("resultados", files);
             request.getRequestDispatcher("perfil.jsp").forward(request, response);            
         }

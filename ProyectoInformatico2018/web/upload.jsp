@@ -4,13 +4,14 @@
     Author     : arken
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="ISO-8859-9"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <title>File Upload</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <script> function other(){
                     var checkbox = document.getElementById("check");

@@ -4,192 +4,49 @@
     Author     : vanes
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%--@page contentType="text/html" pageEncoding="UTF-8"--%>
 <!DOCTYPE html>
 <html>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
     <head>
-
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <title>Registro</title>
-        <style>
-            body {
-                font-family: "Lato", sans-serif;
-            }
-
-            .sidenav {
-                height: 100%;
-                width: 160px;
-                position: fixed;
-                z-index: 1;
-                top: 0;
-                left: 0;
-                background-color: #111;
-                overflow-x: hidden;
-                padding-top: 20px;
-            }
-
-            .sidenav a {
-                padding: 6px 8px 6px 16px;
-                text-decoration: none;
-                font-size: 25px;
-                color: #818181;
-                display: block;
-            }
-
-            .sidenav a:hover {
-                color: #f1f1f1;
-            }
-
-            .main {
-                margin-left: 160px; /* Same as the width of the sidenav */
-                font-size: 20px; /* Increased text to enable scrolling */
-                padding: 0px 10px;
-            }
-
-            @media screen and (max-height: 450px) {
-                .sidenav {padding-top: 15px;}
-                .sidenav a {font-size: 18px;}
-            }
-
-            /* Change the link color on hover */
-            contenido{ 
-                position: absolute;
-                padding-top: 0px;
-                padding-left: 200px;
-            }
-            /*radio buttons*/
-            .container {
-                display: block;
-                position: relative;
-                padding-left: 35px;
-                margin-bottom: 12px;
-                cursor: pointer;
-                font-size: 16px;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-            }       
-
-            /* Hide the browser's default radio button */
-            .container input {
-                position: absolute;
-                opacity: 0;
-                cursor: pointer;
-            }
-
-            /* Create a custom radio button */
-            .checkmark {
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 15px;
-                width: 15px;
-                background-color: #eee;
-                border-radius: 50%;
-            }
-
-            /* On mouse-over, add a grey background color */
-            .container:hover input ~ .checkmark {
-                background-color: #333;
-            }
-
-            /* When the radio button is checked, add a blue background */
-            .container input:checked ~ .checkmark {
-                background-color: #2196F3;
-            }
-
-            /* Create the indicator (the dot/circle - hidden when not checked) */
-            .checkmark:after {
-                content: "";
-                position: absolute;
-                display: none;
-            }
-
-            /* Show the indicator (dot/circle) when checked */
-            .container input:checked ~ .checkmark:after {
-                display: block;
-            }
-
-            /* Style the indicator (dot/circle) */
-            .container .checkmark:after {
-                top: 5px;
-                left: 5px;
-                width: 5px;
-                height: 5px;
-                border-radius: 50%;
-                background: white;
-            }
-
-
-        </style>
-
     </head>
     <body>
-        <div class="sidenav">
-            <a href="ingreso.jsp">Ingresar</a>
-            <a href="registro.jsp">Registrarse</a>
-        </div>
-
         <div class="main">
-            <div class="card card-container"> <!-- Algo así funcionó en algun momento, no se que paso-->
-            <h1>REGISTRO</h1>
+            <div class="sidenav">
+                <a href="ingreso.jsp">Ingresar</a>
+                <a href="index">Registrarse</a>
+            </div>
+            
+            
+            <div class="card" style="width: 600px;"> <!-- Algo así funcionó en algun momento, no se que paso-->
+                <h1>Registro</h1><br>
             <form method="post" action="registrar">
-                <p>Llene los siguientes campos: </p><br />
-                Nombre: <input type="text" name="txtNombre" /><br/><br/>
-                Correo udec: <input type="text" name="txtCorreo" /><br /><br/>
-                Tipo de usuario: 
-                <div class="select">
+                <h4>Por favor, llene los siguientes campos: </h4>
+                <h5>Nombre: <input type="text" name="txtNombre" required /></h5>
+                <h5>Correo UdeC: <input type="text" name="txtCorreo" required /></h5>
+                <h5>Tipo de usuario: 
                     <select name="search_categories" id="search_categories">
                         <option value="Docente" selected="selected">Docente</option>
                         <option value="Estudiante">Estudiante</option>
                         <option value="Postgrado">Postgrado</option>
                     </select>
-                </div>
-                </br><p>Departamento al que pertenece:</p>
-                <label class="container">Ingeniería Civil
-                    <input type="radio" checked="checked" name="radio" value ="Ingeniería Civil">
+                </h5><br>
+                <h4>Departamento al que pertenece:</h4>
+                <c:forEach items="${depar}" var="nom_depa">
+                <label class="container"><c:out value="${nom_depa}"> </c:out> 
+                    <input type="radio" checked="checked" name="radio" value ="${nom_depa}">
                     <span class="checkmark"></span>
                 </label>
-                <label class="container">Ingeniería Eléctrica
-                    <input type="radio" name="radio" value ="Ingenieríaa Eléctrica">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container">Ingeniería Industrial
-                    <input type="radio" name="radio" value ="Ingeniería Industrial">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container">Ingeniería Informática y Ciencias de la Computación
-                    <input type="radio" name="radio" value ="Ingeniería Informática y Ciencias de la Computación">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container">Ingeniería de Materiales
-                    <input type="radio" name="radio" value ="Ingeniería de Materiales">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container">Ingeniería Mecánica
-                    <input type="radio" name="radio" value ="Ingeniería Mecánica">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container">Ingeniería Metalúrgica
-                    <input type="radio" name="radio" value ="Ingeniería Metalúrgica">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="container">Ingeniería Química 
-                    <input type="radio" name="radio" value ="Ingeniería Química">
-                    <span class="checkmark"></span>
-                </label>
-                Contraseña: <input type="password" name="txtPassword" /><br/><br/>
+                </c:forEach>
+                <br><br>
+                <h5>Contraseña: <input type="password" name="txtPassword" required /></h5><br/>
 
-                <input type="submit" value="Enviar"/><br/><br/>
+                <input type="submit" value="Enviar" style="width: 70px; height: 30px;"/><br/><br/>
             </form>
         </div>
         </div>

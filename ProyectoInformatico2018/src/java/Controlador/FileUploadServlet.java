@@ -33,7 +33,9 @@ public class FileUploadServlet extends HttpServlet {
             Logger.getLogger(FileUploadServlet.class.getCanonicalName());
     
     private static DocumentoDao docDao = new DocumentoDao();
+
     private static AreaDao areaDao = new AreaDao();
+
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,6 +49,7 @@ public class FileUploadServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request,
         HttpServletResponse response)
         throws ServletException, IOException {   
+
     
     }
 

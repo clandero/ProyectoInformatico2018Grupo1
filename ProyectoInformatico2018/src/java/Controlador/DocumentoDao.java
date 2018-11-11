@@ -8,10 +8,15 @@ package Controlador;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
+
 import java.io.File;
 
-import Modelo.*;
 import java.nio.file.NoSuchFileException;
+
+
+import Modelo.*;
+import java.util.List;
+
 
 /**
  *
@@ -20,6 +25,7 @@ import java.nio.file.NoSuchFileException;
 public class DocumentoDao {
     
     private static Connection conn;
+
     // FALTA SABER EL PATH DEL SERVIDOR, PARA BORRAR LOS ARCHIVOS EN /DOCS/
     private static String contextPath = null;
     
@@ -33,19 +39,24 @@ public class DocumentoDao {
     public void save(String correo, String tema, String titulo, String sv_path){
         try{
             String query = 
+
                 "INSERT INTO documento(sv_path, correo,titulo, fecha_documento) "
               + "VALUES ((?),(?),(?), (?)) "
+
               + "RETURNING n_doc";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, sv_path);
             ps.setString(2, correo);
             ps.setString(3, titulo);
+
             ps.setTimestamp(4, new java.sql.Timestamp(System.currentTimeMillis()));
+
             ps.execute();            
             ResultSet rs = ps.getResultSet();
             int n_doc = 10000;
             if (rs.next()){
                 n_doc = rs.getInt("n_doc");
+
             } else{
                 System.out.println("Error adding document");
                 return;
@@ -106,6 +117,7 @@ public class DocumentoDao {
             System.out.println(ex);
         }
         return null;
+
     }
     
     public Hashtable<String, ArrayList<String>> search(String keyword, String tema){
@@ -135,7 +147,7 @@ public class DocumentoDao {
         }
         return null;
     }
-    
+
     public static void setContext(String cPath){
         if (contextPath == null){
             contextPath = cPath;
@@ -180,3 +192,4 @@ public class DocumentoDao {
     }
     
 }
+
