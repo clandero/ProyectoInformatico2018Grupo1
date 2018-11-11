@@ -31,7 +31,9 @@ import org.testng.annotations.Test;
  */
 public class TestingPage {
     
-        private static WebDriver driver;
+    private static WebDriver driver;
+    private static PageLogin pageLogin;
+    private static PagePerfil pagePerfil;
         
     @BeforeMethod
     public static void setUp(){
@@ -41,83 +43,39 @@ public class TestingPage {
         
         driver = new ChromeDriver();
         //driver.manage().window().maximize();
-        driver.navigate().to("http://localhost:8080/build");
+        driver.navigate().to("http://localhost:8080/build/ingreso.jsp");
+        
+        pageLogin = new PageLogin(driver);
+        pagePerfil = new PagePerfil(driver);
+        
+        pageLogin.login("mmmmm@udec.cl","mmmmm");
         
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
     
     @Test
-    public void LoginCorrectTest(){
-        driver.navigate().to("http://localhost:8080/build/ingreso.jsp");
-        PageLogin pageLogin = new PageLogin(driver);
-        PagePerfil pagePerfil = new PagePerfil(driver);
-        
-        pageLogin.login("mmmmm@udec.cl","mmmmm");
-        //Helpers helper = new Helpers();
-        //helper.sleepSeconds(3);
-        pagePerfil.assertCorrectPage();
-    }
-
-    @Test
-    public void RegisterTest(){
-        driver.navigate().to("http://localhost:8080/build/index");
-        PageRegister pageRegister = new PageRegister(driver);
-        PagePerfil pagePerfil = new PagePerfil(driver);
-        
-        pageRegister.register("Tester Uno", "test@udec.cl", "test");
-        pageRegister.selectUserType("Estudiante");
-        pageRegister.selectDepartment();
-        
-        //Helpers helper = new Helpers();
-        //helper.sleepSeconds(3);
-        
-        pagePerfil.assertCorrectPage();
-    }
-    
-    @Test
     public void SearchSomeoneTest(){
-        driver.navigate().to("http://localhost:8080/build/ingreso.jsp");
-        PageLogin pageLogin = new PageLogin(driver);
-        PagePerfil pagePerfil = new PagePerfil(driver);
         PageSearchSomeone pageSearchSomeone = new PageSearchSomeone(driver);
-        
-        pageLogin.login("mmmmm@udec.cl","mmmmm");
         
         pagePerfil.SearchSomeone("informatica");
         pagePerfil.selectSearchType("Departamento");
         
-        //Helpers helper = new Helpers();
-        //helper.sleepSeconds(3);
-        
         pageSearchSomeone.assertPage();
     }
     
-    @Test
+    //@Test
     public void DeleteDocumentsTest(){
-        driver.navigate().to("http://localhost:8080/build/ingreso.jsp");
-        PageLogin pageLogin = new PageLogin(driver);
-        PagePerfil pagePerfil = new PagePerfil(driver);
         PageDeleteDocuments pageDeleteDocuments = new PageDeleteDocuments(driver);
-        
-        pageLogin.login("mmmmm@udec.cl","mmmmm");
-        //Helpers helper = new Helpers();
-        //helper.sleepSeconds(3);
         
         pagePerfil.DeleteDocuments();
         pageDeleteDocuments.deleteDocument();
         
         pagePerfil.assertCorrectPage();
-        //helper.sleepSeconds(3);
     }
     
     @Test
     public void EditPerfilTest(){
-        driver.navigate().to("http://localhost:8080/build/ingreso.jsp");
-        PageLogin pageLogin = new PageLogin(driver);
-        PagePerfil pagePerfil = new PagePerfil(driver);
         PageEditPerfil pageEditPerfil = new PageEditPerfil(driver);
-        
-        pageLogin.login("mmmmm@udec.cl","mmmmm");
         
         pagePerfil.EditPerfil();
         pageEditPerfil.changeArea();
