@@ -99,7 +99,7 @@
     </script>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Ingresar</title>
         <style>
             body {
                 font-family: "Lato", sans-serif;
@@ -304,7 +304,7 @@
                                 <input type="checkbox" value="recuerdame"> Recuerdame
                             </label>
                         </div>
-                        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Ingresar</button>
+                        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" name="login">Ingresar</button>
                     </form><!-- /form -->
                     <a href="#" class="forgot-password">
                         ¿Olvidó su contraseña?
