@@ -7,7 +7,6 @@ package Controlador;
 
 import Modelo.*;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.*;
 import java.sql.*;
@@ -31,13 +30,17 @@ public class AreaDao{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List getAll() {
+    public Set getAll() {
         String query = "SELECT * FROM area_de_interes";
         try{
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.execute();
-            ResultSet rs = ps.getResultSet();
-            List ls = new ArrayList<AreadeInteres>();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            //PreparedStatement ps = conn.prepareStatement(query);
+            //ps.execute();
+            //ResultSet rs = ps.getResultSet();
+           // List ls = new ArrayList<AreadeInteres>();
+            Set<AreadeInteres> ls = new TreeSet();
             while (rs.next()){
                 ls.add(new AreadeInteres(rs.getString("tema")));
             }
@@ -47,17 +50,18 @@ public class AreaDao{
             return null;
         }
     }
+   
     
-    public List getAll(Usuario u) {
-        String query = "SELECT UNIQUE tema "
-                     + "FROM usuario_area"
+    public Set getAll(Usuario u) {
+        String query = "SELECT tema "
+                     + "FROM usuario_area "
                      + "WHERE correo=(?)";
         try{
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, u.getCorreo());
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            List ls = new ArrayList<AreadeInteres>();
+            Set<AreadeInteres> ls = new TreeSet();
             while (rs.next()){
                 ls.add(new AreadeInteres(rs.getString("tema")));
             }

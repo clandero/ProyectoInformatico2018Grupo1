@@ -1,6 +1,6 @@
 package Modelo;
 
-public class AreadeInteres {
+public class AreadeInteres implements Comparable<AreadeInteres>{
 
     private String tema;
 
@@ -18,4 +18,11 @@ public class AreadeInteres {
     public String getTema() {
         return this.tema;
     }
+
+    @Override
+    public int compareTo(AreadeInteres t) {
+        return this.getTema().compareTo(t.getTema());
+    }
+
 }
+

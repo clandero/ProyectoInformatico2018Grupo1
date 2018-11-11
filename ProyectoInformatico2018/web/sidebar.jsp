@@ -4,14 +4,20 @@
     Author     : Vicente Varas <vvaras@udec.cl>
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-9"%>
 <!DOCTYPE html>
 
 <div class="sidenav">
     <a href="perfil.jsp">Perfil</a>
     <a href="upload.jsp">Subir Doc.</a>
-    <a href="#services">Anuncios</a>
-    <a href="#clients">Contactos</a>
-    <a href="#contact">Logout</a>
+
+    <a href="crearAnuncio.jsp">Crear Anuncio</a>
+    <a href="personas.jsp">Personas</a>
+    <a href="#">Contactos</a>
+
+    <a href="anuncios">Anuncios</a>
+
+    <a href="logOut">Logout</a>
 </div>
+
 

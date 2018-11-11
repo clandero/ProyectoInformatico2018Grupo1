@@ -4,12 +4,11 @@
     Author     : arken
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-9"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <title>File Upload</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
