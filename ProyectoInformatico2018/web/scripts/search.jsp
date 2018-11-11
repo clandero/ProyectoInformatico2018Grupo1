@@ -4,7 +4,7 @@
     Author     : Vicente Varas <vvaras@udec.cl>
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-9"%>
 <!DOCTYPE html>
 <script>
     function buscarPersona(){
@@ -17,8 +17,7 @@
         document.getElementById("searchForm").action="buscarTrabajo";
         document.getElementById("op_busqueda").options.length=0;
         //hay que poner los valores correctos
-        document.getElementById("op_busqueda").options[0]=new Option("Titulo", "area", true, false);
-        document.getElementById("op_busqueda").options[1]=new Option("Año", "depto", true, false);
-        document.getElementById("op_busqueda").options[2]=new Option("Autor", "depto", true, false);
+        document.getElementById("op_busqueda").options[0]=new Option("Titulo", "titulo", true, false);
+        document.getElementById("op_busqueda").options[1]=new Option("Tema", "tema", true, false);
     }
 </script>

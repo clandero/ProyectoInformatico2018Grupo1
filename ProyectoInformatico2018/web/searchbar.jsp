@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<jsp:include page="searchJS.jsp"/>
+<jsp:include page="scripts/search.jsp"/>
 <form action="busqueda" method="post" id="searchForm">
     <h3>
         <input type="text" placeholder="Buscar.." name="Buscar">
