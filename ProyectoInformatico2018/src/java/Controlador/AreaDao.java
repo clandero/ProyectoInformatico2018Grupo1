@@ -30,6 +30,7 @@ public class AreaDao{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+
     public Set getAll() {
         String query = "SELECT * FROM area_de_interes";
         try{
@@ -42,7 +43,9 @@ public class AreaDao{
            // List ls = new ArrayList<AreadeInteres>();
             Set<AreadeInteres> ls = new TreeSet();
             while (rs.next()){
-                ls.add(new AreadeInteres(rs.getString("tema")));
+                String tema = rs.getString("tema");
+                ls.add(new AreadeInteres(tema));
+                System.out.println("\t"+tema);
             }
             return ls;
         } catch(SQLException ex){
@@ -52,16 +55,20 @@ public class AreaDao{
     }
    
     
+
     public Set getAll(Usuario u) {
         String query = "SELECT tema "
                      + "FROM usuario_area "
                      + "WHERE correo=(?)";
+
         try{
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, u.getCorreo());
             ps.execute();
             ResultSet rs = ps.getResultSet();
+
             Set<AreadeInteres> ls = new TreeSet();
+
             while (rs.next()){
                 ls.add(new AreadeInteres(rs.getString("tema")));
             }
