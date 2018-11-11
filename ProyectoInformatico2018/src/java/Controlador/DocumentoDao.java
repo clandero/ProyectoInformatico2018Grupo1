@@ -33,22 +33,40 @@ public class DocumentoDao {
     public void save(String correo, String tema, String titulo, String sv_path){
         try{
             String query = 
-                "INSERT INTO documento(sv_path,correo,titulo) "
-              + "VALUES ((?),(?),(?)) "
+                "INSERT INTO documento(sv_path, correo,titulo, fecha_documento) "
+              + "VALUES ((?),(?),(?), (?)) "
               + "RETURNING n_doc";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, sv_path);
             ps.setString(2, correo);
             ps.setString(3, titulo);
+            ps.setTimestamp(4, new java.sql.Timestamp(System.currentTimeMillis()));
             ps.execute();            
             ResultSet rs = ps.getResultSet();
             int n_doc = 10000;
             if (rs.next()){
                 n_doc = rs.getInt("n_doc");
+            } else{
+                System.out.println("Error adding document");
+                return;
             }
+            // Verificar si el tema dado existe
+            query = "SELECT tema FROM area_de_interes WHERE tema = (?)";
+            ps = conn.prepareStatement(query);
+            ps.setString(1, tema);
+            ps.execute();
+            rs = ps.getResultSet();
+            if (!(rs.next())){
+                // Si no existe, agregarlo
+                query = "INSERT INTO area_de_interes "
+                        + "VALUES ((?))";
+                ps = conn.prepareStatement(query);
+                ps.setString(1, tema);
+                ps.execute();
+            }
+            
             query = 
-                    "INSERT "
-                  + "INTO documento_area(n_doc, tema) "
+                    "INSERT INTO documento_area(n_doc, tema) "
                   + "VALUES ((?),(?))";
             ps = conn.prepareStatement(query);
             ps.setInt(1, n_doc);
