@@ -35,11 +35,11 @@ public class TestingPage {
     @BeforeMethod
     public static void setUp(){
         DesiredCapabilities caps = new DesiredCapabilities();
-        String PATH = "C:\\Users\\Martin\\Desktop\\UdeC\\Martin\\2018 - 2\\Proyecto Informático\\chromedriver.exe";
+        String PATH = "Drivers/chromedriver.exe";
         System.setProperty("webdriver.chrome.driver", PATH);
         
         driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
         driver.navigate().to("http://localhost:8080/build");
         
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -57,9 +57,9 @@ public class TestingPage {
         pagePerfil.assertCorrectPage();
     }
 
-    @Test
+    //@Test
     public void RegisterTest(){
-        driver.navigate().to("http://localhost:8080/build/registro.jsp");
+        driver.navigate().to("http://localhost:8080/build/index");
         PageRegister pageRegister = new PageRegister(driver);
         PagePerfil pagePerfil = new PagePerfil(driver);
         
@@ -73,7 +73,7 @@ public class TestingPage {
         pagePerfil.assertCorrectPage();
     }
     
-    @Test
+    //@Test
     public void SearchSomeoneTest(){
         driver.navigate().to("http://localhost:8080/build/ingreso.jsp");
         PageLogin pageLogin = new PageLogin(driver);
@@ -91,7 +91,7 @@ public class TestingPage {
         pageSearchSomeone.assertPage();
     }
     
-    @Test
+    //@Test
     public void DeleteDocumentsTest(){
         driver.navigate().to("http://localhost:8080/build/ingreso.jsp");
         PageLogin pageLogin = new PageLogin(driver);
