@@ -10,6 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.*;
+import java.sql.*;
+
 
 /**
  *
@@ -46,6 +49,50 @@ public class DepartamentoDao {
         } catch (SQLException ex) {
             System.out.println(ex);
             return -1;
+        }
+    }
+    public String get_nombre(String num){
+        try {
+            int numero=Integer.parseInt(num);
+            String query = "SELECT * "
+                    + "FROM departamento "
+                    + "WHERE n_departamento=(?)";
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setInt(1, numero);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            if (rs.next()) {
+                String res = rs.getString("nombre_departamento");
+                return res;
+            } else {
+                System.out.println("no more rs");
+                return null;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return null;
+        }
+    }
+    
+    public List<String> getDepartamentos(){
+        try {
+            String query = "SELECT nombre_departamento "
+                    + "FROM departamento";
+            PreparedStatement st = conn.prepareStatement(query);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            List<String> listaDepartamentos = new ArrayList<String>();
+            while (rs.next()) {
+                String nombre_depa=rs.getString("nombre_departamento");
+                listaDepartamentos.add(nombre_depa);
+            }
+            System.out.println("AQUI LOS NOMBRES :  "+listaDepartamentos);
+            return listaDepartamentos;
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return null;
         }
     }
  

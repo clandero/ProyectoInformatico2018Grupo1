@@ -3,89 +3,83 @@
     Created on : 26-09-2018, 22:43:42
     Author     : vanes
 --%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="Modelo.AreadeInteres"%>
-<%@page import="Modelo.Usuario"%>
-<%
-    Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-    Usuario usuario_perfil = (Usuario) request.getSession().getAttribute("usuario_perfil");
-    List<AreadeInteres> areas_existentes = (ArrayList<AreadeInteres>) request.getSession().getAttribute("areas_existentes");
-    List<AreadeInteres> areas_usuario = (ArrayList<AreadeInteres>) request.getSession().getAttribute("areas_usuario");
 
-%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <%@include file="searchJS.jsp"%>
-    
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+        <link href="css/perfil.css" rel="stylesheet" type="text/css"/>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <title>Perfil</title>
-        <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
-        <%@include file="sidebar.jsp" %>
-        <div class="main">
-            <%@include file="searchBar.jsp" %>
-            <div class="container">    
+        <jsp:include page="sidebar.jsp"/>
+        <div class="main">    
+            <jsp:include page="searchbar.jsp"/>
+            <div class="container">
                 <div class="jumbotron">
-
-
-
                     <div class="row">
-                        <div class="col-md-3 col-xs-12 col-sm-6 col-lg-3">
-                            <div class="thumbnail text-center photo_view_postion_b" >
-                                <img src="http://dkextras.com/DK/images/profile/dfe29f0b7f57ca5cb982ac9b323ac975.jpg" alt="stack photo" class="img">
+                        <div class="col-6" style="margin-left:none;">
+                            <div class="form-group" style="border-bottom:1px solid black">
+                                    <h2>Mi Perfil</h2>
                             </div>
-                        </div>
-                        <div class="col-md-9 col-xs-12 col-sm-6 col-lg-9">
-                            <div class="" style="border-bottom:1px solid black">
-                                <h2>PERFIL</h2>
-                            </div>
-                            <hr>
-                            <div class="col-md-8">  
-                                <ul class=" details" style="background-color: #ededed ">
-                                    <li><p><span class="" style="width:100px;"></span>Nombre: <%= usuario_perfil.getNombreUsuario()%></p></li>
-                                    <li><p><span class="" style="width:100px;"></span>Tipo: <%= usuario_perfil.getTipoUsuario()%></p></li>
-                                    <li><p><span class="" style="width:100px;"></span>Departamento: <%= usuario_perfil.getDepartamento()%></p></li>
-                                    <li><p><span class="" style="width:100px;"></span>Correo: <%= usuario_perfil.getCorreo()%></p></li>
+                            <div class="col-md-6" style="padding:0;">  
+                                <ul class="details" style="padding:0;background-color: #ededed; margin-left: none; ">
+                                    <li><p><span class="" style="width:100px;"></span>Nombre: <c:out value="${usuario_nombre}"> </c:out> </p></li>
+                                    <li><p><span class="" style="width:100px;"></span><c:out value="${usuario_tipo}"></c:out> en Departamento de <c:out value="${depa_usuario}"> </c:out></p></li>
+                                    
+                                    <li><p><span class="" style="width:100px;"></span>Correo: <c:out value="${usuario_correo}"> </c:out></p></li>
+                                </ul>
+                                <ul class=" details" style="background-color: #ededed; margin-left: none;">
+                                    
+
                                 </ul>
                             </div>
-                            <!-- Iterate and display actual interests of user -->
-                            <div class="col-md-4">  
-                                <div class="col-sm-5 col-xs-6 tital " >Intereses : </div>
-                                <c:forEach items="${areas_usuario}" var="area">
-                                    <div class="col-sm-7 col-xs-6 ">
-                                        <c:out value="${area.getTema()}"> </c:out>                
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <div class="bot-border"></div>
-                                        <div class="col-sm-5 col-xs-6 tital " ></div>                  
-                                </c:forEach>
+                        </div>
+                        <div class="col-6" style="margin-left:none;">
+                            <p>Áreas de interés</p>
+                            <div class="col-md-6" style="padding:0;">
+                                <nav style="height:200px; width:100%; overflow:hidden; overflow-y:scroll;">
+                                    <ul>
+                                        <c:forEach items="${areas_usuario}" var="area">
+                                            <li><c:out value="${area.getTema()}"> </c:out></li>
+                                        </c:forEach>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="jumbotron">
                     <div class="row">
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <div class="form-group" style="border-bottom:1px solid black">
-                                    <h2>TRABAJOS/PROYECTOS</h2>
+                                    <h2>Mis trabajos y publicaciones</h2>
                                 </div>
+                                <p>Nombre:</p>
+                                <c:forEach var="i" items="${documentos_usuario}">
+                                    <ul>
+                                        <li><c:out value="${i}"></c:out></li>
+                                    </ul>
+                                </c:forEach>        
+                                <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
+                                    <button id="delButton" class="float-left submit-button" >Eliminar Documentos</button>
+                                    <script src="scripts/eliminar_documentos.js" type="text/javascript"></script>
+                                </c:if>
                             </div>
                         </div>
                     </div>
-
-
+                </div>
+                <div class="jumbotron">
                     <div class="row">
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <div class="form-group" style="border-bottom:1px solid black">
-                                    <h2>EXPERIENCIA</h2>
+                                    <h2>Mis anuncios</h2>
                                 </div>
 
                                 <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">

@@ -7,16 +7,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <script>
-    function changeSearch(){
-        if(document.getElementById("sType").value=="Buscar Documento"){
-            document.getElementById("sType").value="Buscar Persona";
-            document.getElementById("searchForm").action="buscarTrabajo";
-        }
-        else{
-            document.getElementById("sType").value="Buscar Documento";
-            document.getElementById("searchForm").action="busqueda";
-        }
-    }
     function buscarPersona(){
         document.getElementById("searchForm").action="busqueda";
         document.getElementById("op_busqueda").options.length=0;
@@ -30,8 +20,5 @@
         document.getElementById("op_busqueda").options[0]=new Option("Titulo", "area", true, false);
         document.getElementById("op_busqueda").options[1]=new Option("Año", "depto", true, false);
         document.getElementById("op_busqueda").options[2]=new Option("Autor", "depto", true, false);
-    }
-    function wtf() {
-        window.alert();
     }
 </script>

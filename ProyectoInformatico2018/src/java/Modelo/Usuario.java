@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Usuario {
@@ -15,6 +16,7 @@ public class Usuario {
     private List<AreadeInteres> intereses;
 
     public Usuario() {
+        this.intereses = new ArrayList<AreadeInteres>();
     }
 
     public Usuario(String name, String c, String p, String departamento, int d, String t) {
@@ -24,6 +26,7 @@ public class Usuario {
         this.departamento = departamento;
         this.n_departamento = d;
         this.tipo_usuario = t;
+        this.intereses = new ArrayList<AreadeInteres>();
     }
 
     public Usuario(String name, String c, String p, int d, String t) {
@@ -32,6 +35,7 @@ public class Usuario {
         this.password = p;
         this.n_departamento = d;
         this.tipo_usuario = t;
+        this.intereses = new ArrayList<AreadeInteres>();
     }
 
     public Usuario(String c, String name, String intereses) {
@@ -43,8 +47,24 @@ public class Usuario {
         for (String inter : intereses_list) {
             this.intereses.add(new AreadeInteres(inter));
         }
+        Collections.sort(this.intereses);
+    }
+    public Usuario(String c, String name, String tipo_usuario,int depa) {
+        this.correo = c;
+        this.nombre_usuario = name;
+        this.tipo_usuario = tipo_usuario;
+        this.n_departamento = depa;
     }
 
+    public List<AreadeInteres> getIntereses() {
+        return this.intereses;
+    }
+    
+    public void addInteres(String x){
+        this.intereses.add(new AreadeInteres(x));
+        Collections.sort(this.intereses);
+    }
+    
     public String getCorreo() {
         return this.correo;
     }
@@ -84,4 +104,10 @@ public class Usuario {
     public void setPassword(String p) {
         this.password = p;
     }
+
+
+    public void setIntereses(List<AreadeInteres> intereses) {
+        this.intereses = intereses;
+    }
+    
 }
