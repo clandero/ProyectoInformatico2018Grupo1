@@ -18,9 +18,11 @@ public class AreadeInteres implements Comparable<AreadeInteres>{
     public String getTema() {
         return this.tema;
     }
-    
+
     @Override
-    public int compareTo(AreadeInteres t){
+    public int compareTo(AreadeInteres t) {
         return this.getTema().compareTo(t.getTema());
     }
+
 }
+

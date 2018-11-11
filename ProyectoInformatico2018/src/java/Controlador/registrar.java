@@ -12,10 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import Modelo.Usuario;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 import java.util.Vector;
+
+import java.io.PrintWriter;
+
 import javax.servlet.annotation.WebServlet;
 import org.apache.commons.codec.digest.DigestUtils;
 import java.util.regex.Matcher;
@@ -36,6 +40,10 @@ public class registrar extends HttpServlet {
     private static UsuarioDao userDao = new UsuarioDao();
     private static AreaDao areaDao = new AreaDao();
 
+    private static DepartamentoDao depaDao = new DepartamentoDao();
+    private static DocumentoDao documentoDao = new DocumentoDao();
+
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -49,12 +57,14 @@ public class registrar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset-UTF-8");
+        PrintWriter out = response.getWriter();
+        response.setContentType("ISO-8859-9");
         String nombre = request.getParameter("txtNombre");
         String correo = request.getParameter("txtCorreo");
         String pass = request.getParameter("txtPassword");
         String passencript = DigestUtils.md5Hex(pass);
         String depa = request.getParameter("radio");
+        out.println(depa);
         String tipo = request.getParameter("search_categories");
         //Buscar en BD departamento por nombre departamento para obtener numero
         Usuario u1 = new Usuario(nombre, correo, passencript, depa,
@@ -88,13 +98,14 @@ public class registrar extends HttpServlet {
             e.printStackTrace();
         }
         request.getSession().setAttribute("depa_usuario", depa);
-        request.getSession().setAttribute("usuario_perfil", u1);
         request.getSession().setAttribute("usuario", u1);
+        request.getSession().setAttribute("usuario_perfil", u1);     
         request.getSession().setAttribute("usuario_nombre", u1.getNombreUsuario());
         request.getSession().setAttribute("usuario_tipo", u1.getTipoUsuario());
         request.getSession().setAttribute("usuario_correo", u1.getCorreo());
         request.getSession().setAttribute("areas_existentes", areaDao.getAll());
         request.getSession().setAttribute("areas_usuario", areaDao.getAll(u1));
+
         try{
         Vector<Usuario> v= new Vector<Usuario>();
         v = userDao.getPersonasComun((TreeSet)areaDao.getAll(u1),u1);
@@ -108,6 +119,9 @@ public class registrar extends HttpServlet {
         }catch (Exception e) {
             e.printStackTrace();
         }
+
+        request.getSession().setAttribute("documentos_usuario", documentoDao.search(u1.getCorreo()));
+
         request.getRequestDispatcher("perfil.jsp").forward(request, response);
     }
 

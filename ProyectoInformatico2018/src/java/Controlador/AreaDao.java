@@ -7,7 +7,6 @@ package Controlador;
 
 import Modelo.*;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.*;
 import java.sql.*;
@@ -30,7 +29,7 @@ public class AreaDao{
     public Optional get(long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     public Set getAll() {
         String query = "SELECT * FROM area_de_interes";
         try{

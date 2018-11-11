@@ -37,6 +37,8 @@ public class ingresar extends HttpServlet {
     private static UsuarioDao userDao = new UsuarioDao();
     private static AreaDao areaDao = new AreaDao();
     private static DepartamentoDao depaDao = new DepartamentoDao();
+    private static DocumentoDao documentoDao = new DocumentoDao();
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -47,7 +49,7 @@ public class ingresar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset-UTF-8");
+        response.setContentType("text/html;charset-ISO-8859-9");
         System.err.println("aaaaaaaaaaaaaaaaaaaa");
 
         String correo = request.getParameter("txtCorreo");
@@ -74,6 +76,7 @@ public class ingresar extends HttpServlet {
         request.getSession().setAttribute("usuario_correo", u1.getCorreo());
         request.getSession().setAttribute("areas_existentes", areaDao.getAll());
         request.getSession().setAttribute("areas_usuario", areaDao.getAll(u1));
+
         request.getSession().setAttribute("depad",depaDao);
         System.out.println(areaDao.getAll(u1)+"INTERESES ESTA VACIO--------------");
         try{
@@ -90,6 +93,9 @@ public class ingresar extends HttpServlet {
         }catch (Exception e) {
             e.printStackTrace();
         }
+
+        request.getSession().setAttribute("documentos_usuario", documentoDao.search(u1.getCorreo()));
+
         request.getRequestDispatcher("perfil.jsp").forward(request, response);     
 
     }
