@@ -5,9 +5,11 @@
  */
 package Controlador;
 
+import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.*;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +34,9 @@ public class FileUploadServlet extends HttpServlet {
     
     private static DocumentoDao docDao = new DocumentoDao();
 
+    private static AreaDao areaDao = new AreaDao();
+
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,70 +48,22 @@ public class FileUploadServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request,
         HttpServletResponse response)
-        throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
+        throws ServletException, IOException {   
 
-    // Create path components to save the file
-    ServletContext sc = getServletContext();
-    String contextpath = sc.getRealPath(File.separator);
-    final String mail = request.getParameter("correo");
-    final String tema = request.getParameter("tema");
-    final String path = contextpath+"/docs/";
-    final Part filePart = request.getPart("file");
-    final String fileName = getFileName(filePart);    
-
-    OutputStream out = null;
-    InputStream filecontent = null;
-    final PrintWriter writer = response.getWriter();
-
-    try {
-        out = new FileOutputStream(new File(path + File.separator
-                + fileName));
-        filecontent = filePart.getInputStream();
-
-        int read = 0;
-        final byte[] bytes = new byte[1024];
-
-        while ((read = filecontent.read(bytes)) != -1) {
-            out.write(bytes, 0, read);
-        }
-        writer.println("New file " + fileName + " created at " + path);
-        LOGGER.log(Level.INFO, "File{0}being uploaded to {1}", 
-                new Object[]{fileName, path});
-        docDao.save(mail, tema, fileName, "/docs/"+fileName);
-    } catch (FileNotFoundException fne) {
-        writer.println("You either did not specify a file to upload or are "
-                + "trying to upload a file to a protected or nonexistent "
-                + "location.");
-        writer.println("<br/> ERROR: " + fne.getMessage());
-
-        LOGGER.log(Level.SEVERE, "Problems during file upload. Error: {0}", 
-                new Object[]{fne.getMessage()});
-    } finally {
-        if (out != null) {
-            out.close();
-        }
-        if (filecontent != null) {
-            filecontent.close();
-        }
-        if (writer != null) {
-            writer.close();
-        }
-    }
     
-}
-
-private String getFileName(final Part part) {
-    final String partHeader = part.getHeader("content-disposition");
-    LOGGER.log(Level.INFO, "Part Header = {0}", partHeader);
-    for (String content : part.getHeader("content-disposition").split(";")) {
-        if (content.trim().startsWith("filename")) {
-            return content.substring(
-                    content.indexOf('=') + 1).trim().replace("\"", "");
-        }
     }
-    return null;
-}
+
+    private String getFileName(final Part part) {
+        final String partHeader = part.getHeader("content-disposition");
+        LOGGER.log(Level.INFO, "Part Header = {0}", partHeader);
+        for (String content : part.getHeader("content-disposition").split(";")) {
+            if (content.trim().startsWith("filename")) {
+                return content.substring(
+                        content.indexOf('=') + 1).trim().replace("\"", "");
+            }
+        }
+        return null;
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -120,7 +77,9 @@ private String getFileName(final Part part) {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        List allTemas = areaDao.getAll();
+        request.getSession().setAttribute("temas", allTemas);
+        request.getRequestDispatcher("upload.jsp").forward(request, response);        
     }
 
     /**
@@ -134,7 +93,80 @@ private String getFileName(final Part part) {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+
+        // Create path components to save the file
+        ServletContext sc = getServletContext();
+        String contextpath = sc.getRealPath(File.separator);
+        //final String mail = request.getParameter("correo");
+        final String mail = ((Usuario)request.getSession().
+                        getAttribute("usuario_perfil")).getCorreo();    
+        String tema = request.getParameter("tema");
+        final String checkotro = request.getParameter("checkotro");
+        if (checkotro != null){
+            tema = request.getParameter("otro");
+        }        
+        final String path = contextpath+"docs";
+        final Part filePart = request.getPart("file");
+        final String fileName = getFileName(filePart);    
+
+        OutputStream out = null;
+        InputStream filecontent = null;
+        final PrintWriter writer = response.getWriter();
+        
+        if (tema == null || tema.equals("")){
+            request.getSession().setAttribute("success", false);
+            request.getSession().setAttribute("message", "Debe seleccionar un tema");
+            request.getRequestDispatcher("upload.jsp").forward(request, response);     
+            return;
+        }
+        if (fileName.equals("") || fileName.equals("")){
+            request.getSession().setAttribute("success", false);
+            request.getSession().setAttribute("message", "Debe seleccionar un archivo");
+            request.getRequestDispatcher("upload.jsp").forward(request, response);    
+            return;
+        }
+
+        try {
+            out = new FileOutputStream(new File(path + File.separator
+                    + fileName));
+            filecontent = filePart.getInputStream();
+
+            int read = 0;
+            final byte[] bytes = new byte[1024];
+
+            while ((read = filecontent.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+            LOGGER.log(Level.INFO, "File{0}being uploaded to {1}", 
+                    new Object[]{fileName, path});
+            docDao.save(mail, tema, fileName, "/docs/"+fileName);
+        } catch (FileNotFoundException fne) {
+            request.getSession().setAttribute("success", false);            
+            String message = "You either did not specify a file to upload or are "
+                    + "trying to upload a file to a protected or nonexistent "
+                    + "location.";
+            request.getSession().setAttribute("message", message);
+            request.getRequestDispatcher("upload.jsp").forward(request, response);        
+            
+
+            LOGGER.log(Level.SEVERE, "Problems during file upload. Error: {0}", 
+                    new Object[]{fne.getMessage()});
+        } finally {
+            
+            if (out != null) {
+                out.close();
+            }
+            if (filecontent != null) {
+                filecontent.close();
+            }
+            request.getSession().setAttribute("success", true);            
+            request.getRequestDispatcher("upload.jsp").forward(request, response);        
+            if (writer != null) {
+                writer.close();
+            }            
+        }
+        
     }
 
     /**

@@ -9,8 +9,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import java.io.File;
+
+import java.nio.file.NoSuchFileException;
+
+
 import Modelo.*;
 import java.util.List;
+
 
 /**
  *
@@ -19,6 +25,9 @@ import java.util.List;
 public class DocumentoDao {
     
     private static Connection conn;
+
+    // FALTA SABER EL PATH DEL SERVIDOR, PARA BORRAR LOS ARCHIVOS EN /DOCS/
+    private static String contextPath = null;
     
     public DocumentoDao(){
         if (conn == null){
@@ -30,22 +39,45 @@ public class DocumentoDao {
     public void save(String correo, String tema, String titulo, String sv_path){
         try{
             String query = 
-                "INSERT INTO documento(sv_path,correo,titulo) "
-              + "VALUES ((?),(?),(?)) "
+
+                "INSERT INTO documento(sv_path, correo,titulo, fecha_documento) "
+              + "VALUES ((?),(?),(?), (?)) "
+
               + "RETURNING n_doc";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, sv_path);
             ps.setString(2, correo);
             ps.setString(3, titulo);
+
+            ps.setTimestamp(4, new java.sql.Timestamp(System.currentTimeMillis()));
+
             ps.execute();            
             ResultSet rs = ps.getResultSet();
             int n_doc = 10000;
             if (rs.next()){
                 n_doc = rs.getInt("n_doc");
+
+            } else{
+                System.out.println("Error adding document");
+                return;
             }
+            // Verificar si el tema dado existe
+            query = "SELECT tema FROM area_de_interes WHERE tema = (?)";
+            ps = conn.prepareStatement(query);
+            ps.setString(1, tema);
+            ps.execute();
+            rs = ps.getResultSet();
+            if (!(rs.next())){
+                // Si no existe, agregarlo
+                query = "INSERT INTO area_de_interes "
+                        + "VALUES ((?))";
+                ps = conn.prepareStatement(query);
+                ps.setString(1, tema);
+                ps.execute();
+            }
+            
             query = 
-                    "INSERT "
-                  + "INTO documento_area(n_doc, tema) "
+                    "INSERT INTO documento_area(n_doc, tema) "
                   + "VALUES ((?),(?))";
             ps = conn.prepareStatement(query);
             ps.setInt(1, n_doc);
@@ -64,24 +96,28 @@ public class DocumentoDao {
         }
     }
     
-    public List search(String correo){
-        String query = "SELECT d.titulo " 
-                     + "FROM documento as d " 
-                     + "WHERE d.correo = (?)";
-        try{    
+    public ArrayList<String> search(String correo){
+        try{
+            String query = 
+                "SELECT d.titulo " +
+                "FROM documento as d " +
+                "WHERE d.correo = (?)";
+            
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, correo);
-            ps.execute();
-            ResultSet rs = ps.getResultSet();
-            List ls = new ArrayList<Documento>();
-            while(rs.next()){                
-                ls.add(rs.getString("titulo"));
+            //ps.setString(1, topic);
+            //ps.setString(2, keyword);
+            ResultSet result = ps.executeQuery();
+            ArrayList<String> datos = new ArrayList<String>();
+            while(result.next()){                
+                datos.add(result.getString("titulo"));
             }
-            return ls;
+            return datos;
         } catch(SQLException ex){
             System.out.println(ex);
-            return null;
         }
+        return null;
+
     }
     
     public Hashtable<String, ArrayList<String>> search(String keyword, String tema){
@@ -111,5 +147,49 @@ public class DocumentoDao {
         }
         return null;
     }
+
+    public static void setContext(String cPath){
+        if (contextPath == null){
+            contextPath = cPath;
+        }
+        
+    }
+    
+    public void delete(int n_doc, String correo){
+        String query = "SELECT * "
+                     + "FROM documento "
+                     + "WHERE n_doc = (?) AND "
+                     + "correo = (?) ";
+        try{
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, n_doc);
+            ps.setString(2, correo);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            if (!(rs.next())){
+                System.out.println("File does not exist, "
+                        + "or is not owned by "+ correo);
+                return;
+            }
+            query = "DELETE FROM documento_area "
+                     + "WHERE n_doc = (?) ";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, n_doc);
+            ps.execute();
+            query = "DELETE FROM documento "
+                    + "WHERE n_doc = (?) ";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, n_doc);
+            ps.execute();
+            File to_delete = new File(contextPath + File.separator +
+                                     rs.getString("sv_path"));
+            to_delete.delete();
+            
+        } catch(SQLException ex){
+            System.out.println(ex);
+        }      
+        
+    }
     
 }
+

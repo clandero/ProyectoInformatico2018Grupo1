@@ -5,29 +5,22 @@
  */
 package Controlador;
 
-import Modelo.*;
-
+import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.Integer.parseInt;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.Hashtable;
-
-import java.util.List;
-
-
 /**
  *
  * @author berko
  */
-@WebServlet(name = "ProfileFileSearchServlet", urlPatterns = {"/perfilTrabajos"})
-public class ProfileFileSearchServlet extends HttpServlet {
+@WebServlet(name = "FileDeleteServlet", urlPatterns = {"/deleteFile"})
+public class FileDeleteServlet extends HttpServlet {
     
     private DocumentoDao docDao = new DocumentoDao();
 
@@ -42,16 +35,11 @@ public class ProfileFileSearchServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            Connection conn = DatabaseConnect.getConn();
-
-            String correo = ((Usuario)request.getSession().
+        String fileID = request.getParameter("fileID");
+        String correo = ((Usuario)request.getSession().
                     getAttribute("usuario_perfil")).getCorreo();
-
-            ArrayList<String> files = docDao.search(correo);
-
-            request.getSession().setAttribute("resultados", files);
-            request.getRequestDispatcher("perfil.jsp").forward(request, response);            
-        }
+        docDao.delete(parseInt(fileID), correo);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -79,7 +67,7 @@ public class ProfileFileSearchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        processRequest(request, response);        
     }
 
     /**
