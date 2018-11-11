@@ -10,7 +10,13 @@
 <div class="sidenav">
     <a href="perfil.jsp">Perfil</a>
     <a href="upload.jsp">Subir Doc.</a>
+
+    <a href="crearAnuncio.jsp">Crear Anuncio</a>
+    <a href="personas.jsp">Personas</a>
+    <a href="#">Contactos</a>
+
     <a href="anuncios">Anuncios</a>
+
     <a href="logOut">Logout</a>
 </div>
 

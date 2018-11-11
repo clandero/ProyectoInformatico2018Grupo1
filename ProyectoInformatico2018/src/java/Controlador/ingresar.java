@@ -5,13 +5,20 @@
  */
 package Controlador;
 
+import Modelo.AreadeInteres;
 import Modelo.Usuario;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.Vector;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**
@@ -60,7 +67,7 @@ public class ingresar extends HttpServlet {
 
         }
         String depa = Integer.toString(u1.getDepartamento());
-        System.out.println(depa+"AQUIII EL DEPARTAMENTO");
+        System.out.println("AQUIII EL DEPARTAMENTO");
         request.getSession().setAttribute("depa_usuario", depaDao.get_nombre(depa));
         request.getSession().setAttribute("usuario", u1);
         request.getSession().setAttribute("usuario_perfil", u1);     
@@ -69,7 +76,26 @@ public class ingresar extends HttpServlet {
         request.getSession().setAttribute("usuario_correo", u1.getCorreo());
         request.getSession().setAttribute("areas_existentes", areaDao.getAll());
         request.getSession().setAttribute("areas_usuario", areaDao.getAll(u1));
+
+        request.getSession().setAttribute("depad",depaDao);
+        System.out.println(areaDao.getAll(u1)+"INTERESES ESTA VACIO--------------");
+        try{
+        Vector<Usuario> v= new Vector<Usuario>();
+        v = userDao.getPersonasComun((TreeSet)areaDao.getAll(u1),u1);
+        for(int i=0;i<v.size();i++){
+            List<AreadeInteres> l = new ArrayList<AreadeInteres>();
+            l.addAll(areaDao.getAll(v.get(i)));
+            v.get(i).setIntereses(l);
+            
+        }
+        request.getSession().setAttribute("personasInteresComun",v);
+       
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
         request.getSession().setAttribute("documentos_usuario", documentoDao.search(u1.getCorreo()));
+
         request.getRequestDispatcher("perfil.jsp").forward(request, response);     
 
     }

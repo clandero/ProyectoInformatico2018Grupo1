@@ -16,8 +16,10 @@
     </head>
     <body>
         <div class="sidenav">
+
             <a href="ingreso.jsp">Ingresar</a>
             <a href="index">Registrarse</a>
+
         </div>
         <div class="main">
             <div class="container">

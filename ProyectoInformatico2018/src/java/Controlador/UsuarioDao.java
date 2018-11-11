@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Modelo.AreadeInteres;
 import Modelo.Usuario;
 import java.util.*;
 import java.sql.*;
@@ -141,6 +142,67 @@ public class UsuarioDao{
             System.out.println(e);
             return null;
         }
+    }
+    public Vector<Usuario> getPersonasComun(TreeSet<AreadeInteres> x,Usuario u){
+        Vector<Usuario> susuario = new Vector<Usuario>();
+        Set<String> correos = new TreeSet();
+        /*ArrayList<AreadeInteres> y = new ArrayList<AreadeInteres>();
+        y.add(new AreadeInteres("Estructuras"));*/
+        System.out.println("INTERESES ESTA VACIO EN AREADAO--------------"+x);
+        try{
+            for(AreadeInteres i : /*y*/x){
+                //System.out.println("CONSULTA"+i.getTema()+" "+x.size());
+                String query = "SELECT us.nombre_usuario, us.correo, us.tipo_usuario, d.n_departamento, d.nombre_departamento, x.tema FROM usuario as us, usuario_area as x, departamento as d WHERE x.tema = (?) AND us.correo=x.correo AND d.n_departamento=us.n_departamento";
+                //System.out.println(query);
+                PreparedStatement ps = conn.prepareStatement(query);
+                ps.setString(1, i.getTema());
+                ps.execute();
+                ResultSet rs = ps.getResultSet();
+                //System.out.println("INTERESES ESTA VACIO EN AREADAO--------------");
+                while (rs.next()){
+                    //System.out.println(rs.getString("correo")+"INTERESES ESTA VACIO--------------"+i.getTema()+" "+ rs.getString("nombre_usuario")+" "+rs.getString("nombre_departamento")+" "+rs.getString("tipo_usuario")+" "+ rs.getInt("n_departamento")+" "+ rs.getString("tema"));
+                    if(correos.isEmpty()&&(!u.getCorreo().equals(rs.getString("correo")))){
+                        //System.out.println(rs.getString("correo").getClass().getName()+"INTERESES ESTA VACIO2--------------"+i.getTema()+" "+ rs.getString("nombre_usuario")+" "+rs.getString("nombre_departamento")+" "+rs.getString("tipo_usuario")+" "+ rs.getInt("n_departamento")+" "+ rs.getString("tema"));
+                        correos.add(rs.getString("correo"));
+                        //susuario.add(new Usuario());
+                        susuario.add(new Usuario(rs.getString("correo"), rs.getString("nombre_usuario"),rs.getString("tipo_usuario"),rs.getInt("n_departamento")));
+                    }
+                    else if(correos.size()>0&&(!u.getCorreo().equals(rs.getString("correo")))){
+                        if(correos.contains(rs.getString("correo"))==false){
+                            correos.add(rs.getString("correo"));
+                            //susuario.add(new Usuario());
+                            susuario.add(new Usuario(rs.getString("correo"), rs.getString("nombre_usuario"),rs.getString("tipo_usuario"),rs.getInt("n_departamento")));
+                        }
+                    }
+                    
+                }
+            }
+            return susuario;
+        } catch (SQLException ex){   
+            System.out.println(ex);
+            System.out.println(ex.getStackTrace()[0].getLineNumber());
+            System.out.println(ex.getCause());
+        }
+        return susuario;
+    }
+    public Usuario getUser(String correo){
+        System.out.println("GETUSER EN USERDAO--------------");
+        try{
+            String query = "SELECT * FROM usuario as us WHERE us.correo = (?)";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, correo);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            if(rs.next()){  
+                Usuario user = new Usuario(rs.getString("correo"), rs.getString("nombre_usuario"),rs.getString("tipo_usuario"), rs.getInt("n_departamento"));                         
+                return user;
+            }  
+        } catch (SQLException ex){   
+            System.out.println(ex);
+            System.out.println(ex.getStackTrace()[0].getLineNumber());
+            System.out.println(ex.getCause());
+        }
+        return null;
     }
     
     public void upFile(String correo, String tema, String titulo, String sv_path){

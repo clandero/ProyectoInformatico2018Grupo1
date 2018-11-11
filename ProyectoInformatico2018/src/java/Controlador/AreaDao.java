@@ -50,6 +50,7 @@ public class AreaDao{
             return null;
         }
     }
+   
     
     public Set getAll(Usuario u) {
         String query = "SELECT tema "

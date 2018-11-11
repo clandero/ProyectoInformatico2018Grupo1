@@ -49,6 +49,12 @@ public class Usuario {
         }
         Collections.sort(this.intereses);
     }
+    public Usuario(String c, String name, String tipo_usuario,int depa) {
+        this.correo = c;
+        this.nombre_usuario = name;
+        this.tipo_usuario = tipo_usuario;
+        this.n_departamento = depa;
+    }
 
     public List<AreadeInteres> getIntereses() {
         return this.intereses;
@@ -98,4 +104,13 @@ public class Usuario {
     public void setPassword(String p) {
         this.password = p;
     }
+
+    public List<AreadeInteres> getIntereses() {
+        return intereses;
+    }
+
+    public void setIntereses(List<AreadeInteres> intereses) {
+        this.intereses = intereses;
+    }
+    
 }
