@@ -19,6 +19,7 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registro</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
         <style>
             body {
                 font-family: "Lato", sans-serif;

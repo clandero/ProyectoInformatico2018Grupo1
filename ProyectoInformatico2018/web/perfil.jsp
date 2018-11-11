@@ -21,86 +21,17 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <%@include file="searchJS.jsp"%>
+    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Perfil</title>
-        <style>
-            body {
-                font-family: "Lato", sans-serif;
-            }
-
-            .sidenav {
-                height: 100%;
-                width: 160px;
-                position: fixed;
-                z-index: 1;
-                top: 0;
-                left: 0;
-                background-color: #111;
-                overflow-x: hidden;
-                padding-top: 20px;
-            }
-
-            .sidenav a {
-                padding: 6px 8px 6px 16px;
-                text-decoration: none;
-                font-size: 25px;
-                color: #818181;
-                display: block;
-            }
-
-            .sidenav a:hover {
-                color: #f1f1f1;
-            }
-
-            .main {
-                margin-left: 160px; /* Same as the width of the sidenav */
-                font-size: 10px; /* Increased text to enable scrolling */
-                padding: 0px 10px;
-            }
-
-            @media screen and (max-height: 450px) {
-                .sidenav {padding-top: 15px;}
-                .sidenav a {font-size: 18px;}
-            }
-
-            /* Change the link color on hover */
-            li a:hover {
-                background-color: #111;
-                color: white;
-            }
-            .details li {
-                list-style: none;
-                background-color: #ededed;
-            }
-            li {
-                margin-bottom:10px;
-            }
-            .tital{
-                text-align:right;
-            }
-            .contant_i{
-                color: #631e1e;
-                border-bottom: 1px solid #cea7a7;
-            }
-
-
-        </style>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
         <%@include file="sidebar.jsp" %>
         <div class="main">
-            <form action="busqueda" method="post" >
-                <h3>Busqueda de personas:
-                    <input type="text" placeholder="Search.." name="Buscar">
-
-                    <select name="opcion">
-                        <option value="area">Área de Interés</option>
-                        <option value="depto">Departamento</option>
-                    </select>
-                    <input type="submit" name="Enviar"/>
-                </h3>
-            </form>
+            <%@include file="searchBar.jsp" %>
             <div class="container">    
                 <div class="jumbotron">
 
