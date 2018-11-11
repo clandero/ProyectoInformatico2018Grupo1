@@ -24,6 +24,7 @@ public class PagePerfil {
     private By searchTypeDrop;
     private By submitButton;
     private By deleteButton;
+    private By editButton;
     
     public PagePerfil(WebDriver driver) {
         this.driver = driver;
@@ -32,6 +33,7 @@ public class PagePerfil {
         searchTypeDrop = By.name("opcion");
         submitButton = By.name("Enviar");
         deleteButton = By.id("delButton");
+        editButton = By.id("editButton");
     }
     
     public void SearchSomeone(String searchText){
@@ -53,8 +55,11 @@ public class PagePerfil {
     public void DeleteDocuments(){
         WebElement delete_button = driver.findElement(deleteButton);
         delete_button.click();
-        
-        
+    }
+    
+    public void EditPerfil(){
+        WebElement edit_button = driver.findElement(editButton);
+        edit_button.click();
     }
     
     public void assertCorrectPage() {

@@ -77,7 +77,7 @@ public class FileUploadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List allTemas = areaDao.getAll();
+        List allTemas = (List) areaDao.getAll();
         request.getSession().setAttribute("temas", allTemas);
         request.getRequestDispatcher("upload.jsp").forward(request, response);        
     }

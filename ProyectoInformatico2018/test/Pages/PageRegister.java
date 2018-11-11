@@ -31,7 +31,7 @@ public class PageRegister {
         userField = By.name("txtCorreo");
         passField = By.name("txtPassword");
         userTypeDrop = By.name("search_categories");
-        departmentButton = By.xpath("//input[@name='radio' and @value='Ingeniería Informática y Ciencias de la Computación']");
+        departmentButton = By.xpath("//input[@name='radio' and @value='Ingeniería Química']");
         submitButton = By.xpath("//input[@value ='Enviar']");
     }
     

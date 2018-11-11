@@ -20,7 +20,7 @@ public class PageSearchSomeone {
     public PageSearchSomeone(WebDriver driver){
         this.driver = driver;
         //titleText = By.xpath("/html/body/div[2]/table/thead/tr/th[1]");
-        titleText = By.xpath("/html/body/div[2]/table/tbody/tr/td[2]");
+        titleText = By.xpath("/html/body/div[2]/div/div/div/div/table/tbody/tr[1]/td[2]");
     }
     
     public void assertPage(){

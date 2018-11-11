@@ -8,6 +8,7 @@ package Controlador;
 
 import Helper.Helpers;
 import Pages.PageDeleteDocuments;
+import Pages.PageEditPerfil;
 import Pages.PageLogin;
 import Pages.PagePerfil;
 import Pages.PageRegister;
@@ -57,7 +58,7 @@ public class TestingPage {
         pagePerfil.assertCorrectPage();
     }
 
-    //@Test
+    @Test
     public void RegisterTest(){
         driver.navigate().to("http://localhost:8080/build/index");
         PageRegister pageRegister = new PageRegister(driver);
@@ -73,7 +74,7 @@ public class TestingPage {
         pagePerfil.assertCorrectPage();
     }
     
-    //@Test
+    @Test
     public void SearchSomeoneTest(){
         driver.navigate().to("http://localhost:8080/build/ingreso.jsp");
         PageLogin pageLogin = new PageLogin(driver);
@@ -91,7 +92,7 @@ public class TestingPage {
         pageSearchSomeone.assertPage();
     }
     
-    //@Test
+    @Test
     public void DeleteDocumentsTest(){
         driver.navigate().to("http://localhost:8080/build/ingreso.jsp");
         PageLogin pageLogin = new PageLogin(driver);
@@ -99,15 +100,32 @@ public class TestingPage {
         PageDeleteDocuments pageDeleteDocuments = new PageDeleteDocuments(driver);
         
         pageLogin.login("mmmmm@udec.cl","mmmmm");
-        Helpers helper = new Helpers();
-        helper.sleepSeconds(3);
+        //Helpers helper = new Helpers();
+        //helper.sleepSeconds(3);
         
         pagePerfil.DeleteDocuments();
         pageDeleteDocuments.deleteDocument();
         
         pagePerfil.assertCorrectPage();
-        helper.sleepSeconds(3);
+        //helper.sleepSeconds(3);
+    }
+    
+    @Test
+    public void EditPerfilTest(){
+        driver.navigate().to("http://localhost:8080/build/ingreso.jsp");
+        PageLogin pageLogin = new PageLogin(driver);
+        PagePerfil pagePerfil = new PagePerfil(driver);
+        PageEditPerfil pageEditPerfil = new PageEditPerfil(driver);
         
+        pageLogin.login("mmmmm@udec.cl","mmmmm");
+        
+        pagePerfil.EditPerfil();
+        pageEditPerfil.changeArea();
+        Helpers helper = new Helpers();
+        helper.sleepSeconds(3);
+        pagePerfil.assertCorrectPage();
+        
+        helper.sleepSeconds(3);
     }
     
     @AfterMethod
