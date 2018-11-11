@@ -92,7 +92,7 @@ public class TestingPage {
     
     @Test
     public void DeleteDocumentsTest(){
-        
+        System.out.println("Hola");
     }
     
     @AfterMethod
