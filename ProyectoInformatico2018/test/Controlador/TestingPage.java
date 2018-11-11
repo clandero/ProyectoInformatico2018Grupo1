@@ -7,6 +7,7 @@ package Controlador;
 
 
 import Helper.Helpers;
+import Pages.PageDeleteDocuments;
 import Pages.PageLogin;
 import Pages.PagePerfil;
 import Pages.PageRegister;
@@ -44,8 +45,8 @@ public class TestingPage {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
     
-    //@Test
-    public void LoginTest(){
+    @Test
+    public void LoginCorrectTest(){
         driver.navigate().to("http://localhost:8080/build/ingreso.jsp");
         PageLogin pageLogin = new PageLogin(driver);
         PagePerfil pagePerfil = new PagePerfil(driver);
@@ -53,10 +54,10 @@ public class TestingPage {
         pageLogin.login("mmmmm@udec.cl","mmmmm");
         //Helpers helper = new Helpers();
         //helper.sleepSeconds(3);
-        pagePerfil.assertPage();
+        pagePerfil.assertCorrectPage();
     }
 
-    //@Test
+    @Test
     public void RegisterTest(){
         driver.navigate().to("http://localhost:8080/build/registro.jsp");
         PageRegister pageRegister = new PageRegister(driver);
@@ -69,7 +70,7 @@ public class TestingPage {
         //Helpers helper = new Helpers();
         //helper.sleepSeconds(3);
         
-        pagePerfil.assertPage();
+        pagePerfil.assertCorrectPage();
     }
     
     @Test
@@ -92,7 +93,21 @@ public class TestingPage {
     
     @Test
     public void DeleteDocumentsTest(){
-        System.out.println("Hola");
+        driver.navigate().to("http://localhost:8080/build/ingreso.jsp");
+        PageLogin pageLogin = new PageLogin(driver);
+        PagePerfil pagePerfil = new PagePerfil(driver);
+        PageDeleteDocuments pageDeleteDocuments = new PageDeleteDocuments(driver);
+        
+        pageLogin.login("mmmmm@udec.cl","mmmmm");
+        Helpers helper = new Helpers();
+        helper.sleepSeconds(3);
+        
+        pagePerfil.DeleteDocuments();
+        pageDeleteDocuments.deleteDocument();
+        
+        pagePerfil.assertCorrectPage();
+        helper.sleepSeconds(3);
+        
     }
     
     @AfterMethod
