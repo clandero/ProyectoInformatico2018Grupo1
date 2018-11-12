@@ -12,7 +12,7 @@
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <title>Resultados de la b√∫squeda</title>
+        <title>Resultados de la b˙squeda</title>
     </head>
     <body>
         <jsp:include page="sidebar.jsp"/>
@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-6" style="margin-left:none;">
                             <div class="form-group" style="border-bottom:1px solid black">
-                                    <h2>Resultados de b√∫squeda: ${Buscar}</h2>
+                                    <h2>Resultados de b˙squeda: ${Buscar}</h2>
                             </div>
                            
                             <c:if test="${opcion=='area'}">
@@ -54,7 +54,7 @@
                                             
                                             <th>Correo</th>
                                             
-                                            <th>√Årea de inter√©s</th>
+                                            <th>¡rea de interÈs</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -77,7 +77,7 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>Titulo</th>
+                                            <th>TÌtulo</th>
                                             
                                             <th>Tema</th>
                                             

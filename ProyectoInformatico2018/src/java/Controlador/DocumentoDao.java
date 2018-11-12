@@ -151,14 +151,13 @@ public class DocumentoDao {
     public ArrayList<ArrayList<String>> genSearch(String keyword, String term){
         try{
             String query;
-            System.out.println("genSearched");
             if(term.equals("titulo")){
                 query=
                         "SELECT a.tema, d.titulo, d.correo "+
                         "FROM area_de_interes as a, documento_area as d_a, documento as d "+
                         "WHERE a.tema=d_a.tema "+
                         "AND d.n_doc = d_a.n_doc " +
-                        "AND d.titulo LIKE ?";
+                        "AND d.titulo ILIKE ?";
                 System.out.println("titulo searched");
             }
             else if(term.equals("tema")){
@@ -167,7 +166,7 @@ public class DocumentoDao {
                         "FROM area_de_interes as a, documento_area as d_a, documento as d "+
                         "WHERE a.tema=d_a.tema "+
                         "AND d.n_doc = d_a.n_doc " +
-                        "AND a.tema LIKE ?";
+                        "AND a.tema ILIKE ?";
             }
             else{
                 query="Invalid query";
