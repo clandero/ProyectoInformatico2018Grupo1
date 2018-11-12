@@ -41,10 +41,12 @@ public class FileSearchServlet extends HttpServlet {
             throws ServletException, IOException {
         Connection conn = DatabaseConnect.getConn();
         
-        String keyword = request.getParameter("keyword");
-        String topic = request.getParameter("topic");
+        String keyword = request.getParameter("Buscar");
+        String term = request.getParameter("opcion");
 
-        Hashtable<String, ArrayList<String>> files = docDao.search(keyword, topic);
+        ArrayList<ArrayList<String>> files = docDao.genSearch(keyword, term);
+        request.getSession().setAttribute("Buscar", keyword);
+        request.getSession().setAttribute("opcion", term);
         request.getSession().setAttribute("resultados", files);
         request.getRequestDispatcher("resultadosBusqueda.jsp").forward(request, response);
         

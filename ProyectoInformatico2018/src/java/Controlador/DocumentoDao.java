@@ -147,6 +147,52 @@ public class DocumentoDao {
         }
         return null;
     }
+    
+    public ArrayList<ArrayList<String>> genSearch(String keyword, String term){
+        try{
+            String query;
+            if(term.equals("titulo")){
+                query=
+                        "SELECT a.tema, d.titulo, d.correo "+
+                        "FROM area_de_interes as a, documento_area as d_a, documento as d "+
+                        "WHERE a.tema=d_a.tema "+
+                        "AND d.n_doc = d_a.n_doc " +
+                        "AND d.titulo ILIKE ?";
+                System.out.println("titulo searched");
+            }
+            else if(term.equals("tema")){
+                query=
+                        "SELECT a.tema, d.titulo, d.correo "+
+                        "FROM area_de_interes as a, documento_area as d_a, documento as d "+
+                        "WHERE a.tema=d_a.tema "+
+                        "AND d.n_doc = d_a.n_doc " +
+                        "AND a.tema ILIKE ?";
+            }
+            else{
+                query="Invalid query";
+                System.out.println("Invalid search term type");
+            }
+            
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, "%"+keyword+"%");
+               
+            ResultSet result = ps.executeQuery();
+            ArrayList<ArrayList<String>> files = new ArrayList<ArrayList<String>>();
+            
+            while(result.next()){
+                ArrayList<String> datos = new ArrayList<String>();
+                datos.add(result.getString("titulo"));
+                datos.add(result.getString("tema"));
+                datos.add(result.getString("correo"));
+                files.add(datos);
+            }
+            
+            return files;
+        } catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return null;
+    }
 
     public static void setContext(String cPath){
         if (contextPath == null){

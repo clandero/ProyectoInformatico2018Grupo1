@@ -1,19 +1,23 @@
 <%-- 
-    Document   : searchbar
-    Created on : 25-10-2018, 16:15:21
-    Author     : cland
+    Document   : searchBar
+    Created on : Oct 28, 2018, 10:54:53 AM
+    Author     : Vicente Varas <vvaras@udec.cl>
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-9"%>
 <!DOCTYPE html>
-    <form style="margin:15px;" action="busqueda" method="post" >
-        <h3>
-            <input type="text" placeholder="Buscar.." name="Buscar">
+<jsp:include page="scripts/search.jsp"/>
+<form action="busqueda" method="post" id="searchForm">
+    <h3>
+        <input type="text" placeholder="Buscar.." name="Buscar">
 
-            <select name="opcion">
-                <option value="area">√Årea de Inter√©s</option>
-                <option value="depto">Departamento</option>
-            </select>
-            <input type="submit" name="Enviar"/>
-        </h3>
-    </form>
+        <select name="opcion" id="op_busqueda">
+            <option value="area" >¡rea de InterÈs</option>
+            <option value="depto">Departamento</option>
+        </select>
+        
+        <input type="submit" name="Enviar" value="Buscar"/><br>
+        <input type="radio" name="searchSelect" onclick="buscarPersona();" checked> Buscar Persona
+        <input type="radio" name="searchSelect" onclick="buscarDocumento();" > Buscar Trabajo
+    </h3>
+</form>

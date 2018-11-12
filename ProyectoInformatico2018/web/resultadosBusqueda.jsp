@@ -72,6 +72,29 @@
                                     </tbody>
                                 </table>
                             </c:if>
+                            <!--Busqueda de Docs. Los resultados se pasan como arreglos de strings-->
+                            <c:if test="${opcion=='titulo' || opcion=='tema'}">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Título</th>
+                                            
+                                            <th>Tema</th>
+                                            
+                                            <th>Subido por</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach var="resultado" items="${resultados}">
+                                            <tr>
+                                            <c:forEach var="i" items="${resultado}">
+                                                    <td>${i}</td>
+                                            </c:forEach>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </c:if>
                         </div>
                     </div>
                 </div>
