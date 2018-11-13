@@ -5,6 +5,9 @@
  */
 package Controlador;
 
+import Modelo.DepartamentoDao;
+import Modelo.AreaDao;
+import Modelo.UsuarioDao;
 import Modelo.AreadeInteres;
 import Modelo.Usuario;
 import java.io.IOException;

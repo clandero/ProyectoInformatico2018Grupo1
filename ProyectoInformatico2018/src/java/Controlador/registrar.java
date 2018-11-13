@@ -5,6 +5,10 @@
  */
 package Controlador;
 
+import Modelo.DepartamentoDao;
+import Modelo.DocumentoDao;
+import Modelo.AreaDao;
+import Modelo.UsuarioDao;
 import Modelo.AreadeInteres;
 import java.io.IOException;
 import javax.servlet.ServletException;
