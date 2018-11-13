@@ -5,6 +5,8 @@
  */
 package Controlador;
 
+import Modelo.AnuncioDao;
+import Modelo.AreaDao;
 import Modelo.Anuncio;
 import Modelo.AreadeInteres;
 import Modelo.Usuario;
