@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.*;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -77,7 +78,9 @@ public class FileUploadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List allTemas = (List) areaDao.getAll();
+
+        Set allTemas = areaDao.getAll();
+
         request.getSession().setAttribute("temas", allTemas);
         request.getRequestDispatcher("upload.jsp").forward(request, response);        
     }
