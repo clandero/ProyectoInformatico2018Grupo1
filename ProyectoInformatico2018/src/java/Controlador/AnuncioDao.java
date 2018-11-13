@@ -111,14 +111,14 @@ public class AnuncioDao {
                     + "' WHERE n_anun = " + n_anun;
             Statement stmt = conn.createStatement();
             System.out.println("Previo primer update");
-            ResultSet rs = stmt.executeQuery(query);
+            stmt.executeQuery(query);
 
             query = "UPDATE anuncio_area "
                     + "SET tema = '" + tema
                     + "', WHERE n_anun = " + n_anun;
             System.out.println("Previo segundo update");
             
-            rs = stmt.executeQuery(query);
+            stmt.executeQuery(query);
             System.out.println("worked?");
             //TODO: check returned result
         } catch (SQLException ex) {
