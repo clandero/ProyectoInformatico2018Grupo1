@@ -25,6 +25,8 @@ public class PagePerfil {
     private By submitButton;
     private By deleteButton;
     private By editButton;
+    private By searchPersonButton;
+    private By searchDocumentButton;
     
     public PagePerfil(WebDriver driver) {
         this.driver = driver;
@@ -34,19 +36,24 @@ public class PagePerfil {
         submitButton = By.name("Enviar");
         deleteButton = By.id("delButton");
         editButton = By.id("editButton");
+        searchPersonButton = By.xpath("//input[@onclick='buscarPersona();']");
+        searchDocumentButton = By.xpath("//input[@onclick='buscarDocumento();']");
     }
     
-    public void SearchSomeone(String searchText){
+    public void SearchSomething(String searchText){
         WebElement search_box = driver.findElement(searchField);
         search_box.sendKeys(searchText);
     }
     
     public void selectSearchType(String searchType){
+        WebElement type_button = driver.findElement(searchPersonButton);
         WebElement submit_button = driver.findElement(submitButton);
         
         Select selectType = new Select(driver.findElement(searchTypeDrop));
-        System.out.println(searchType);
+        //System.out.println(searchType);
+        type_button.click();
         selectType.selectByVisibleText(searchType);
+        
         submit_button.click();
         
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -60,6 +67,19 @@ public class PagePerfil {
     public void EditPerfil(){
         WebElement edit_button = driver.findElement(editButton);
         edit_button.click();
+    }
+    
+    public void SearchSomeDocument(String searchText){
+        WebElement type_button = driver.findElement(searchDocumentButton);
+        WebElement submit_button = driver.findElement(submitButton);
+        
+        Select selectType = new Select(driver.findElement(searchTypeDrop));
+        type_button.click();
+        selectType.selectByVisibleText(searchText);
+        
+        submit_button.click();
+        
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);        
     }
     
     public void assertCorrectPage() {

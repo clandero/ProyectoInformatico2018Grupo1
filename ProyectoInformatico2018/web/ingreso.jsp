@@ -8,7 +8,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-<<<<<<< HEAD
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Ingresar</title>
         <style>
@@ -194,14 +193,12 @@
             }
 
         </style>
-=======
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="scripts/ingreso.js" type="text/javascript"></script>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
         <title>Ingreso</title>
->>>>>>> origin/master
     </head>
     <body>
         <div class="sidenav">

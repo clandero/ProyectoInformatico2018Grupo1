@@ -11,17 +11,12 @@ import Pages.PageDeleteDocuments;
 import Pages.PageEditPerfil;
 import Pages.PageLogin;
 import Pages.PagePerfil;
-import Pages.PageRegister;
+import Pages.PageSearchDocuments;
 import Pages.PageSearchSomeone;
 import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -57,7 +52,7 @@ public class TestingPage {
     public void SearchSomeoneTest(){
         PageSearchSomeone pageSearchSomeone = new PageSearchSomeone(driver);
         
-        pagePerfil.SearchSomeone("informatica");
+        pagePerfil.SearchSomething("informatica");
         pagePerfil.selectSearchType("Departamento");
         
         pageSearchSomeone.assertPage();
@@ -79,16 +74,25 @@ public class TestingPage {
         
         pagePerfil.EditPerfil();
         pageEditPerfil.changeArea();
-        Helpers helper = new Helpers();
-        helper.sleepSeconds(3);
+        //Helpers helper = new Helpers();
+        //helper.sleepSeconds(3);
         pagePerfil.assertCorrectPage();
         
-        helper.sleepSeconds(3);
+        //helper.sleepSeconds(3);
+    }
+    
+    @Test
+    public void SearchDocuments(){
+        PageSearchDocuments pageSearchDocument = new PageSearchDocuments(driver);
+        pagePerfil.SearchSomething("optimizacion");
+        pagePerfil.SearchSomeDocument("Tema");
+        //Helpers helper = new Helpers();
+        //helper.sleepSeconds(3);
+        pageSearchDocument.assertPage();
     }
     
     @AfterMethod
     public void tearDown(){
         driver.close();
     }
-    
 }
