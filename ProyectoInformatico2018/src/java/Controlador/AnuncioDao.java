@@ -106,21 +106,19 @@ public class AnuncioDao {
         try {
             //Debe actualizar tabla anuncio + tabla anuncio_area
             String query = "UPDATE anuncio "
-                    + "SET titulo = '" + titulo
-                    + "', contenido = '" + contenido
-                    + "' WHERE n_anun = " + n_anun;
+                    + "SET titulo = '" + titulo + "', "
+                    + "contenido = '" + contenido + "' "
+                    + "WHERE n_anun = " + n_anun;
+            
             Statement stmt = conn.createStatement();
-            System.out.println("Previo primer update");
             stmt.executeUpdate(query);
 
             query = "UPDATE anuncio_area "
-                    + "SET tema = '" + tema
-                    + "', WHERE n_anun = " + n_anun;
-            System.out.println("Previo segundo update");
+                    + "SET tema = '" + tema + "' "
+                    + "WHERE n_anun = " + n_anun;
             
             stmt.executeUpdate(query);
-            System.out.println("worked?");
-            //TODO: check returned result
+            
         } catch (SQLException ex) {
             Logger.getLogger(AnuncioDao.class.getName()).log(Level.SEVERE, null, ex);
         }
