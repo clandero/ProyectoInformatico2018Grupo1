@@ -92,38 +92,71 @@ public class AnuncioDao {
         }
 
     }
-    
-    public void delete(int n_anun){
-        try{
+
+    /**
+     * Actualiza un anuncio en la base de datos con un nuevo titulo, 
+     * contenido y tema.
+     * 
+     * @param n_anun Numero del anuncio a actualizar
+     * @param titulo Nuevo titulo del anuncio
+     * @param contenido Nuevo contenido del anuncio
+     * @param tema Nuevo tema/area de interes del anuncio
+     */
+    public void update(int n_anun, String titulo, String contenido, String tema) {
+        try {
+            //Debe actualizar tabla anuncio + tabla anuncio_area
+            String query = "UPDATE anuncio "
+                    + "SET titulo = '" + titulo
+                    + "', contenido = '" + contenido
+                    + "' WHERE n_anun = " + n_anun;
+            Statement stmt = conn.createStatement();
+            System.out.println("Previo primer update");
+            ResultSet rs = stmt.executeQuery(query);
+
+            query = "UPDATE anuncio_area "
+                    + "SET tema = '" + tema
+                    + "', WHERE n_anun = " + n_anun;
+            System.out.println("Previo segundo update");
+            
+            rs = stmt.executeQuery(query);
+            System.out.println("worked?");
+            //TODO: check returned result
+        } catch (SQLException ex) {
+            Logger.getLogger(AnuncioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void delete(int n_anun) {
+        try {
             String query = "SELECT tema"
-                         + "FROM anuncio_area as a"
-                         + "WHERE a.n_anun = (?)";
+                    + "FROM anuncio_area as a"
+                    + "WHERE a.n_anun = (?)";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, n_anun);
             ps.execute();
             ResultSet rs = ps.getResultSet();
-            if (!(rs.next())){
+            if (!(rs.next())) {
                 System.out.println("no result");
                 return;
             }
             String tema = rs.getString("tema");
             query = "DELETE FROM anuncio_area"
-                  + "WHERE tema=(?) AND n_anun=(?)";            
+                    + "WHERE tema=(?) AND n_anun=(?)";
             ps = conn.prepareStatement(query);
             ps.setString(1, tema);
             ps.setInt(2, n_anun);
             ps.execute();
             query = "DELETE FROM anuncio"
-                  + "WHERE n_anun=(?)";
+                    + "WHERE n_anun=(?)";
             ps = conn.prepareStatement(query);
             ps.setInt(1, n_anun);
             ps.execute();
             // BORRAR ARCHIVO DEL SERVIDOR
-            
-        } catch (SQLException ex){
-            
+
+        } catch (SQLException ex) {
+
         }
-        
+
     }
 
     /**
@@ -133,7 +166,7 @@ public class AnuncioDao {
      */
     public Set<Anuncio> getAll(Usuario u) {
         Set<Anuncio> anuncios_usuario = new TreeSet<>();
-        
+
         String query_anuncio = "SELECT * "
                 + "FROM anuncio, anuncio_area "
                 + "WHERE anuncio.n_anun = anuncio_area.n_anun "
@@ -148,14 +181,14 @@ public class AnuncioDao {
                 String contenido = rs.getString("contenido");
                 String fecha_anuncio = rs.getString("fecha_anuncio");
                 String tema = rs.getString("tema");
-                System.out.println("Fecha retirada: "+ fecha_anuncio);
-                System.out.println("Tema retirado: "+ tema);
+                System.out.println("Fecha retirada: " + fecha_anuncio);
+                System.out.println("Tema retirado: " + tema);
                 anuncios_usuario.add(new Anuncio(num_anuncio, titulo,
                         u.getCorreo(), contenido, fecha_anuncio, tema));
             }
         } catch (SQLException ex) {
             Logger.getLogger(AnuncioDao.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
         return anuncios_usuario;
     }
 
