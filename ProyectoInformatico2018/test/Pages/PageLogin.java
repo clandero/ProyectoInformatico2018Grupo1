@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 /**
  *
@@ -39,6 +40,10 @@ public class PageLogin {
         submit_button.click();
         
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
+    }
+    
+    public void assertLoginIncorrect() {
+        String PATH = "/html/body/div[2]/div/div/form/p";
+        Assert.assertTrue(driver.findElement(By.xpath(PATH)).getText().contains("incorrectos"));
     }
 }

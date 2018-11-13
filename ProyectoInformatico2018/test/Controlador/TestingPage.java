@@ -63,7 +63,7 @@ public class TestingPage {
         pageSearchSomeone.assertPage();
     }
     
-    //@Test
+    @Test
     public void DeleteDocumentsTest(){
         PageDeleteDocuments pageDeleteDocuments = new PageDeleteDocuments(driver);
         

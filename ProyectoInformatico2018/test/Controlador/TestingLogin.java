@@ -43,9 +43,19 @@ public class TestingLogin {
         PagePerfil pagePerfil = new PagePerfil(driver);
         
         pageLogin.login("mmmmm@udec.cl","mmmmm");
-        //Helpers helper = new Helpers();
-        //helper.sleepSeconds(3);
+
         pagePerfil.assertCorrectPage();
+    }
+    
+    @Test
+    public void LoginIncorrectTest(){
+        driver.navigate().to("http://localhost:8080/build/ingreso.jsp");
+        PageLogin pageLogin = new PageLogin(driver);
+        PagePerfil pagePerfil = new PagePerfil(driver);
+        
+        pageLogin.login("mmmmm@udec.cl","mm");
+        
+        pageLogin.assertLoginIncorrect();
     }
     
     @AfterMethod

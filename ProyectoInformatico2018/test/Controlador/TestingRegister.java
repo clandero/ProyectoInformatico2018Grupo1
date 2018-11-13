@@ -36,7 +36,7 @@ public class TestingRegister {
     }
     
     @Test
-    public void RegisterTest(){
+    public void RegisterCorrectTest(){
         driver.navigate().to("http://localhost:8080/build/index");
         PageRegister pageRegister = new PageRegister(driver);
         PagePerfil pagePerfil = new PagePerfil(driver);
@@ -44,9 +44,6 @@ public class TestingRegister {
         pageRegister.register("Tester uno", "test1@udec.cl", "test");
         pageRegister.selectUserType("Estudiante");
         pageRegister.selectDepartment();
-        
-        //Helpers helper = new Helpers();
-        //helper.sleepSeconds(3);
         
         pagePerfil.assertCorrectPage();
     }
