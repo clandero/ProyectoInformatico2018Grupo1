@@ -8,24 +8,23 @@ package Controlador;
 import Modelo.DepartamentoDao;
 import Modelo.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
  * @author vanes
  */
 @WebServlet(
-        name = "index",
-        description = "Example Servlet Using Annotations",
+        name = "Index",
+        description = "Registration",
         urlPatterns = {"/index"}
 )
+
 public class index extends HttpServlet {
     private static DepartamentoDao depaDao = new DepartamentoDao();
     /**

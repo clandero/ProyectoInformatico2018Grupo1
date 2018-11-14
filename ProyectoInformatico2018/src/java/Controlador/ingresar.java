@@ -8,6 +8,7 @@ package Controlador;
 import Modelo.DepartamentoDao;
 import Modelo.DocumentoDao;
 import Modelo.AreaDao;
+import Modelo.AnuncioDao;
 import Modelo.UsuarioDao;
 import Modelo.AreadeInteres;
 import Modelo.Usuario;
@@ -40,6 +41,7 @@ public class ingresar extends HttpServlet {
     private static UsuarioDao userDao = new UsuarioDao();
     private static AreaDao areaDao = new AreaDao();
     private static DepartamentoDao depaDao = new DepartamentoDao();
+    private static AnuncioDao anuncioDao = new AnuncioDao();
     private static DocumentoDao documentoDao = new DocumentoDao();
 
     @Override
@@ -79,6 +81,7 @@ public class ingresar extends HttpServlet {
         request.getSession().setAttribute("areas_existentes", areaDao.getAll());
         request.getSession().setAttribute("areas_usuario", areaDao.getAll(u1));
         request.getSession().setAttribute("depad", depaDao);
+        request.getSession().setAttribute("anuncios_usuario", anuncioDao.getAll(u1));
         System.out.println(areaDao.getAll(u1) + "INTERESES ESTA VACIO--------------");
         this.getServletContext().getRequestDispatcher("/perfil").forward(request, response);
         
