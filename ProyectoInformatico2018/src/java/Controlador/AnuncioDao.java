@@ -126,8 +126,8 @@ public class AnuncioDao {
 
     public void delete(int n_anun) {
         try {
-            String query = "SELECT tema"
-                    + "FROM anuncio_area as a"
+            String query = "SELECT tema "
+                    + "FROM anuncio_area as a "
                     + "WHERE a.n_anun = (?)";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, n_anun);
@@ -138,17 +138,17 @@ public class AnuncioDao {
                 return;
             }
             String tema = rs.getString("tema");
-            query = "DELETE FROM anuncio_area"
+            query = "DELETE FROM anuncio_area "
                     + "WHERE tema=(?) AND n_anun=(?)";
             ps = conn.prepareStatement(query);
             ps.setString(1, tema);
             ps.setInt(2, n_anun);
-            ps.execute();
-            query = "DELETE FROM anuncio"
+            ps.executeUpdate();
+            query = "DELETE FROM anuncio "
                     + "WHERE n_anun=(?)";
             ps = conn.prepareStatement(query);
             ps.setInt(1, n_anun);
-            ps.execute();
+            ps.executeUpdate();
             // BORRAR ARCHIVO DEL SERVIDOR
 
         } catch (SQLException ex) {

@@ -61,16 +61,34 @@ public class EditarAnuncioServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        AnuncioDao dao = new AnuncioDao();
+        Set<Anuncio> anuncios_usuario = (Set<Anuncio>) request.getSession().getAttribute("anuncios_usuario");
+        String borrar = request.getParameter("borrar_anuncio");
+        
+        if (borrar != null) {
+            int num = Integer.parseInt(borrar);
+            
+            //borrar de la base de datos y treeset
+            dao.delete(num);
+            Anuncio anuncio_eliminar = null;
+            for (Anuncio anuncio : anuncios_usuario) {
+                if (anuncio.getNumero() == num) {
+                    anuncio_eliminar = anuncio;
+                }
+            }
+            anuncios_usuario.remove(anuncio_eliminar);
+            request.getRequestDispatcher("perfil.jsp").forward(request, response);
+            return;
+        }
         String titulo = request.getParameter("titulo_anuncio");
         String contenido = request.getParameter("contenido_anuncio");
         String tema = request.getParameter("area_anuncio");
         int num_anuncio = (int) request.getSession().getAttribute("num_anuncio_editar");
 
-        AnuncioDao dao = new AnuncioDao();
         dao.update(num_anuncio, titulo, contenido, tema);
-        
+
         //Hay que actualizar datos en el TreeSet de anuncios de usuario.
-        Set<Anuncio> anuncios_usuario = (Set<Anuncio>) request.getSession().getAttribute("anuncios_usuario");
+        anuncios_usuario = (Set<Anuncio>) request.getSession().getAttribute("anuncios_usuario");
         for (Anuncio anuncio : anuncios_usuario) {
             if (anuncio.getNumero() == num_anuncio) {
                 anuncio.setTitulo(titulo);

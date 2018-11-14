@@ -86,11 +86,19 @@
                                         <h2>Título: ${anuncio.getTitulo()}</h2>
                                         <h5>Fecha: ${anuncio.getFecha()}</h5>
                                         <h5>Tema: ${anuncio.getTema()}</h5>
-                                        <form action="editar_anuncio" method="get">
-                                            <button type="submit" name="anuncio" value="${anuncio.getNumero()}">
-                                                Editar Anuncio
-                                            </button>
-                                        </form>
+                                        <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
+
+                                            <form action="editar_anuncio" method="get">
+                                                <button type="submit" name="anuncio" value="${anuncio.getNumero()}">
+                                                    Editar Anuncio
+                                                </button>
+                                            </form>
+                                            <form action="editar_anuncio" method="post">
+                                                <button type="submit" name="borrar_anuncio" value="${anuncio.getNumero()}">
+                                                    Borrar Anuncio
+                                                </button>
+                                            </form>
+                                        </c:if>
                                     </div>
                                 </c:forEach>
                                 <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
