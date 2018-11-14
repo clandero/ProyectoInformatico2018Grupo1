@@ -71,15 +71,15 @@
                                     <ul>
                                         <li>
                                             <c:out value="${i.getTitulo()}"></c:out>
-                                            <a href="/build/${i.getSvPath()}">
-                                                <img width=30px src="resources/pdflogo" }">
+                                            <a href="/build${i.getSvPath()}">
+                                                <img width=30px src="resources/pdflogo">
                                             </a>
                                             <a href="/build/deleteFile?fileID=${i.getID()}">
-                                                <img width=30px src="resources/trashcan" }">
+                                                <img width=30px src="resources/trashcan">
                                             </a>
                                         </li>
                                     </ul>
-                                </c:forEach> 
+                                    </c:forEach> 
                                 </div>
                             </div>
                         </div>

@@ -64,7 +64,7 @@
                                     <ul>
                                         <li>
                                             <c:out value="${i.getTitulo()}"></c:out>
-                                            <a href="/build/${i.getSvPath()}">
+                                            <a href="/build${i.getSvPath()}">
                                                 <img width=30px src="resources/pdflogo">
                                             </a>
                                         </li>
