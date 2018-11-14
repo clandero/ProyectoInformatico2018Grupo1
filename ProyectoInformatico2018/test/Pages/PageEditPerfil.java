@@ -15,20 +15,24 @@ import org.openqa.selenium.WebElement;
  */
 public class PageEditPerfil {
     private WebDriver driver;
-    private By newArea;
+    private By newArea1;
+    private By newArea2;
     private By submitButton;
     
     public PageEditPerfil(WebDriver driver){
         this.driver = driver;
-        newArea = By.xpath("//input[@value='Infraestructura Vial']");
+        newArea1 = By.xpath("//input[@value='Optimizacion']");
+        newArea2 = By.xpath("//input[@value='Inteligencia Artificial']");
         submitButton = By.xpath("//input[@value='Guardar cambios']");
     }
     
     public void changeArea(){
-        WebElement checkbox = driver.findElement(newArea);
+        WebElement checkbox1 = driver.findElement(newArea1);
+        WebElement checkbox2 = driver.findElement(newArea2);
         WebElement submit_button = driver.findElement(submitButton);
         
-        checkbox.click();
+        checkbox1.click();
+        checkbox2.click();
         submit_button.click();
     }
 }

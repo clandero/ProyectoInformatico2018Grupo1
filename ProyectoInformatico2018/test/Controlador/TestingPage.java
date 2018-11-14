@@ -7,9 +7,11 @@ package Controlador;
 
 
 import Helper.Helpers;
+import Pages.PageAnuncios;
 import Pages.PageDeleteDocuments;
 import Pages.PageEditPerfil;
 import Pages.PageLogin;
+import Pages.PagePersonas;
 import Pages.PagePerfil;
 import Pages.PageSearchDocuments;
 import Pages.PageSearchSomeone;
@@ -91,8 +93,27 @@ public class TestingPage {
         pageSearchDocument.assertPage();
     }
     
+    @Test
+    public void SearchSameInterest(){
+        PagePersonas pagePersonas = new PagePersonas(driver);
+        
+        pagePersonas.SomeoneSameInterest();
+        
+        pagePersonas.assertCorrectPage();
+    }
+    
+    @Test
+    public void SearchAnuncio(){
+        PageAnuncios pageAnuncios = new PageAnuncios(driver);
+        
+        pageAnuncios.searchAnuncios();
+        
+        pageAnuncios.assertCorrectPage();
+    }
+    
     @AfterMethod
     public void tearDown(){
         driver.close();
     }
+    
 }
