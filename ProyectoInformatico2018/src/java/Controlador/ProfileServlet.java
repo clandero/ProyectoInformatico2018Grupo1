@@ -5,11 +5,18 @@
  */
 package Controlador;
 
+import Modelo.AreaDao;
+import Modelo.AreadeInteres;
+import Modelo.DepartamentoDao;
 import Modelo.DocumentoDao;
 import Modelo.Usuario;
+import Modelo.UsuarioDao;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeSet;
+import java.util.Vector;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,12 +25,15 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author berko
+ * @author arken
  */
-@WebServlet(name = "FileDeleteServlet", urlPatterns = {"/deleteFile"})
-public class FileDeleteServlet extends HttpServlet {
+@WebServlet(name = "ProfileServlet", urlPatterns = {"/perfil"})
+public class ProfileServlet extends HttpServlet {
     
-    private DocumentoDao docDao = new DocumentoDao();
+    private static UsuarioDao userDao = new UsuarioDao();
+    private static AreaDao areaDao = new AreaDao();
+    private static DepartamentoDao depaDao = new DepartamentoDao();
+    private static DocumentoDao documentoDao = new DocumentoDao();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,16 +45,27 @@ public class FileDeleteServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String fileID = request.getParameter("fileID");
-        String correo = ((Usuario)request.getSession().
-                    getAttribute("usuario_perfil")).getCorreo();
-        System.out.println("WANT TO DELETE "+fileID);
-        docDao.delete(parseInt(fileID), correo);
-        request.getSession().setAttribute("documentos_usuario", docDao.search(correo));
+            throws ServletException, IOException {       
+        
+        Usuario u1 = (Usuario) request.getSession().getAttribute("usuario");
+        try {
+            Vector<Usuario> v = new Vector<Usuario>();
+            v = userDao.getPersonasComun((TreeSet) areaDao.getAll(u1), u1);
+            for (int i = 0; i < v.size(); i++) {
+                List<AreadeInteres> l = new ArrayList<AreadeInteres>();
+                l.addAll(areaDao.getAll(v.get(i)));
+                v.get(i).setIntereses(l);
 
-        request.getRequestDispatcher("editar_perfil.jsp").forward(request, response);
+            }
+            request.getSession().setAttribute("personasInteresComun", v);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        request.getSession().setAttribute("documentos_usuario", documentoDao.search(u1.getCorreo()));
+        request.getRequestDispatcher("perfil.jsp").forward(request, response);
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -72,7 +93,7 @@ public class FileDeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);        
+        processRequest(request, response);
     }
 
     /**
