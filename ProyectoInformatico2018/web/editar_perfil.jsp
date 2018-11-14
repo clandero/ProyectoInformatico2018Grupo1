@@ -67,6 +67,19 @@
                             <div class="col-md-12">
                                 <div class="form-group" style="border-bottom:1px solid black">
                                     <h2>Mis trabajos y publicaciones</h2>
+                                    <c:forEach var="i" items="${documentos_usuario}">
+                                    <ul>
+                                        <li>
+                                            <c:out value="${i.getTitulo()}"></c:out>
+                                            <a href="/build/${i.getSvPath()}">
+                                                <img width=30px src="resources/pdflogo" }">
+                                            </a>
+                                            <a href="/build/deleteFile?fileID=${i.getID()}">
+                                                <img width=30px src="resources/trashcan" }">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </c:forEach> 
                                 </div>
                             </div>
                         </div>

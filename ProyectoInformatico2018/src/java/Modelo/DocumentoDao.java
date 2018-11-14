@@ -97,21 +97,20 @@ public class DocumentoDao {
         }
     }
     
-    public ArrayList<String> search(String correo){
+    public List<Documento> search(String correo){
         try{
             String query = 
-                "SELECT d.titulo " +
-                "FROM documento as d " +
-                "WHERE d.correo = (?)";
-            
+                "SELECT titulo, n_doc, sv_path " +
+                "FROM documento " +
+                "WHERE correo = (?)";            
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, correo);
-            //ps.setString(1, topic);
-            //ps.setString(2, keyword);
             ResultSet result = ps.executeQuery();
-            ArrayList<String> datos = new ArrayList<String>();
+            ArrayList<Documento> datos = new ArrayList<Documento>();
             while(result.next()){                
-                datos.add(result.getString("titulo"));
+                datos.add(new Documento(result.getInt("n_doc"), 
+                        result.getString("titulo"), 
+                        result.getString("sv_path")));
             }
             return datos;
         } catch(SQLException ex){
@@ -233,6 +232,7 @@ public class DocumentoDao {
             to_delete.delete();
             
         } catch(SQLException ex){
+            System.out.println("!!!! ERROR IN DOCDAO DELETE !!!!");
             System.out.println(ex);
         }      
         
