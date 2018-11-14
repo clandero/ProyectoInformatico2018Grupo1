@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Modelo.DocumentoDao;
 import Modelo.Documento;
 import Modelo.Usuario;
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class documentos_usuario extends HttpServlet {
         //out.println(p);
         Usuario usuario_perfil = (Usuario) request.getSession().getAttribute("usuario_perfil");
 
-        List res = documentodao.search(usuario_perfil.getCorreo());
+        List<Documento> res = documentodao.search(usuario_perfil.getCorreo());
         request.getSession().setAttribute("resultados", res);
         request.getRequestDispatcher("/documentos.jsp").forward(request, response);
     }

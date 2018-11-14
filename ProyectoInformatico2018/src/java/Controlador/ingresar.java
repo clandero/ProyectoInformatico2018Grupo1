@@ -5,6 +5,11 @@
  */
 package Controlador;
 
+import Modelo.DepartamentoDao;
+import Modelo.DocumentoDao;
+import Modelo.AreaDao;
+import Modelo.AnuncioDao;
+import Modelo.UsuarioDao;
 import Modelo.AreadeInteres;
 import Modelo.Usuario;
 import java.io.IOException;
@@ -63,8 +68,8 @@ public class ingresar extends HttpServlet {
             return;
         } else {
             System.out.println("listo lito");
-
         }
+        
         String depa = Integer.toString(u1.getDepartamento());
         System.out.println("AQUIII EL DEPARTAMENTO");
         request.getSession().setAttribute("depa_usuario", depaDao.get_nombre(depa));
@@ -75,28 +80,11 @@ public class ingresar extends HttpServlet {
         request.getSession().setAttribute("usuario_correo", u1.getCorreo());
         request.getSession().setAttribute("areas_existentes", areaDao.getAll());
         request.getSession().setAttribute("areas_usuario", areaDao.getAll(u1));
-
         request.getSession().setAttribute("depad", depaDao);
+        request.getSession().setAttribute("anuncios_usuario", anuncioDao.getAll(u1));
         System.out.println(areaDao.getAll(u1) + "INTERESES ESTA VACIO--------------");
-        try {
-            Vector<Usuario> v = new Vector<Usuario>();
-            v = userDao.getPersonasComun((TreeSet) areaDao.getAll(u1), u1);
-            for (int i = 0; i < v.size(); i++) {
-                List<AreadeInteres> l = new ArrayList<AreadeInteres>();
-                l.addAll(areaDao.getAll(v.get(i)));
-                v.get(i).setIntereses(l);
-
-            }
-            request.getSession().setAttribute("personasInteresComun", v);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        request.getSession().setAttribute("documentos_usuario", documentoDao.search(u1.getCorreo()));
-        request.getSession().setAttribute("anuncios_usuario", 
-                anuncioDao.getAll(u1));
-        request.getRequestDispatcher("perfil.jsp").forward(request, response);     
+        this.getServletContext().getRequestDispatcher("/perfil").forward(request, response);
+        
 
     }
 

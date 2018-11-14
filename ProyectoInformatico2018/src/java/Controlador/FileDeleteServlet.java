@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Modelo.DocumentoDao;
 import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,7 +39,11 @@ public class FileDeleteServlet extends HttpServlet {
         String fileID = request.getParameter("fileID");
         String correo = ((Usuario)request.getSession().
                     getAttribute("usuario_perfil")).getCorreo();
+        System.out.println("WANT TO DELETE "+fileID);
         docDao.delete(parseInt(fileID), correo);
+        request.getSession().setAttribute("documentos_usuario", docDao.search(correo));
+
+        request.getRequestDispatcher("editar_perfil.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

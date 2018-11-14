@@ -1,12 +1,12 @@
 package Modelo;
 
-public class Curso {
+public class Departamento {
     private int codigo_curso;
     private String nombre_curso;
     
-    public Curso(){
+    public Departamento(){
     }
-    public Curso(int codigo, String nombre){
+    public Departamento(int codigo, String nombre){
         this.codigo_curso = codigo;
         this.nombre_curso = nombre;
     }

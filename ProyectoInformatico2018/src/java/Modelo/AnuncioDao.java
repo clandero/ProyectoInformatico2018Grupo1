@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controlador;
+package Modelo;
 
+import Controlador.DatabaseConnect;
 import Modelo.Anuncio;
 import Modelo.Usuario;
 import Modelo.AreadeInteres;
@@ -94,9 +95,9 @@ public class AnuncioDao {
     }
 
     /**
-     * Actualiza un anuncio en la base de datos con un nuevo titulo, 
-     * contenido y tema.
-     * 
+     * Actualiza un anuncio en la base de datos con un nuevo titulo, contenido y
+     * tema.
+     *
      * @param n_anun Numero del anuncio a actualizar
      * @param titulo Nuevo titulo del anuncio
      * @param contenido Nuevo contenido del anuncio
@@ -109,16 +110,16 @@ public class AnuncioDao {
                     + "SET titulo = '" + titulo + "', "
                     + "contenido = '" + contenido + "' "
                     + "WHERE n_anun = " + n_anun;
-            
+
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(query);
 
             query = "UPDATE anuncio_area "
                     + "SET tema = '" + tema + "' "
                     + "WHERE n_anun = " + n_anun;
-            
+
             stmt.executeUpdate(query);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(AnuncioDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -143,12 +144,12 @@ public class AnuncioDao {
             ps = conn.prepareStatement(query);
             ps.setString(1, tema);
             ps.setInt(2, n_anun);
-            ps.executeUpdate();
+            ps.execute();
             query = "DELETE FROM anuncio "
                     + "WHERE n_anun=(?)";
             ps = conn.prepareStatement(query);
             ps.setInt(1, n_anun);
-            ps.executeUpdate();
+            ps.execute();
             // BORRAR ARCHIVO DEL SERVIDOR
 
         } catch (SQLException ex) {
@@ -191,7 +192,7 @@ public class AnuncioDao {
     }
 
     public TreeSet<Anuncio> getAnuncios(TreeSet<AreadeInteres> x) {
-        TreeSet<Anuncio> res = new TreeSet<Anuncio>();
+        TreeSet<Anuncio> res = new TreeSet<>();
         /*ArrayList<AreadeInteres> y = new ArrayList<AreadeInteres>();
         y.add(new AreadeInteres("Estructuras"));*/
 

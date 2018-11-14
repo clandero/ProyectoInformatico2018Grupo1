@@ -5,31 +5,35 @@
  */
 package Controlador;
 
-import Modelo.*;
-
+import Modelo.AreaDao;
+import Modelo.AreadeInteres;
+import Modelo.DepartamentoDao;
+import Modelo.DocumentoDao;
+import Modelo.Usuario;
+import Modelo.UsuarioDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.TreeSet;
+import java.util.Vector;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.Hashtable;
-
-import java.util.List;
-
-
 /**
  *
- * @author berko
+ * @author arken
  */
-@WebServlet(name = "ProfileFileSearchServlet", urlPatterns = {"/perfilTrabajos"})
-public class ProfileFileSearchServlet extends HttpServlet {
+@WebServlet(name = "ProfileServlet", urlPatterns = {"/perfil"})
+public class ProfileServlet extends HttpServlet {
     
-    private DocumentoDao docDao = new DocumentoDao();
+    private static UsuarioDao userDao = new UsuarioDao();
+    private static AreaDao areaDao = new AreaDao();
+    private static DepartamentoDao depaDao = new DepartamentoDao();
+    private static DocumentoDao documentoDao = new DocumentoDao();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,17 +45,27 @@ public class ProfileFileSearchServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-            Connection conn = DatabaseConnect.getConn();
+            throws ServletException, IOException {       
+        
+        Usuario u1 = (Usuario) request.getSession().getAttribute("usuario");
+        try {
+            Vector<Usuario> v = new Vector<Usuario>();
+            v = userDao.getPersonasComun((TreeSet) areaDao.getAll(u1), u1);
+            for (int i = 0; i < v.size(); i++) {
+                List<AreadeInteres> l = new ArrayList<AreadeInteres>();
+                l.addAll(areaDao.getAll(v.get(i)));
+                v.get(i).setIntereses(l);
 
-            String correo = ((Usuario)request.getSession().
-                    getAttribute("usuario_perfil")).getCorreo();
+            }
+            request.getSession().setAttribute("personasInteresComun", v);
 
-            ArrayList<String> files = docDao.search(correo);
-
-            request.getSession().setAttribute("resultados", files);
-            request.getRequestDispatcher("perfil.jsp").forward(request, response);            
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        request.getSession().setAttribute("documentos_usuario", documentoDao.search(u1.getCorreo()));
+        request.getRequestDispatcher("perfil.jsp").forward(request, response);
+    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

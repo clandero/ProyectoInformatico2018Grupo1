@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 
 <div class="sidenav">
-    <a href="perfil.jsp">Perfil</a>
+    <a href="perfil">Perfil</a>
     <a href="anuncios">Anuncios</a>
     <a href="personas.jsp">Personas</a>
     <a href="upload">Subir Doc.</a>

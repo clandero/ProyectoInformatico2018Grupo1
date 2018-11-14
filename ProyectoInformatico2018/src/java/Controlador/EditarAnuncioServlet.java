@@ -6,8 +6,8 @@
 package Controlador;
 
 import Modelo.Anuncio;
+import Modelo.AnuncioDao;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
