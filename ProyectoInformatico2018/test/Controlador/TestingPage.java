@@ -15,6 +15,7 @@ import Pages.PagePersonas;
 import Pages.PagePerfil;
 import Pages.PageSearchDocuments;
 import Pages.PageSearchSomeone;
+import Pages.PageUploadFile;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -50,7 +51,7 @@ public class TestingPage {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
     
-    @Test
+    //@Test
     public void SearchSomeoneTest(){
         PageSearchSomeone pageSearchSomeone = new PageSearchSomeone(driver);
         
@@ -60,7 +61,7 @@ public class TestingPage {
         pageSearchSomeone.assertPage();
     }
     
-    @Test
+    //@Test
     public void DeleteDocumentsTest(){
         PageDeleteDocuments pageDeleteDocuments = new PageDeleteDocuments(driver);
         
@@ -70,7 +71,7 @@ public class TestingPage {
         pagePerfil.assertCorrectPage();
     }
     
-    @Test
+    //@Test
     public void EditPerfilTest(){
         PageEditPerfil pageEditPerfil = new PageEditPerfil(driver);
         
@@ -83,7 +84,7 @@ public class TestingPage {
         //helper.sleepSeconds(3);
     }
     
-    @Test
+    //@Test
     public void SearchDocuments(){
         PageSearchDocuments pageSearchDocument = new PageSearchDocuments(driver);
         pagePerfil.SearchSomething("optimizacion");
@@ -93,7 +94,7 @@ public class TestingPage {
         pageSearchDocument.assertPage();
     }
     
-    @Test
+    //@Test
     public void SearchSameInterest(){
         PagePersonas pagePersonas = new PagePersonas(driver);
         
@@ -102,13 +103,22 @@ public class TestingPage {
         pagePersonas.assertCorrectPage();
     }
     
-    @Test
+    //@Test
     public void SearchAnuncio(){
         PageAnuncios pageAnuncios = new PageAnuncios(driver);
         
         pageAnuncios.searchAnuncios();
         
         pageAnuncios.assertCorrectPage();
+    }
+    
+    @Test
+    public void UploadFile(){
+        PageUploadFile pageUploadFile = new PageUploadFile(driver);
+        
+        pageUploadFile.goUploadFile();
+        pageUploadFile.uploadFile();
+        pageUploadFile.assertPage();
     }
     
     @AfterMethod

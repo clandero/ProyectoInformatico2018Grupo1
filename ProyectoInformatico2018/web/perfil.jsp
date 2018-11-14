@@ -63,13 +63,17 @@
                                 <c:forEach var="i" items="${documentos_usuario}">
                                     <ul>
                                         <li>
-                                            <c:out value="${i.getTitulo()}"></c:out>
-                                            <a href="/build/${i.getSvPath()}">
+                                            <c:out value="${i}"></c:out>
+                                            <a href="/build/${i}">
                                                 <img width=30px src="resources/pdflogo">
                                             </a>
                                         </li>
                                     </ul>
-                                </c:forEach>        
+                                </c:forEach>
+                                <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
+                                    <button id="delButton" class="float-left submit-button" >Eliminar Documentos</button>
+                                    <script src="scripts/eliminar_documentos.js" type="text/javascript"></script>
+                                </c:if>    
                             </div>
                         </div>
                     </div>
