@@ -80,7 +80,9 @@ public class FileUploadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         Set allTemas = areaDao.getAll();
+
         request.getSession().setAttribute("temas", allTemas);
         request.getRequestDispatcher("upload.jsp").forward(request, response);        
     }

@@ -51,6 +51,15 @@
                                 </nav>
                             </div>
                         </div>
+                        <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
+                                    <button id="editButton" class="float-left submit-button" >Editar Perfil</button>
+
+                                    <script type="text/javascript">
+                                        document.getElementById("editButton").onclick = function () {
+                                            location.href = "editar_perfil.jsp";
+                                        };
+                                    </script>
+                        </c:if>            
                     </div>
                 </div>
                 <div class="jumbotron">
@@ -101,15 +110,7 @@
                                         </c:if>
                                     </div>
                                 </c:forEach>
-                                <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
-                                    <button id="editButton" class="float-left submit-button" >Editar Perfil</button>
-
-                                    <script type="text/javascript">
-                                        document.getElementById("editButton").onclick = function () {
-                                            location.href = "editar_perfil.jsp";
-                                        };
-                                    </script>
-                                </c:if>
+                                
                             </div>
                         </div>
                     </div>
