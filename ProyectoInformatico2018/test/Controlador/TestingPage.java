@@ -55,7 +55,7 @@ public class TestingPage {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
     
-    //@Test //Listo!
+    @Test //Listo!
     public void SearchSomeoneTest(){
         PageSearchSomeone pageSearchSomeone = new PageSearchSomeone(driver);
         
@@ -74,7 +74,7 @@ public class TestingPage {
         
     }
     
-    //@Test //Listo!
+    @Test //Listo!
     public void EditPerfilTest(){
         PageEditPerfil pageEditPerfil = new PageEditPerfil(driver);
         
@@ -94,14 +94,14 @@ public class TestingPage {
         pageSearchDocument.assertPage();
     }
     
-    //@Test //Listo!
+    @Test //Listo!
     public void SearchSameInterestTest(){
         PagePersonas pagePersonas = new PagePersonas(driver);
         
         pagePersonas.SomeoneSameInterest();
     }
     
-   // @Test //Listo!
+   @Test //Listo!
     public void SearchAnuncioTest(){
         PageAnuncios pageAnuncios = new PageAnuncios(driver);
         
@@ -109,7 +109,7 @@ public class TestingPage {
 
     }
     
-    //@Test //Listo!
+    @Test //Listo!
     public void UploadFileTest(){
         PageUploadFile pageUploadFile = new PageUploadFile(driver);
         
@@ -118,13 +118,13 @@ public class TestingPage {
         pageUploadFile.assertPage();
     }
     
-    //@Test //Listo!
+    @Test //Listo!
     public void CrearAnuncioTest(){
         PageCrearAnuncio pageCrearAnuncio = new PageCrearAnuncio(driver);
         pageCrearAnuncio.crearAnuncio();
     }
     
-    //@Test //Listo!
+    @Test //Listo!
     public void EditarAnuncioTest(){
         PageEditarAnuncio pageEditarAnuncio = new PageEditarAnuncio(driver);
         
