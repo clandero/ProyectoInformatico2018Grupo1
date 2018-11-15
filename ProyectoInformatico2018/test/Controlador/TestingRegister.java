@@ -35,13 +35,13 @@ public class TestingRegister {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
     
-    @Test
+    @Test //Listo!
     public void RegisterCorrectTest(){
         driver.navigate().to("http://localhost:8080/build/index");
         PageRegister pageRegister = new PageRegister(driver);
         PagePerfil pagePerfil = new PagePerfil(driver);
         
-        pageRegister.register("Tester uno", "test1@udec.cl", "test");
+        pageRegister.register("Tester dos", "test2@udec.cl", "test");
         pageRegister.selectUserType("Estudiante");
         pageRegister.selectDepartment();
         

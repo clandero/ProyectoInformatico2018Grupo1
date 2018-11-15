@@ -23,7 +23,6 @@ public class PagePerfil {
     private By searchField;
     private By searchTypeDrop;
     private By submitButton;
-    private By deleteButton;
     private By editButton;
     private By searchPersonButton;
     private By searchDocumentButton;
@@ -34,7 +33,6 @@ public class PagePerfil {
         searchField = By.name("Buscar");
         searchTypeDrop = By.name("opcion");
         submitButton = By.name("Enviar");
-        deleteButton = By.id("delButton");
         editButton = By.id("editButton");
         searchPersonButton = By.xpath("//input[@onclick='buscarPersona();']");
         searchDocumentButton = By.xpath("//input[@onclick='buscarDocumento();']");
@@ -60,14 +58,10 @@ public class PagePerfil {
     }
     
     public void DeleteDocuments(){
-        WebElement delete_button = driver.findElement(deleteButton);
+        WebElement delete_button = driver.findElement(editButton);
         delete_button.click();
     }
     
-    public void EditPerfil(){
-        WebElement edit_button = driver.findElement(editButton);
-        edit_button.click();
-    }
     
     public void SearchSomeDocument(String searchText){
         WebElement type_button = driver.findElement(searchDocumentButton);

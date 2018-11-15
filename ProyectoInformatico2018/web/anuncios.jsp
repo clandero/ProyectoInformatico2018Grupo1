@@ -28,8 +28,8 @@
                     <h2>Título: ${i.getTitulo()}</h2>
                     <p>${i.getContent()}</p>
                     <p>Escrito por: ${i.getUsuario()}</p>
-                    <h5>Fecha: ${i.getFecha()}</h5>
                     <h5>Tema: ${i.getTema()}</h5>
+                    <h5>Fecha: ${i.getFecha()}</h5>
                 </div>
             </c:forEach>
             </div>

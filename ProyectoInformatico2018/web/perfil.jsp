@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="col-6" style="margin-left:none;">
-                                <p>?reas de inter?s</p>
+                                <p>Áreas de interés</p>
                                 <div class="col-md-6" style="padding:0;">
                                     <nav style="height:200px; width:100%; overflow:hidden; overflow-y:scroll;">
                                         <ul>
@@ -51,6 +51,15 @@
                                 </nav>
                             </div>
                         </div>
+                        <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
+                                    <button id="editButton" class="float-left submit-button" >Editar Perfil</button>
+
+                                    <script type="text/javascript">
+                                        document.getElementById("editButton").onclick = function () {
+                                            location.href = "editar_perfil.jsp";
+                                        };
+                                    </script>
+                        </c:if>            
                     </div>
                 </div>
                 <div class="jumbotron">
@@ -83,7 +92,7 @@
                                 </div>
                                 <c:forEach var="anuncio" items="${anuncios_usuario}">
                                     <div class="jumbotron">
-                                        <h2>T?tulo: ${anuncio.getTitulo()}</h2>
+                                        <h2>Título: ${anuncio.getTitulo()}</h2>
                                         <h5>Fecha: ${anuncio.getFecha()}</h5>
                                         <h5>Tema: ${anuncio.getTema()}</h5>
                                         <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
@@ -101,15 +110,7 @@
                                         </c:if>
                                     </div>
                                 </c:forEach>
-                                <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
-                                    <button id="editButton" class="float-left submit-button" >Editar Perfil</button>
-
-                                    <script type="text/javascript">
-                                        document.getElementById("editButton").onclick = function () {
-                                            location.href = "editar_perfil.jsp";
-                                        };
-                                    </script>
-                                </c:if>
+                                
                             </div>
                         </div>
                     </div>

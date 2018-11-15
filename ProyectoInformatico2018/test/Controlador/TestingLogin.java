@@ -36,7 +36,7 @@ public class TestingLogin {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
     
-    @Test
+    @Test //Listo!
     public void LoginCorrectTest(){
         driver.navigate().to("http://localhost:8080/build/ingreso.jsp");
         PageLogin pageLogin = new PageLogin(driver);
@@ -47,7 +47,7 @@ public class TestingLogin {
         pagePerfil.assertCorrectPage();
     }
     
-    @Test
+    @Test //Listo!
     public void LoginIncorrectTest(){
         driver.navigate().to("http://localhost:8080/build/ingreso.jsp");
         PageLogin pageLogin = new PageLogin(driver);

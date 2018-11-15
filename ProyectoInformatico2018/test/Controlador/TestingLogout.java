@@ -41,7 +41,7 @@ public class TestingLogout {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
     
-    @Test
+    @Test //Listo!
     public void LogoutTest(){
         PageLogout pageLogout = new PageLogout(driver);
         

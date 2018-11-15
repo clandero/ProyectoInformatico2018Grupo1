@@ -5,8 +5,10 @@
  */
 package Pages;
 
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 /**
@@ -19,10 +21,19 @@ public class PageSearchDocuments {
     
     public PageSearchDocuments(WebDriver driver){
         this.driver = driver;
-        titleText = By.xpath("/html/body/div[2]/div/div/div/div/table/tbody/tr[5]/td[3]");
+        titleText = By.tagName("td");
     }
     
     public void assertPage(){
-        Assert.assertTrue(driver.findElement(titleText).getText().contains("@"));
+        List<WebElement> listWebElements = driver.findElements(titleText);
+
+        boolean bool = false;
+        for(int i = 0; i < listWebElements.size(); i++){
+            if(listWebElements.get(i).getText().contains("@")){
+                bool = true;
+            }
+        }
+        
+        Assert.assertTrue(bool);
     }
 }

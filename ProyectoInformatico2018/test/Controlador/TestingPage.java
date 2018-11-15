@@ -51,7 +51,7 @@ public class TestingPage {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
     
-    //@Test
+    @Test //Listo!
     public void SearchSomeoneTest(){
         PageSearchSomeone pageSearchSomeone = new PageSearchSomeone(driver);
         
@@ -61,58 +61,51 @@ public class TestingPage {
         pageSearchSomeone.assertPage();
     }
     
-    //@Test
+    @Test //Listo!
     public void DeleteDocumentsTest(){
         PageDeleteDocuments pageDeleteDocuments = new PageDeleteDocuments(driver);
         
         pagePerfil.DeleteDocuments();
         pageDeleteDocuments.deleteDocument();
         
-        pagePerfil.assertCorrectPage();
     }
     
-    //@Test
+    @Test //Listo!
     public void EditPerfilTest(){
         PageEditPerfil pageEditPerfil = new PageEditPerfil(driver);
         
-        pagePerfil.EditPerfil();
-        pageEditPerfil.changeArea();
+        pageEditPerfil.EditPerfil();
         //Helpers helper = new Helpers();
         //helper.sleepSeconds(3);
-        pagePerfil.assertCorrectPage();
-        
-        //helper.sleepSeconds(3);
+
     }
     
-    //@Test
+    @Test //Listo!
     public void SearchDocuments(){
         PageSearchDocuments pageSearchDocument = new PageSearchDocuments(driver);
-        pagePerfil.SearchSomething("optimizacion");
+        pagePerfil.SearchSomething("Optimización");
         pagePerfil.SearchSomeDocument("Tema");
         //Helpers helper = new Helpers();
         //helper.sleepSeconds(3);
         pageSearchDocument.assertPage();
     }
     
-    //@Test
+    @Test //Listo!
     public void SearchSameInterest(){
         PagePersonas pagePersonas = new PagePersonas(driver);
         
         pagePersonas.SomeoneSameInterest();
-        
-        pagePersonas.assertCorrectPage();
     }
     
-    //@Test
+    @Test //Listo!
     public void SearchAnuncio(){
         PageAnuncios pageAnuncios = new PageAnuncios(driver);
         
         pageAnuncios.searchAnuncios();
-        
-        pageAnuncios.assertCorrectPage();
+
     }
     
-    @Test
+    @Test //Listo!
     public void UploadFile(){
         PageUploadFile pageUploadFile = new PageUploadFile(driver);
         

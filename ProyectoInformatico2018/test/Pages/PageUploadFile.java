@@ -46,9 +46,9 @@ public class PageUploadFile {
         
         examinar_button.click();
         Helpers helper = new Helpers();
-        helper.sleepSeconds(10);
+        helper.sleepSeconds(15);
         
-        selectType.selectByVisibleText("Optimizacion");
+        selectType.selectByVisibleText("Optimización");
         upload_button.click();
     }
     
