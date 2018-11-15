@@ -11,6 +11,7 @@ import Modelo.AreadeInteres;
 import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -75,6 +76,9 @@ public class crear_Anuncio extends HttpServlet {
         Anuncio an = new Anuncio(titulo, contenido);
         an.setTitulo(titulo);
         an.setContent(contenido);
+        //Agregar tema fecha
+        an.setFecha(LocalDate.now().toString());
+        an.setTema(area);
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         AreadeInteres areadeinteres = new AreadeInteres(area);
         anuncioDao.save(an, usuario, areadeinteres);
