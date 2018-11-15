@@ -7,9 +7,11 @@ package Controlador;
 
 import Modelo.DocumentoDao;
 import Modelo.Usuario;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Integer.parseInt;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,7 +42,11 @@ public class FileDeleteServlet extends HttpServlet {
         String correo = ((Usuario)request.getSession().
                     getAttribute("usuario_perfil")).getCorreo();
         System.out.println("WANT TO DELETE "+fileID);
+        ServletContext sc = getServletContext();
+        String contextpath = sc.getRealPath(File.separator);
+        docDao.setContext(contextpath);
         docDao.delete(parseInt(fileID), correo);
+        
         request.getSession().setAttribute("documentos_usuario", docDao.search(correo));
 
         request.getRequestDispatcher("editar_perfil.jsp").forward(request, response);
