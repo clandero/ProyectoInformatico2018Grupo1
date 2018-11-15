@@ -24,29 +24,29 @@
                     <div class="row">
                         <div class="col-6" style="margin-left:none;">
                             <div class="form-group" style="border-bottom:1px solid black">
-                                    <h2>Mi Perfil</h2>
+                                <h2>Mi Perfil</h2>
                             </div>
                             <div class="col-md-6" style="padding:0;">  
                                 <ul class="details" style="padding:0;background-color: #ededed; margin-left: none; ">
                                     <li><p><span class="" style="width:100px;"></span>Nombre: <c:out value="${usuario_nombre}"> </c:out> </p></li>
                                     <li><p><span class="" style="width:100px;"></span><c:out value="${usuario_tipo}"></c:out> en Departamento de <c:out value="${depa_usuario}"> </c:out></p></li>
-                                    
-                                    <li><p><span class="" style="width:100px;"></span>Correo: <c:out value="${usuario_correo}"> </c:out></p></li>
-                                </ul>
-                                <ul class=" details" style="background-color: #ededed; margin-left: none;">
-                                    
 
-                                </ul>
+                                            <li><p><span class="" style="width:100px;"></span>Correo: <c:out value="${usuario_correo}"> </c:out></p></li>
+                                    </ul>
+                                    <ul class=" details" style="background-color: #ededed; margin-left: none;">
+
+
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6" style="margin-left:none;">
-                            <p>Áreas de interés</p>
-                            <div class="col-md-6" style="padding:0;">
-                                <nav style="height:200px; width:100%; overflow:hidden; overflow-y:scroll;">
-                                    <ul>
+                            <div class="col-6" style="margin-left:none;">
+                                <p>?reas de inter?s</p>
+                                <div class="col-md-6" style="padding:0;">
+                                    <nav style="height:200px; width:100%; overflow:hidden; overflow-y:scroll;">
+                                        <ul>
                                         <c:forEach items="${areas_usuario}" var="area">
                                             <li><c:out value="${area.getTema()}"> </c:out></li>
-                                        </c:forEach>
+                                            </c:forEach>
                                     </ul>
                                 </nav>
                             </div>
@@ -63,17 +63,13 @@
                                 <c:forEach var="i" items="${documentos_usuario}">
                                     <ul>
                                         <li>
-                                            <c:out value="${i}"></c:out>
-                                            <a href="/build/${i}">
+                                            <c:out value="${i.getTitulo()}"></c:out>
+                                            <a href="/build${i.getSvPath()}">
                                                 <img width=30px src="resources/pdflogo">
                                             </a>
                                         </li>
                                     </ul>
-                                </c:forEach>
-                                <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
-                                    <button id="delButton" class="float-left submit-button" >Eliminar Documentos</button>
-                                    <script src="scripts/eliminar_documentos.js" type="text/javascript"></script>
-                                </c:if>    
+                                </c:forEach>        
                             </div>
                         </div>
                     </div>
@@ -85,7 +81,26 @@
                                 <div class="form-group" style="border-bottom:1px solid black">
                                     <h2>Mis anuncios</h2>
                                 </div>
+                                <c:forEach var="anuncio" items="${anuncios_usuario}">
+                                    <div class="jumbotron">
+                                        <h2>T?tulo: ${anuncio.getTitulo()}</h2>
+                                        <h5>Fecha: ${anuncio.getFecha()}</h5>
+                                        <h5>Tema: ${anuncio.getTema()}</h5>
+                                        <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
 
+                                            <form action="editar_anuncio" method="get">
+                                                <button type="submit" name="anuncio" value="${anuncio.getNumero()}">
+                                                    Editar Anuncio
+                                                </button>
+                                            </form>
+                                            <form action="editar_anuncio" method="post">
+                                                <button type="submit" name="borrar_anuncio" value="${anuncio.getNumero()}">
+                                                    Borrar Anuncio
+                                                </button>
+                                            </form>
+                                        </c:if>
+                                    </div>
+                                </c:forEach>
                                 <c:if test="${usuario.getCorreo().equals(usuario_perfil.getCorreo())}">
                                     <button id="editButton" class="float-left submit-button" >Editar Perfil</button>
 

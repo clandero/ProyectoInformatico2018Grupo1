@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -77,7 +78,10 @@ public class crear_Anuncio extends HttpServlet {
         Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
         AreadeInteres areadeinteres = new AreadeInteres(area);
         anuncioDao.save(an, usuario, areadeinteres);
-        
+        //Actualizar anuncios usuario(no va a tener info de tema/fecha
+        Set anuncios_usuario = (Set) request.getSession().getAttribute("anuncios_usuario");
+        anuncios_usuario.add(an);
+        request.getRequestDispatcher("perfil.jsp").forward(request, response); 
     }
 
     /**
