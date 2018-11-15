@@ -8,8 +8,11 @@ package Controlador;
 
 import Helper.Helpers;
 import Pages.PageAnuncios;
+import Pages.PageCrearAnuncio;
+import Pages.PageDeleteAnuncio;
 import Pages.PageDeleteDocuments;
 import Pages.PageEditPerfil;
+import Pages.PageEditarAnuncio;
 import Pages.PageLogin;
 import Pages.PagePersonas;
 import Pages.PagePerfil;
@@ -51,7 +54,7 @@ public class TestingPage {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
     
-    @Test //Listo!
+    //@Test //Listo!
     public void SearchSomeoneTest(){
         PageSearchSomeone pageSearchSomeone = new PageSearchSomeone(driver);
         
@@ -61,7 +64,7 @@ public class TestingPage {
         pageSearchSomeone.assertPage();
     }
     
-    @Test //Listo!
+    //@Test //Listo!
     public void DeleteDocumentsTest(){
         PageDeleteDocuments pageDeleteDocuments = new PageDeleteDocuments(driver);
         
@@ -70,7 +73,7 @@ public class TestingPage {
         
     }
     
-    @Test //Listo!
+    //@Test //Listo!
     public void EditPerfilTest(){
         PageEditPerfil pageEditPerfil = new PageEditPerfil(driver);
         
@@ -80,7 +83,7 @@ public class TestingPage {
 
     }
     
-    @Test //Listo!
+    //@Test //Listo!
     public void SearchDocuments(){
         PageSearchDocuments pageSearchDocument = new PageSearchDocuments(driver);
         pagePerfil.SearchSomething("Optimización");
@@ -90,14 +93,14 @@ public class TestingPage {
         pageSearchDocument.assertPage();
     }
     
-    @Test //Listo!
+    //@Test //Listo!
     public void SearchSameInterest(){
         PagePersonas pagePersonas = new PagePersonas(driver);
         
         pagePersonas.SomeoneSameInterest();
     }
     
-    @Test //Listo!
+    //@Test //Listo!
     public void SearchAnuncio(){
         PageAnuncios pageAnuncios = new PageAnuncios(driver);
         
@@ -105,13 +108,33 @@ public class TestingPage {
 
     }
     
-    @Test //Listo!
+    //@Test //Listo!
     public void UploadFile(){
         PageUploadFile pageUploadFile = new PageUploadFile(driver);
         
         pageUploadFile.goUploadFile();
         pageUploadFile.uploadFile();
         pageUploadFile.assertPage();
+    }
+    
+    //@Test //Listo!
+    public void CrearAnuncio(){
+        PageCrearAnuncio pageCrearAnuncio = new PageCrearAnuncio(driver);
+        pageCrearAnuncio.crearAnuncio();
+    }
+    
+    //@Test //Listo!
+    public void EditarAnuncio(){
+        PageEditarAnuncio pageEditarAnuncio = new PageEditarAnuncio(driver);
+        
+        pageEditarAnuncio.editarAnuncio();
+    }
+    
+    @Test //Falta
+    public void DeleteAnuncio(){
+        PageDeleteAnuncio pageDeleteAnuncio = new PageDeleteAnuncio(driver);
+        
+        pageDeleteAnuncio.deleteAnuncio();
     }
     
     @AfterMethod
