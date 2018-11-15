@@ -113,11 +113,11 @@
                                     <li><p><span class="" style="width:100px;"></span>Tipo: <c:out value="${usuario_tipo2}"> </c:out></p></li>
                                     <li><p><span class="" style="width:100px;"></span>Departamento: <c:out value="${depa_usuario2}"> </c:out></p></li>
                                     <li><p><span class="" style="width:100px;"></span>Correo: <c:out value="${usuario_correo2}"> </c:out></p></li>
-                                </ul>
-                            </div>
-                            <!-- Iterate and display actual interests of user -->
-                            <div class="col-md-4">  
-                                <div class="col-sm-5 col-xs-6 tital " >Intereses : </div>
+                                    </ul>
+                                </div>
+                                <!-- Iterate and display actual interests of user -->
+                                <div class="col-md-4">  
+                                    <div class="col-sm-5 col-xs-6 tital " >Intereses : </div>
                                 <c:forEach items="${areas_usuario2}" var="area">
                                     <div class="col-sm-7 col-xs-6 ">
                                         <c:out value="${area.getTema()}"> </c:out>                
@@ -144,12 +144,19 @@
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <div class="form-group" style="border-bottom:1px solid black">
-                                    <h2>EXPERIENCIA</h2>        
+                                    <h2>Anuncio</h2>        
+                                </div>
+                                <c:forEach var="anuncio" items="${anuncios_usuario2}">
+                                    <div class="jumbotron">
+                                        <h2>Título: ${anuncio.getTitulo()}</h2>
+                                        <h5>Fecha: ${anuncio.getFecha()}</h5>
+                                        <h5>Tema: ${anuncio.getTema()}</h5>
+                                    </div>
+                                </c:forEach>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-    </body>
-</html>
+                </body>
+                </html>

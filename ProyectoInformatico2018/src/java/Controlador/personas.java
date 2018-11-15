@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Modelo.AnuncioDao;
 import Modelo.DepartamentoDao;
 import Modelo.AreaDao;
 import Modelo.UsuarioDao;
@@ -30,7 +31,7 @@ public class personas extends HttpServlet {
     private static UsuarioDao userDao = new UsuarioDao();
     private static AreaDao areaDao = new AreaDao();
     private static DepartamentoDao depaDao = new DepartamentoDao();
-
+    private static AnuncioDao anuncioDao = new AnuncioDao();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -87,6 +88,7 @@ public class personas extends HttpServlet {
         request.getSession().setAttribute("usuario_correo2", u1.getCorreo());
         request.getSession().setAttribute("areas_existentes2", areaDao.getAll());
         request.getSession().setAttribute("areas_usuario2", areaDao.getAll(u1));
+        request.setAttribute("anuncios_usuario2", anuncioDao.getAll(u1));
         request.getRequestDispatcher("perfilSimple.jsp").forward(request, response);
     }
 
