@@ -38,11 +38,16 @@ public class PageDeleteDocuments {
         List<WebElement> listDocuments = driver.findElements(documents); //Se obtiene la lista de los documentos (actualizada)
         
         boolean bool = false;
-        for(int i = 0; i < listDocuments.size() ; i++){
-            if(listDocuments.get(i).getText() == nameDocumentDelete){
-                bool = false;
+        if(listDocuments.size() == 0){
+            bool = true;
+        }
+        else{
+            for(int i = 0; i < listDocuments.size() ; i++){
+                if(listDocuments.get(i).getText() == nameDocumentDelete){
+                    bool = false;
+                }
+                else bool = true;
             }
-            else bool = true;
         }
         
         Assert.assertTrue(bool);

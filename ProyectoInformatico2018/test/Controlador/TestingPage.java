@@ -9,7 +9,6 @@ package Controlador;
 import Helper.Helpers;
 import Pages.PageAnuncios;
 import Pages.PageCrearAnuncio;
-import Pages.PageDeleteAnuncio;
 import Pages.PageDeleteDocuments;
 import Pages.PageEditPerfil;
 import Pages.PageEditarAnuncio;
@@ -20,6 +19,7 @@ import Pages.PageSearchDocuments;
 import Pages.PageSearchSomeone;
 import Pages.PageUploadFile;
 import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -44,6 +44,7 @@ public class TestingPage {
         
         driver = new ChromeDriver();
         //driver.manage().window().maximize();
+        //driver.manage().window().setPosition(new Point(0, -3000));
         driver.navigate().to("http://localhost:8080/build/ingreso.jsp");
         
         pageLogin = new PageLogin(driver);
@@ -83,8 +84,8 @@ public class TestingPage {
 
     }
     
-    //@Test //Listo!
-    public void SearchDocuments(){
+    @Test //Listo!
+    public void SearchDocumentsTest(){
         PageSearchDocuments pageSearchDocument = new PageSearchDocuments(driver);
         pagePerfil.SearchSomething("Optimización");
         pagePerfil.SearchSomeDocument("Tema");
@@ -94,14 +95,14 @@ public class TestingPage {
     }
     
     //@Test //Listo!
-    public void SearchSameInterest(){
+    public void SearchSameInterestTest(){
         PagePersonas pagePersonas = new PagePersonas(driver);
         
         pagePersonas.SomeoneSameInterest();
     }
     
-    //@Test //Listo!
-    public void SearchAnuncio(){
+   // @Test //Listo!
+    public void SearchAnuncioTest(){
         PageAnuncios pageAnuncios = new PageAnuncios(driver);
         
         pageAnuncios.searchAnuncios();
@@ -109,7 +110,7 @@ public class TestingPage {
     }
     
     //@Test //Listo!
-    public void UploadFile(){
+    public void UploadFileTest(){
         PageUploadFile pageUploadFile = new PageUploadFile(driver);
         
         pageUploadFile.goUploadFile();
@@ -118,23 +119,16 @@ public class TestingPage {
     }
     
     //@Test //Listo!
-    public void CrearAnuncio(){
+    public void CrearAnuncioTest(){
         PageCrearAnuncio pageCrearAnuncio = new PageCrearAnuncio(driver);
         pageCrearAnuncio.crearAnuncio();
     }
     
     //@Test //Listo!
-    public void EditarAnuncio(){
+    public void EditarAnuncioTest(){
         PageEditarAnuncio pageEditarAnuncio = new PageEditarAnuncio(driver);
         
         pageEditarAnuncio.editarAnuncio();
-    }
-    
-    @Test //Falta
-    public void DeleteAnuncio(){
-        PageDeleteAnuncio pageDeleteAnuncio = new PageDeleteAnuncio(driver);
-        
-        pageDeleteAnuncio.deleteAnuncio();
     }
     
     @AfterMethod
