@@ -13,7 +13,6 @@
     <a href="personas.jsp">Personas</a>
     <a href="upload">Subir Doc.</a>
     <a href="crearAnuncio.jsp">Crear Anuncio</a>
-    <a href="#">Contactos</a>
     <a href="logOut">Logout</a>
 
 </div>
