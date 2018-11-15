@@ -65,7 +65,7 @@ public class TestingPage {
         pageSearchSomeone.assertPage();
     }
     
-    //@Test //Listo!
+    @Test //Listo!
     public void DeleteDocumentsTest(){
         PageDeleteDocuments pageDeleteDocuments = new PageDeleteDocuments(driver);
         
