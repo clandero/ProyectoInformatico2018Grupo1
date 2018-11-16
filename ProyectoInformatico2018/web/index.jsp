@@ -21,9 +21,17 @@
             <a href="index">Registrarse</a>
 
         </div>
-        <div class="main">
-            <div class="container">
-                <h2 style="color: white;">Bienvenido a la plataforma colaborativa UDEC</h2>
+        <div class="" style="height:160px;background-color:whitesmoke;">
+            <div class="main">
+                <br>
+                <img src="http://www.ing.udec.cl/img/sitio/universidad-de-concepcion.png" width="150" height="53">
+                <img align="right"  style="margin-right:10px" src="http://www.ing.udec.cl/img/sitio/facultad-de-ingeneria.png" width="150" height="53">
+                <div class="" style="height:90px;background-color:#1b457b;">
+                    <br>
+                    <center><h2 style="color: white;">Plataforma colaborativa UDEC</h2></center>
+                </div>
+                <br>
+                <center><img src="http://www.ing.udec.cl/upload/paginas/archivos/22-03-2016-16-51-54_edificioingenieria800x533.jpg"></center>
             </div>
         </div>  
     </body>
