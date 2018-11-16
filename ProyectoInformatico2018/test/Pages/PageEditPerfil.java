@@ -57,6 +57,12 @@ public class PageEditPerfil {
                 list_Intereses.remove(i);
             }
         }
+        for(int i = 0; i < list_Intereses.size(); i++){
+            String auxText = list_Intereses.get(i).getText();
+            if(auxText.contains("pdf")){
+                list_Intereses.remove(i);
+            }
+        }
         list_Intereses.remove(0);
         ArrayList<String> list_InteresesActual = new ArrayList<String>();
         for(WebElement element: list_Intereses){
