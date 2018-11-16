@@ -20,7 +20,7 @@
         <%@include file="sidebar.jsp" %>
         <div class="main">
             <jsp:include page="searchbar.jsp"/>
-            <h1>PERSONAS</h1><br/><br/>
+            <h1 style="color:white;">Sugerencias de personas</h1><br/><br/>
             <div class="container">
                 <c:if test="${personasInteresComun.isEmpty()}">
                     Ingrese intereses para buscar personas.
@@ -33,9 +33,10 @@
                     <input type="hidden" name="person" value="${pic.getCorreo()}">
                     <p>${pic.getTipoUsuario()} ${depad.get_nombre(Integer.toString(pic.getDepartamento()))}</p>
                     <p>${pic.getCorreo()}</p>
-                    <c:forEach items="${pic.getIntereses()}" var="in">
-                        <p>${in.getTema()}</p>
-                    </c:forEach>
+                    <h4>Temas en común: <c:forEach items="${pic.getIntereses()}" var="in" varStatus="loop">
+                        ${in.getTema()}<c:if test="${!loop.last}">,</c:if> 
+                    </c:forEach></h4>
+                    
                     <input type="submit" value="Ver Perfil"/><br/><br/>
                 </div>
                 </form>

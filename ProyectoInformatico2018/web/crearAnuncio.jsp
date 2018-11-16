@@ -20,7 +20,7 @@
         <%@include file="sidebar.jsp" %>
         <div class="main">
             <jsp:include page="searchbar.jsp"/>
-            <h1>CREAR ANUNCIO</h1><br/><br/>
+            <h1 style="color:white;">  Crear nuevo anuncio</h1><br/>
             <div class="jumbotron">
                 <form method="post" action="crear_Anuncio">
                     <table>

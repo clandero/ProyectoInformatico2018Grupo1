@@ -198,7 +198,6 @@
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <script src="scripts/ingreso.js" type="text/javascript"></script>
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
-        <title>Ingreso</title>
     </head>
     <body>
         <div class="sidenav">
